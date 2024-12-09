@@ -1,0 +1,46 @@
+---
+import SkillPill from "@/components/web/SkillPill.astro";
+import { SKILLS_ITEMS } from "@/utils/data.js";
+---
+
+<h2 class="font-semibold text-violet-200 text-2xl mb-8">Sobre mí</h2>
+<div class="prose prose-invert">
+    <p>
+        Me llamo Marco Pat, me conocen como marcvs. Soy tecnico e ingeniero
+        titulado en redes y ciberseguridad. Actualmente coordino la
+        ciberseguridad de los servicios digitales de una institución pública
+        gubernamental.
+    </p>
+    <p>
+        He concursado en competencias de Hacking conocidas como <span
+            class="font-semibold">Capture The Flag (CTF)</span
+        > organizadas en el <strong
+            ><a href="https://www.facebook.com/yucatani6/"
+                >Congreso Yucatán i6</a
+            ></strong
+        >. En los años 2022 y 2024 con mi equipo quedamos en segundo lugar. En
+        2023 capacité a los concursantes en el uso de Máquinas Virtuales y
+        Contenedores para practicar sus habilidades de Hacking así como dar a
+        conocer sus diferencias.
+    </p>
+    <p>
+        Miembro y organizador de la comunidad de estudiantes, profesionales y
+        entusiastas de la ciberseguridad, <strong
+            ><a href="https://www.facebook.com/profile.php?id=100028409967204"
+                >VidaHacker</a
+            ></strong
+        >.
+    </p>
+</div>
+<article class="mt-4">
+    <h3 class="mb-3">Tecnologías</h3>
+    <ul class="inline-flex flex-wrap gap-3">
+        {
+            SKILLS_ITEMS.map((skill) => (
+                <li>
+                    <SkillPill>#{skill.label}</SkillPill>
+                </li>
+            ))
+        }
+    </ul>
+</article>

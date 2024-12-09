@@ -1,0 +1,60 @@
+---
+import Logo from "@/components/web/Logo.astro";
+
+const { class: className } = Astro.props;
+
+const NAV_ITEMS = [
+    {
+        title: "Experiencia",
+        url: "#experiencie",
+    },
+    {
+        title: "Sobre Mí",
+        url: "#about-me",
+    },
+];
+
+//fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2
+---
+
+<header
+    class={`${className} fixed top-0 z-10 flex items-center justify-center w-full mx-auto `}
+>
+    <nav class="flex flex-row gap-x-4 md:gap-x-11 lg:gap-x-96">
+        <Logo />
+        <ul class="flex flex-row gap-x-4">
+            {
+                NAV_ITEMS.map((navItem) => (
+                    <li>
+                        <a class="hover:font-semibold" href={navItem.url}>
+                            {navItem.title}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+</header>
+
+
+
+<style>
+    header {
+        animation: nav-shadown 1s linear both;
+        animation-timeline: scroll();
+        animation-range: 0 100px;
+    }
+
+    header {
+        @apply bg-transparent;
+    }
+
+    @keyframes nav-shadown {
+        0% {
+            @apply bg-transparent ;
+        }
+        to {
+            @apply shadow-lg backdrop-blur rounded;
+        }
+    }
+</style>

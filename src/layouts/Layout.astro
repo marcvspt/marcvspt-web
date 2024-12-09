@@ -1,22 +1,32 @@
+---
+import "@fontsource/onest";
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Marcvs Pt</title>
 	</head>
-	<body>
+	<body class="relative min-h-screen">
+		<div
+			class="absolute top-0 bottom-0 inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(150%_150%_at_50%_10%,#000_40%,#63e_100%)]"
+		>
+		</div>
 		<slot />
 	</body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+	:root {
+		color-scheme: light dark;
+	}
+
+	html {
+		font-family: "Onest", system-ui, sans-serif;
+		scroll-behavior: smooth;
 	}
 </style>

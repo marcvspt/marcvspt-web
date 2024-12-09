@@ -1,0 +1,17 @@
+---
+const { class: className } = Astro.props;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class={`${className} flex items-center justify-center w-full mx-auto`}>
+    <span class="text-sm text-gray-300"
+        >© {currentYear}
+        <a href="https://marcvspt.vercel.app/" class="hover:underline"
+            >marcvspt</a
+        >. Este proyecto está licenciado bajo los términos de la <a
+            class="hover:font-semibold"
+            href="https://github.com/marcvspt/marcvspt/LICENSE"
+            >GNU General Public License v3.0</a
+        >.
+    </span>
+</footer>
