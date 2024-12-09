@@ -1,4 +1,4 @@
-# My Website Repository
+# Repositorio de mi web
 
 ## Run
 
@@ -6,10 +6,10 @@
 pnpm run dev
 ```
 
-## Credits
+## Creditos
 
-- Icons from [Tabler Icons](https://tabler.io/icons)
-- Idea based on [midudev](https://x.com/midudev) portfolio. You can check his version in [porfolio.dev](https://porfolio.dev)
+- Iconos de [Tabler Icons](https://tabler.io/icons)
+- Idea basada en el portfolio desarrollado por [midudev](https://x.com/midudev). Puedes ver su versión en [porfolio.dev](https://porfolio.dev)
 
 ## Licencia
 
