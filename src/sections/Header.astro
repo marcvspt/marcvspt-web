@@ -6,15 +6,13 @@ const { class: className } = Astro.props;
 const NAV_ITEMS = [
     {
         title: "Experiencia",
-        url: "#experiencie",
+        url: "#experience",
     },
     {
         title: "Sobre Mí",
         url: "#about-me",
     },
 ];
-
-//fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2
 ---
 
 <header
@@ -36,8 +34,6 @@ const NAV_ITEMS = [
     </nav>
 </header>
 
-
-
 <style>
     header {
         animation: nav-shadown 1s linear both;
@@ -51,7 +47,7 @@ const NAV_ITEMS = [
 
     @keyframes nav-shadown {
         0% {
-            @apply bg-transparent ;
+            @apply bg-transparent;
         }
         to {
             @apply shadow-lg backdrop-blur rounded;
