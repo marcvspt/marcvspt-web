@@ -10,6 +10,8 @@ pnpm run dev
 
 - Iconos de [Tabler Icons](https://tabler.io/icons)
 - Idea basada en el portfolio desarrollado por [midudev](https://x.com/midudev). Puedes ver su versión en [porfolio.dev](https://porfolio.dev)
+- Fuente [Onest de Fontsoucer](https://fontsource.org/fonts/onest)
+- Componentes de [Flowbite tailwind](https://flowbite.com/docs/getting-started/introduction/)
 
 ## Licencia
 
