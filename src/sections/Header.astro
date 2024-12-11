@@ -1,5 +1,6 @@
 ---
 import Logo from "@/components/web/Logo.astro";
+import ToggleTheme from "@/components/web/ToggleTheme.astro";
 
 const { class: className } = Astro.props;
 
@@ -24,15 +25,13 @@ const NAV_ITEMS = [
             {
                 NAV_ITEMS.map((navItem) => (
                     <li>
-                        <a
-                            class="hover:font-semibold"
-                            href={navItem.url}
-                        >
+                        <a class="hover:font-semibold" href={navItem.url}>
                             {navItem.title}
                         </a>
                     </li>
                 ))
             }
+            <li><ToggleTheme /></li>
         </ul>
     </nav>
 </header>
@@ -53,7 +52,8 @@ const NAV_ITEMS = [
             @apply bg-transparent;
         }
         to {
-            @apply shadow-lg backdrop-blur rounded;
+            @apply backdrop-blur shadow-sm;
         }
     }
 </style>
+
