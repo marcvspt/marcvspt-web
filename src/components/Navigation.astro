@@ -1,0 +1,26 @@
+---
+const NAV_ITEMS = [
+    {
+        title: "Experiencia",
+        url: "#experience",
+    },
+    {
+        title: "Sobre Mí",
+        url: "#about-me",
+    },
+];
+---
+
+<nav class="md:gap-x-11 lg:gap-x-96 text-gray-700 dark:text-white">
+    <ul class="flex flex-row gap-x-4">
+        {
+            NAV_ITEMS.map((navItem) => (
+                <li>
+                    <a class="hover:font-semibold" href={navItem.url}>
+                        {navItem.title}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</nav>

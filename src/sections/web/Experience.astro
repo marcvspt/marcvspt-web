@@ -1,0 +1,42 @@
+---
+import ExperienceIcon from "@/icons/ExperienceIcon.astro";
+import LinkIcon from "@/icons/LinkIcon.astro";
+
+import { EXPERIENCE_DATA } from "@/utils/data.js";
+---
+
+<article class="text-gray-700 dark:text-white">
+    <h2 class="font-semibold text-2xl mb-8">Experiencia</h2>
+    <ol class="relative border-l border-gray-700">
+        {
+            EXPERIENCE_DATA.map((experience) => (
+                <li class="mb-10 ms-6 px-2">
+                    <ExperienceIcon />
+                    <h3 class="flex items-center mb-1 text-gray-700 dark:text-white font-medium text-lg ">
+                        {experience.organization}
+                        {experience.link && (
+                            <a
+                                class="px-1"
+                                aria-label={experience.organization}
+                                href={experience.link}
+                            >
+                                <LinkIcon />
+                            </a>
+                        )}
+                        {experience.focus && (
+                            <span class="text-xs font-medium me-2 px-2.5 py-0.5 rounded bg-violet-200 text-gray-600/90 dark:bg-violet-800 dark:text-violet-200 ms-3">
+                                {experience.focus}
+                            </span>
+                        )}
+                    </h3>
+                    <time class="block mb-2 text-sm font-light text-violet-500/80 dark:text-violet-200">
+                        {experience.date}
+                    </time>
+                    <p class="text-pretty leading-loose">
+                        {experience.description}
+                    </p>
+                </li>
+            ))
+        }
+    </ol>
+</article>

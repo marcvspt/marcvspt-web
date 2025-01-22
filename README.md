@@ -16,3 +16,5 @@ pnpm run dev
 ## Licencia
 
 Este proyecto está licenciado bajo los términos de la **[GNU General Public License v3.0](./LICENSE)**.
+
+# H

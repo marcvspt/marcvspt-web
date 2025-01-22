@@ -1,4 +1,4 @@
-export const EXPERIENCE_ITEMS = [
+export const EXPERIENCE_DATA = [
     {
         organization: "Organización gubernamental",
         focus: "",
@@ -22,5 +22,29 @@ export const EXPERIENCE_ITEMS = [
         date: "Mayo, 2021 - Agosto 2021",
         description:
             "Proyecto de grado de carrera técnica: Administración e instalación de enlaces inalámbricos mediante radiofrecuencias de un Proveedor de Servicios de Internet Inalámbrico. Administración de routers, access point, switches y antenas 5Ghz. Configuración enlaces inalámbricos punto-a-punto y punto-a-multipunto. Administración de redes LAN, WLAN y WAN.",
+    },
+];
+
+
+export const SOCIAL_DATA = [
+    {
+        name: "LinkedIn",
+        url: "https://www.linkedin.com/in/marcopat01/",
+    },
+    {
+        name: "GitHub",
+        url: "https://github.com/marcvspt",
+    },
+    {
+        name: "HackTheBox",
+        url: "https://app.hackthebox.com/profile/935643",
+    },
+    {
+        name: "X/Twitter",
+        url: "https://x.com/marcvspt",
+    },
+    {
+        name: "Contactame",
+        url: "mailto:marcvspt@gmail.com",
     },
 ];
