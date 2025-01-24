@@ -1,0 +1,15 @@
+:root {
+    font-family: "Onest", system-ui, sans-serif;
+    scroll-behavior: smooth;
+}
+
+.page {
+    display: grid;
+    grid-template-areas:
+        "sidebar content"
+        "sidebar content"
+        "footer content";
+    ;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 1fr auto;
+}

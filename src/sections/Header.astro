@@ -5,6 +5,7 @@ import ToggleTheme from "@/components/ToggleTheme.astro";
 ---
 
 <header
+    id="header"
     class="flex flex-row p-2 gap-x-6 md:gap-x-12 lg:gap-x-32 fixed top-0 z-10 items-center justify-center w-full mx-auto text-gray-700 dark:text-white"
 >
     <Logo />
@@ -13,13 +14,13 @@ import ToggleTheme from "@/components/ToggleTheme.astro";
 </header>
 
 <style>
-    header {
+    #header {
         animation: nav-shadown 1s linear both;
         animation-timeline: scroll();
         animation-range: 0 100px;
     }
 
-    header {
+    #header {
         @apply bg-transparent;
     }
 
