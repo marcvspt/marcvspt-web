@@ -1,28 +1,24 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
-import ContainerSection from "@/components/web/ContainerSection.astro";
+import ArticleContainer from "@/components/ArticleContainer.astro";
 
-import Header from "@/sections/Header.astro";
-import Footer from "@/sections/Footer.astro";
-
-import Hero from "@/sections/web/Hero.astro";
-import Experience from "@/sections/web/Experience.astro";
-import AboutMe from "@/sections/web/AboutMe.astro";
+import Hero from "@/sections/home/Hero.astro";
+import Experience from "@/sections/home/Experience.astro";
+import AboutMe from "@/sections/home/AboutMe.astro";
 ---
 
-<BaseLayout title="" description="Ingeniero en Ciberseguridad con 2 años de experiencia realizando actividades de inteligencia de amenazas, respuesta ante incidentes, seguridad perimetral y pentesting.">
-	<Header />
-	<main class="flex flex-col gap-y-16 p-16">
-		<ContainerSection id="hero">
-			<Hero />
-		</ContainerSection>
-		<ContainerSection id="experience">
-			<Experience />
-		</ContainerSection>
-		<ContainerSection id="about-me">
-			<AboutMe />
-		</ContainerSection>
-	</main>
-	<Footer />
+<BaseLayout
+	title=""
+	description="Ingeniero en Ciberseguridad con 2 años de experiencia realizando actividades de inteligencia de amenazas, respuesta ante incidentes, seguridad perimetral y pentesting."
+>
+	<ArticleContainer id="hero">
+		<Hero />
+	</ArticleContainer>
+	<ArticleContainer id="experience">
+		<Experience />
+	</ArticleContainer>
+	<ArticleContainer id="about-me">
+		<AboutMe />
+	</ArticleContainer>
 </BaseLayout>
