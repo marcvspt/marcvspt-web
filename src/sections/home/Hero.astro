@@ -8,37 +8,35 @@ import MailIcon from "@/icons/MailIcon.astro";
 import { SOCIAL_DATA } from "@/utils/data.js";
 ---
 
-<article class="text-gray-700 dark:text-white">
-    <h1 class="font-bold text-5xl">Hola, soy Marco</h1>
+<h1 class="font-bold text-5xl">Hola, soy Marco</h1>
 
-    <p class="text-xl mt-6 text-pretty">
-        Ingeniero en Ciberseguridad con <strong
-            class="text-violet-500/90 dark:text-violet-300/90"
-            >2 años de experiencia</strong
-        > realizando actividades de inteligencia de amenazas, respuesta ante incidentes,
-        seguridad perimetral y pentesting.
-    </p>
+<p class="text-xl mt-6 text-pretty">
+    Ingeniero en Ciberseguridad con <strong
+        class="text-violet-500/90 dark:text-violet-300/90"
+        >2 años de experiencia</strong
+    > realizando actividades de inteligencia de amenazas, respuesta ante incidentes,
+    seguridad perimetral y pentesting.
+</p>
 
-    <nav class="inline-flex flex-wrap mt-4 gap-2 dark:text-white">
-        {
-            SOCIAL_DATA.map((social) => {
-                return (
-                    <a
-                        id={`link-${social.name}`}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex border border-purple-500 bg-violet-300/20 dark:bg-violet-950/40 rounded-full items-center justify-center gap-2 px-4 py-1 hover:bg-purple-500 text-gray-700 dark:text-white"
-                    >
-                        {social.name === "LinkedIn" && <LinkedInIcon />}
-                        {social.name === "GitHub" && <GitHubIcon />}
-                        {social.name === "HackTheBox" && <HackTheBoxIcon />}
-                        {social.name === "X/Twitter" && <XIcon />}
-                        {social.name === "Contactame" && <MailIcon />}
-                        {social.name}
-                    </a>
-                );
-            })
-        }
-    </nav>
-</article>
+<nav class="inline-flex flex-wrap mt-4 gap-2">
+    {
+        SOCIAL_DATA.map((social) => {
+            return (
+                <a
+                    id={`link-${social.name}`}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex border border-purple-500 bg-violet-300/20 dark:bg-violet-950/40 rounded-full items-center justify-center gap-2 px-4 py-1 hover:bg-purple-500 "
+                >
+                    {social.name === "LinkedIn" && <LinkedInIcon />}
+                    {social.name === "GitHub" && <GitHubIcon />}
+                    {social.name === "HackTheBox" && <HackTheBoxIcon />}
+                    {social.name === "X/Twitter" && <XIcon />}
+                    {social.name === "Contactame" && <MailIcon />}
+                    {social.name}
+                </a>
+            );
+        })
+    }
+</nav>

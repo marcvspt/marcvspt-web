@@ -28,12 +28,12 @@ const THEMES = ["Light", "Dark", "System"];
     <div
         transition:persist
         id="themes-menu"
-        class="absolute hidden scale-80 top-8 right-0 text-sm p-1 min-w-[8rem] rounded-md border border-gray-100 bg-white/80 dark:bg-violet-500/90 dark:border-violet-900/20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] dark:shadow-[0_3px_10px_rgb(255,255,255,0.3)] backdrop-blur-md"
+        class="absolute hidden scale-80 top-8 right-0 text-sm p-1 min-w-[8rem] rounded-md border border-gray-100 bg-white/90 dark:bg-violet-500/90 dark:border-violet-900/20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] dark:shadow-[0_3px_10px_rgb(255,255,255,0.3)] backdrop-blur-md"
     >
         <ul>
             {
                 THEMES.map((theme) => (
-                    <li class="themes-menu-option px-2 py-1.5 cursor-default hover:bg-violet-100 dark:hover:bg-violet-500 rounded-sm">
+                    <li class="themes-menu-option px-2 py-1.5 cursor-default hover:bg-violet-100 dark:hover:bg-violet-400 rounded-md">
                         {theme}
                     </li>
                 ))
