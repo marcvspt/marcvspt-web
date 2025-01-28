@@ -1,34 +1,32 @@
 ---
-import Navigation from "@/components/Navigation.astro";
 import ToggleTheme from "@/components/ToggleTheme.astro";
+
+const { pageTitle } = Astro.props;
 ---
 
-<header
-    id="header"
-    class="flex flex-row p-2 gap-x-6 md:gap-x-12 lg:gap-x-32 fixed top-0 z-10 items-center justify-center w-full mx-auto"
->
-    <img src="/img/logo.webp" alt="" class="rounded-full size-6" />
-    <Navigation />
-    <ToggleTheme />
+<header id="header" class="min-w-scree w-full shadow-sm">
+    <div class="flex flex-row justify-between items-center md:mx-16 px-4 py-3">
+        <div class="flex items-center justify-center gap-4 md:hidden">
+            <button
+                id="toggleSidebar"
+                class="p-2 rounded-lg hover:bg-red-500"
+                aria-label="Toggle sidebar"
+            >
+                <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <h1 class="text-xl font-semibold">{pageTitle}</h1>
+        <ToggleTheme />
+    </div>
 </header>
-
-<style>
-    #header {
-        animation: nav-shadown 1s linear both;
-        animation-timeline: scroll();
-        animation-range: 0 100px;
-    }
-
-    #header {
-        @apply bg-transparent;
-    }
-
-    @keyframes nav-shadown {
-        0% {
-            @apply bg-transparent;
-        }
-        to {
-            @apply backdrop-blur shadow-sm;
-        }
-    }
-</style>
