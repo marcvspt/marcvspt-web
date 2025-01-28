@@ -10,7 +10,7 @@ export const EXPERIENCE_DATA = [
     {
         organization: "31 Rooms",
         focus: "Prácticas",
-        link: "https://www.conexionesti.com/",
+        link: "https://31rooms.com/",
         date: "Enero, 2023 - Abril, 2023",
         description:
             "Proyecto de grado de ingeniería: Pentest a servicios web en modalidad de caja gris. Pruebas de seguridad a dos APIs y dos interfaces web. Determinación de severidad de vulnerabilidades y su explotabilidad.",
@@ -18,7 +18,7 @@ export const EXPERIENCE_DATA = [
     {
         organization: "ConexionesTI",
         focus: "Prácticas",
-        link: "https://31rooms.com/",
+        link: "https://www.conexionesti.com/",
         date: "Mayo, 2021 - Agosto 2021",
         description:
             "Proyecto de grado de carrera técnica: Administración e instalación de enlaces inalámbricos mediante radiofrecuencias de un Proveedor de Servicios de Internet Inalámbrico. Administración de routers, access point, switches y antenas 5Ghz. Configuración enlaces inalámbricos punto-a-punto y punto-a-multipunto. Administración de redes LAN, WLAN y WAN.",
