@@ -15,11 +15,11 @@ const NAV_ITEMS = [
 ];
 ---
 
-<nav class="md:gap-x-11 lg:gap-x-96 text-gray-700 dark:text-white">
-    <ul class="flex flex-row gap-x-4">
+<nav class="py-8 px-4">
+    <ul class="space-y-2 w-full">
         {
             NAV_ITEMS.map((navItem) => (
-                <li>
+                <li class=" py-2">
                     <a class="hover:font-semibold" href={navItem.url}>
                         {navItem.title}
                     </a>

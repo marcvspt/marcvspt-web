@@ -6,11 +6,11 @@ export default {
 		extend: {
 			colors: {
 				primary: {
-					DEFAULT: '#ffffff', // Green
+					DEFAULT: '#ffffff',
 					dark: '#374151'
 				},
 				secondary: {
-					DEFAULT: '#DDD6FE', // Gray
+					DEFAULT: '#DDD6FE',
 					dark: '#A855F7'
 				},
 				terciary: {
@@ -26,6 +26,9 @@ export default {
 					dark: '#4c1d95'
 				}
 
+			},
+			spacing: {
+				'34': '8.5rem'
 			}
 		},
 	},

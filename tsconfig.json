@@ -10,6 +10,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/pages/*": [
+        "src/pages/*"
+      ],
       "@/layouts/*": [
         "src/layouts/*"
       ],
@@ -22,8 +25,8 @@
       "@/icons/*": [
         "src/icons/*"
       ],
-      "@/utils/*": [
-        "src/utils/*"
+      "@/scripts/*": [
+        "src/scripts/*"
       ],
       "@/styles/*": [
         "src/styles/*"

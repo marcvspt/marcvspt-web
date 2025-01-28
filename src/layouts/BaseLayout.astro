@@ -2,13 +2,13 @@
 import "@/styles/global.css";
 
 import "@fontsource/onest";
+
 import Header from "@/sections/Header.astro";
-import Footer from "@/sections/Footer.astro";
+import Sidebar from "@/sections/Sidebar.astro";
 
 const { title, description } = Astro.props;
 ---
 
-<!doctype html>
 <html lang="es" class="dark">
 	<head>
 		<meta charset="UTF-8" />
@@ -16,18 +16,33 @@ const { title, description } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Marcvs Pt{title}</title>
+		<title>Marcvs Pt | {title}</title>
 	</head>
-	<body class="relative min-h-screen text-primary-dark dark:text-primary">
+	<body class="text-primary-dark dark:text-primary">
 		<div
 			class="fixed top-0 bottom-0 inset-0 -z-10 h-full w-full items-center px-5 py-24 bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)] dark:[background:radial-gradient(150%_150%_at_50%_10%,#000_40%,#63e_100%)]"
 		>
 		</div>
+		<Sidebar />
 
-		<Header />
-		<main class="flex flex-col gap-y-16 p-16 leading-loose text-pretty">
-			<slot />
-		</main>
-		<Footer />
+		<div id="mainContent" class="transition-all duration-300 md:ml-34">
+			<Header pageTitle={title} />
+			<main
+				class="min-h-auto mt-4 mx-auto px-3 sm:px-0 sm:max-w-md md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl"
+			>
+				<slot />
+			</main>
+		</div>
+		<script is:inline>
+			const toggleSidebar = document.querySelector("#toggleSidebar");
+			const sidebar = document.querySelector("#sidebar");
+			const mainContent = document.querySelector("#mainContent");
+
+			toggleSidebar.addEventListener("click", () => {
+				sidebar.classList.toggle("-translate-x-full");
+				mainContent.classList.toggle("md:ml-34");
+				mainContent.classList.toggle("ml-34");
+			});
+		</script>
 	</body>
 </html>
