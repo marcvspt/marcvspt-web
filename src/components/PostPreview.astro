@@ -1,0 +1,45 @@
+---
+import CategoryIcon from "@/icons/CategoryIcon.astro";
+import DateIcon from "@/icons/DateIcon.astro";
+
+import { getFormatedDate } from "@/scripts/utils";
+
+const { postImage, postTitle, postPubDate, postCategories } = Astro.props;
+
+const newPostPubDate = getFormatedDate(postPubDate);
+---
+
+<a
+    href="#"
+    class="flex flex-col bg-secondary/10 dark:bg-secondary/5 shadow-2xl dark:hover:bg-terciary-dark/20 hover:bg-terciary/80 max-h-[27rem] p-4 rounded-lg cursor-pointer gap-2 relative"
+>
+    {
+        postImage && (
+            <img
+                src={postImage.path}
+                alt={postImage.alt}
+                class="w-full h-auto object-cover aspect-[16/9] rounded-md"
+            />
+        )
+    }
+
+    <article class="flex flex-col">
+        <h2 class="text-2xl">
+            {postTitle}
+        </h2>
+        <section class="flex flex-row gap-x-2 text-xs mt-4">
+            <time
+                class="flex flew-row gap-x-1 items-center mb-2 font-light text-accent/80 dark:text-secondary"
+            >
+                <DateIcon />
+                {newPostPubDate}
+            </time>
+            <p
+                class="flex flew-row gap-x-1 items-center mb-2 font-light text-accent/80 dark:text-secondary"
+            >
+                <CategoryIcon />
+                {postCategories.join(", ")}
+            </p>
+        </section>
+    </article>
+</a>

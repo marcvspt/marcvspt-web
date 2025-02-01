@@ -13,6 +13,13 @@ export const NAV_ITEMS = [
     },
 ];
 
+export const BLOG_ITEMS = [
+    {
+        title: "Posts",
+        url: "/blog",
+    },
+];
+
 export const SOCIAL_DATA = [
     {
         name: "LinkedIn",
