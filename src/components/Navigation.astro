@@ -3,7 +3,7 @@ import NavLink from "@/components/NavLink.astro";
 
 import DropdownIcon from "@/icons/DropdownIcon.astro";
 
-import { NAV_ITEMS } from "@/scripts/data";
+import { NAV_ITEMS, BLOG_ITEMS } from "@/scripts/data";
 ---
 
 <nav class="py-8 px-4">
@@ -13,5 +13,34 @@ import { NAV_ITEMS } from "@/scripts/data";
                 <NavLink linkUrl={navItem.url}>{navItem.title}</NavLink>
             ))
         }
+        <li class="py-2">
+            <button
+                id="submenu-dropdown-btn"
+                class="flex flex-row justify-between w-full hover:font-semibold"
+            >
+                Blog
+                <DropdownIcon id="submenu-dropdown-icon" />
+            </button>
+            <ul id="submenu" class="py-2 hidden">
+                {
+                    BLOG_ITEMS.map((blogItem) => (
+                        <NavLink className="px-4" linkUrl={blogItem.url}>
+                            {blogItem.title}
+                        </NavLink>
+                    ))
+                }
+            </ul>
+        </li>
     </ul>
 </nav>
+<script is:inline>
+    const $dropdownButton = document.querySelector("#submenu-dropdown-btn");
+    const $subMenu = document.querySelector("#submenu");
+    const $dropdownIcon = document.querySelector("#submenu-dropdown-icon");
+
+    $dropdownButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        $subMenu.classList.toggle("hidden");
+        $dropdownIcon.classList.toggle("rotate-180");
+    });
+</script>

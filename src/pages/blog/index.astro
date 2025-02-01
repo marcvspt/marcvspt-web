@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PostPreview from "@/components/PostPreview.astro";
+
+import { getAllPosts } from "@/scripts/utils";
+
+const allPosts = getAllPosts();
+
+const pageTitle = "Blog";
+---
+
+<BaseLayout title={pageTitle}>
+    <nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+    {
+        allPosts.map((post: any) => (
+            <PostPreview postUrl={post.url}
+                postImage={post.frontmatter.image},
+                postTitle={post.frontmatter.title},
+                postDescription={post.frontmatter.description},
+                postPubDate={post.frontmatter.pubDate},
+                postTags={post.frontmatter.tags},
+                postCategories={post.frontmatter.categories},
+            />
+        ))
+    }
+    </nav>
+</BaseLayout>
