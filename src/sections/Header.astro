@@ -1,6 +1,6 @@
 ---
 import ToggleTheme from "@/components/ToggleTheme.astro";
-import MenuBurguerIcon from "@/icons/MenuBurguerIcon.astro";
+import ToggleSidebar from "@/components/ToggleSidebar.astro";
 
 const { pageTitle } = Astro.props;
 ---
@@ -10,16 +10,10 @@ const { pageTitle } = Astro.props;
     class="min-w-scree w-full shadow-sm dark:shadow-sm dark:shadow-terciary-dark/5"
 >
     <div class="flex flex-row justify-between items-center md:mx-16 px-4 py-3">
-        <div class="flex items-center justify-center gap-4 md:hidden">
-            <button
-                id="toggleSidebar"
-                class="p-2 rounded-lg dark:hover:text-terciary-dark hover:text-secondary-dark/80"
-                aria-label="Toggle sidebar"
-            >
-                <MenuBurguerIcon />
-            </button>
-        </div>
+        <ToggleSidebar />
+
         <h1 class="text-xl font-semibold">{pageTitle}</h1>
+
         <ToggleTheme />
     </div>
 </header>

@@ -1,6 +1,4 @@
 ---
-import "@/styles/global.css";
-
 import "@fontsource/onest";
 
 import Header from "@/sections/Header.astro";
@@ -25,7 +23,7 @@ const { title, description } = Astro.props;
 		</div>
 		<Sidebar />
 
-		<div id="mainContent" class="transition-all duration-300 md:ml-34">
+		<div id="main-content" class="transition-all duration-300 md:ml-36">
 			<Header pageTitle={title} />
 			<main
 				class="min-h-auto mt-4 mx-auto px-3 sm:px-0 sm:max-w-md md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl"
@@ -33,15 +31,24 @@ const { title, description } = Astro.props;
 				<slot />
 			</main>
 		</div>
-		<script is:inline>
-			const toggleSidebar = document.querySelector("#toggleSidebar");
-			const sidebar = document.querySelector("#sidebar");
-			const mainContent = document.querySelector("#mainContent");
+		<style>
+			:root {
+				font-family: "Onest", system-ui, sans-serif;
+				scroll-behavior: smooth;
+			}
+		</style>
 
-			toggleSidebar.addEventListener("click", () => {
-				sidebar.classList.toggle("-translate-x-full");
-				mainContent.classList.toggle("md:ml-34");
-				mainContent.classList.toggle("ml-34");
+		<script is:inline>
+			const $toggleSidebarBtn = document.querySelector(
+				"#sidebar-toggle-btn",
+			);
+			const $sidebar = document.querySelector("#sidebar");
+			const $mainContent = document.querySelector("#main-content");
+
+			$toggleSidebarBtn.addEventListener("click", () => {
+				$sidebar.classList.toggle("-translate-x-full");
+				$mainContent.classList.toggle("md:ml-36");
+				$mainContent.classList.toggle("ml-36");
 			});
 		</script>
 	</body>
