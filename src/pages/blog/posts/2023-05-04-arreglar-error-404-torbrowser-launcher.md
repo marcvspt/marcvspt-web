@@ -2,9 +2,7 @@
 layout: '@/layouts/PostLayout.astro'
 title: Tor Browser Launcher - Arreglar error 404 en la descarga
 pubDate: 2023-05-04
-upadetePub:
-description: Solución de error 404 en la descarga de Tor Browser Launcher
-author: Marco Pat
+updtPubDate:
 categories: [Errores, Bugs]
 tags: [bugs, errores, tor, web, linux]
 image:

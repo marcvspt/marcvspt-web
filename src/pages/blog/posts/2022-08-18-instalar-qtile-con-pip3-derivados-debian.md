@@ -2,9 +2,7 @@
 layout: '@/layouts/PostLayout.astro'
 title: Qtile - Instalación con pip3 y Configuración
 pubDate: 2022-08-18
-upadetePub:
-description: Instalación de Qtile con pip3 y configuración
-author: Marco Pat
+updtPubDate:
 categories: [Instalación, Configuración]
 tags: [instalación, configuración, python3, pip3, debian, linux]
 image:

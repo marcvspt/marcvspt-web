@@ -24,7 +24,7 @@ export default {
 				fully: {
 					DEFAULT: '#f3f4f6',
 					dark: '#4c1d95'
-				}
+				},
 
 			},
 			spacing: {
@@ -32,5 +32,5 @@ export default {
 			}
 		},
 	},
-	plugins: []
+	plugins: [require('@tailwindcss/typography')]
 }

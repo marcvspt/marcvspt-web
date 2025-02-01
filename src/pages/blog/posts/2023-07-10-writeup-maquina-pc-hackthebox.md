@@ -2,9 +2,7 @@
 layout: '@/layouts/PostLayout.astro'
 title: Writeup - Maquina "PC" HackTheBox
 pubDate: 2023-07-10
-upadetePub:
-description: Writeup - Maquina "PC" HackTheBox
-author: Marco Pat
+updtPubDate:
 categories: [Writeup, HackTheBox]
 tags: [writeup, hackthebox, grpc, python, linux]
 image:

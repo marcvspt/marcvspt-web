@@ -1,4 +1,6 @@
 export const getFormatedDate = (pubDate) => {
+    if (!pubDate) return "";
+
     const newPubDate = new Date(pubDate).toLocaleDateString("es-MX", {
         year: "numeric",
         month: "long",
