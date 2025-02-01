@@ -2,9 +2,7 @@
 layout: '@/layouts/PostLayout.astro'
 title: Certificado SSL autofirmado Apache2 y Nginx
 pubDate: 2023-06-14
-upadetePub:
-description: Certificado SSL autofirmado Apache2 y Nginx
-author: Marco Pat
+updtPubDate:
 categories: [Instalación, Configuración]
 tags: [instalación, configuración, http, web, debian, linux]
 image:

@@ -2,9 +2,7 @@
 layout: '@/layouts/PostLayout.astro'
 title: Análisis forense de una imagen VMEM
 pubDate: 2023-04-19
-upadetePub:
-description: Análisis forense de una imagen VMEM
-author: Marco Pat
+updtPubDate:
 categories: [Forense, Análisis]
 tags: [forense, análisis, memoria, linux, windows]
 image:

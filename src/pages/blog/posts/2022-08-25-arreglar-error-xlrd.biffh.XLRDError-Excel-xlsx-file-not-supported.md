@@ -2,9 +2,7 @@
 layout: '@/layouts/PostLayout.astro'
 title: Windows Exploit Suggester (python2) - Arreglo de errores
 pubDate: 2022-08-25
-upadetePub:
-description: Solución de errores de Windows Exploit Suggester (python2)
-author: Marco Pat
+updtPubDate:
 categories: [Errores, Bugs]
 tags: [bugs, errores, python2, pip2, linux, windows]
 image:

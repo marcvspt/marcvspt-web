@@ -2,9 +2,7 @@
 layout: '@/layouts/PostLayout.astro'
 title: Writeup - Maquina "Sandworm" HackTheBox
 pubDate: 2023-07-18
-upadetePub:
-description: Writeup - Maquina "Sandworm" HackTheBox
-author: Marco Pat
+updtPubDate:
 categories: [Writeup, HackTheBox]
 tags: [writeup, hackthebox, pgp, gpg, gnupg, python, linux]
 image:

@@ -2,9 +2,7 @@
 layout: '@/layouts/PostLayout.astro'
 title: MiddleWare para ataques SQL injection
 pubDate: 2023-05-24
-upadetePub:
-description: MiddleWare para ataques SQL injection
-author: Marco Pat
+updtPubDate:
 categories: [Pentest, SQLi]
 tags: [pentest, sqli, http, websocket, grpc, python3, pip3]
 image:
