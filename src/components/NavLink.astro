@@ -1,0 +1,9 @@
+---
+const { className, linkUrl } = Astro.props;
+---
+
+<li class=`${className} py-2`>
+    <a class="hover:font-semibold" href={linkUrl}>
+        <slot />
+    </a>
+</li>

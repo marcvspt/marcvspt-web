@@ -1,29 +1,16 @@
 ---
-const NAV_ITEMS = [
-    {
-        title: "Inicio",
-        url: "/#top",
-    },
-    {
-        title: "Experiencia",
-        url: "/#experience",
-    },
-    {
-        title: "Sobre Mí",
-        url: "/#about-me",
-    },
-];
+import NavLink from "@/components/NavLink.astro";
+
+import DropdownIcon from "@/icons/DropdownIcon.astro";
+
+import { NAV_ITEMS } from "@/scripts/data";
 ---
 
 <nav class="py-8 px-4">
     <ul class="space-y-2 w-full">
         {
             NAV_ITEMS.map((navItem) => (
-                <li class=" py-2">
-                    <a class="hover:font-semibold" href={navItem.url}>
-                        {navItem.title}
-                    </a>
-                </li>
+                <NavLink linkUrl={navItem.url}>{navItem.title}</NavLink>
             ))
         }
     </ul>

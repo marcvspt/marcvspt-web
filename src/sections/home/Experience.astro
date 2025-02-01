@@ -5,7 +5,7 @@ import LinkIcon from "@/icons/LinkIcon.astro";
 import { EXPERIENCE_DATA } from "src/scripts/data.js";
 ---
 
-<h2 class="font-semibold text-2xl mb-4">Experiencia</h2>
+<h2 class="font-semibold text-xl mb-4">Experiencia</h2>
 <ol class="relative border-l border-primary-dark ms-3">
     {
         EXPERIENCE_DATA.map((experience) => (
@@ -21,11 +21,6 @@ import { EXPERIENCE_DATA } from "src/scripts/data.js";
                         >
                             <LinkIcon />
                         </a>
-                    )}
-                    {experience.focus && (
-                        <span class="text-xs font-medium me-2 px-2.5 py-0.5 rounded bg-secondary text-primary-dark/90 dark:bg-accent-dark dark:text-secondary ms-3">
-                            {experience.focus}
-                        </span>
                     )}
                 </h3>
                 <time class="block mb-2 text-sm font-light text-accent/80 dark:text-secondary">
