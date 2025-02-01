@@ -7,7 +7,6 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   redirects: {
     '/blog/posts': '/blog',
-    '/tags/[...slug]': '/blog'
   },
   integrations: [tailwind()]
 });
