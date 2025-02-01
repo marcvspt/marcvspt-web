@@ -1,0 +1,28 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+import Tags from "@/components/Tags.astro";
+
+import { getFormatedDate } from "@/scripts/utils";
+
+const { frontmatter } = Astro.props;
+
+const { title, pubDate, description, author, image, tags } = frontmatter;
+const newPubDate = getFormatedDate(pubDate);
+---
+
+<BaseLayout title={title}>
+    <p class="">
+        Published on <time datetime={pubDate.slice(0, 10)}>{newPubDate}</time>
+    </p>
+    <p><em>{description}</em></p>
+
+    <img
+        class="w-2/4 h-auto object-cover aspect-[16/9]"
+        src={image?.path}
+        alt={image?.alt}
+    />
+
+    <Tags tags={tags} />
+    <slot />
+</BaseLayout>
