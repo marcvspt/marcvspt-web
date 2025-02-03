@@ -34,13 +34,23 @@ import { NAV_ITEMS, BLOG_ITEMS } from "@/scripts/data";
     </ul>
 </nav>
 <script is:inline>
-    const $dropdownButton = document.querySelector("#submenu-dropdown-btn");
-    const $subMenu = document.querySelector("#submenu");
-    const $dropdownIcon = document.querySelector("#submenu-dropdown-icon");
+    function initializeDropdown() {
+        const $dropdownButton = document.querySelector("#submenu-dropdown-btn");
+        const $subMenu = document.querySelector("#submenu");
+        const $dropdownIcon = document.querySelector("#submenu-dropdown-icon");
 
-    $dropdownButton.addEventListener("click", (e) => {
-        e.stopPropagation();
-        $subMenu.classList.toggle("hidden");
-        $dropdownIcon.classList.toggle("rotate-180");
+        if ($dropdownButton && $subMenu && $dropdownIcon) {
+            $dropdownButton.addEventListener("click", (e) => {
+                e.stopPropagation();
+                $subMenu.classList.toggle("hidden");
+                $dropdownIcon.classList.toggle("rotate-180");
+            });
+        }
+    }
+
+    initializeDropdown();
+
+    document.addEventListener("astro:after-swap", () => {
+        initializeDropdown();
     });
 </script>

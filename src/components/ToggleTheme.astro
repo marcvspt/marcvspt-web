@@ -18,12 +18,12 @@ const THEMES = ["Light", "Dark", "System"];
     </button>
     <div
         id="themes-menu"
-        class="absolute hidden scale-80 top-8 right-0 text-sm p-1 min-w-[8rem] rounded-md border border-terciary bg-primary/90 dark:bg-accent/90 dark:border-fully-dark/20 shadow-[0_3px_10px_rgb(0,0,0,0.2)] dark:shadow-[0_3px_10px_rgb(255,255,255,0.3)] backdrop-blur-md"
+        class="absolute hidden scale-80 top-8 right-0 text-sm p-1 min-w-[8rem] rounded-md border bg-primary/90 dark:bg-accent/90 border-secondary/50 dark:border-secondary-dark/50 shadow-[0_3px_10px_rgb(0,0,0,0.2)] dark:shadow-[0_3px_10px_rgb(255,255,255,0.3)] backdrop-blur-md"
     >
         <ul>
             {
                 THEMES.map((theme) => (
-                    <li class="themes-menu-option px-2 py-1.5 cursor-default hover:bg-terciary dark:hover:bg-secondary-dark/70 rounded-md">
+                    <li class="themes-menu-option px-2 py-1.5 cursor-default hover:bg-secondary/50 dark:hover:bg-secondary-dark/60 rounded-md">
                         {theme}
                     </li>
                 ))
@@ -33,71 +33,79 @@ const THEMES = ["Light", "Dark", "System"];
 </div>
 
 <script is:inline>
-    let remove = null;
-    const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
-    const themesMenu = document.querySelector("#themes-menu");
+    function initializeThemeToggle() {
+        let remove = null;
+        const matchMedia = window.matchMedia("(prefers-color-scheme: dark)");
+        const themesMenu = document.querySelector("#themes-menu");
 
-    const getThemePreference = () => {
-        if (typeof localStorage !== "undefined") {
-            return localStorage.getItem("theme") ?? "system";
-        }
+        const getThemePreference = () => {
+            if (typeof localStorage !== "undefined") {
+                return localStorage.getItem("theme") ?? "system";
+            }
 
-        return window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-    };
-
-    const updateIcon = (themePreference) => {
-        document.querySelectorAll(".theme-toggle-icon").forEach((element) => {
-            element.style.scale = element.id === themePreference ? "1" : "0";
-        });
-    };
-
-    const updateTheme = () => {
-        if (remove != null) {
-            remove();
-        }
-        matchMedia.addEventListener("change", updateTheme);
-        remove = () => {
-            matchMedia.removeEventListener("change", updateTheme);
+            return window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
         };
 
-        const themePreference = getThemePreference();
-        const isDark =
-            themePreference === "dark" ||
-            (themePreference === "system" && matchMedia.matches);
+        const updateIcon = (themePreference) => {
+            document
+                .querySelectorAll(".theme-toggle-icon")
+                .forEach((element) => {
+                    element.style.scale =
+                        element.id === themePreference ? "1" : "0";
+                });
+        };
 
-        updateIcon(themePreference);
-        document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-    };
+        const updateTheme = () => {
+            if (remove != null) {
+                remove();
+            }
+            matchMedia.addEventListener("change", updateTheme);
+            remove = () => {
+                matchMedia.removeEventListener("change", updateTheme);
+            };
 
-    updateTheme();
+            const themePreference = getThemePreference();
+            const isDark =
+                themePreference === "dark" ||
+                (themePreference === "system" && matchMedia.matches);
 
-    document.addEventListener("click", () =>
-        themesMenu.classList.remove("open"),
-    );
-
-    document
-        .querySelector("#theme-toggle-btn")
-        .addEventListener("click", (e) => {
-            e.stopPropagation();
-            const isClosed = !themesMenu.classList.contains("open");
-            themesMenu.classList[isClosed ? "add" : "remove"]("open");
-        });
-
-    document.querySelectorAll(".themes-menu-option").forEach((element) => {
-        element.addEventListener("click", (e) => {
-            localStorage.setItem(
-                "theme",
-                e.target.innerText.toLowerCase().trim(),
+            updateIcon(themePreference);
+            document.documentElement.classList[isDark ? "add" : "remove"](
+                "dark",
             );
-            updateTheme();
+        };
+
+        updateTheme();
+
+        document.addEventListener("click", () =>
+            themesMenu.classList.remove("open"),
+        );
+
+        document
+            .querySelector("#theme-toggle-btn")
+            .addEventListener("click", (e) => {
+                e.stopPropagation();
+                const isClosed = !themesMenu.classList.contains("open");
+                themesMenu.classList[isClosed ? "add" : "remove"]("open");
+            });
+
+        document.querySelectorAll(".themes-menu-option").forEach((element) => {
+            element.addEventListener("click", (e) => {
+                localStorage.setItem(
+                    "theme",
+                    e.target.innerText.toLowerCase().trim(),
+                );
+                updateTheme();
+            });
         });
-    });
+    }
+
+    initializeThemeToggle();
 
     document.addEventListener("astro:after-swap", () => {
-        updateTheme();
-        window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+        initializeThemeToggle();
     });
 </script>
 

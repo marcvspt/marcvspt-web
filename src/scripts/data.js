@@ -69,3 +69,5 @@ export const EXPERIENCE_DATA = [
             "Proyecto de grado de carrera técnica: Administración e instalación de enlaces inalámbricos mediante radiofrecuencias de un Proveedor de Servicios de Internet Inalámbrico. Administración de routers, access point, switches y antenas 5Ghz. Configuración enlaces inalámbricos punto-a-punto y punto-a-multipunto. Administración de redes LAN, WLAN y WAN.",
     },
 ];
+
+export const currentYear = new Date().getFullYear();

@@ -4,7 +4,11 @@ import "@fontsource/onest";
 import Header from "@/sections/Header.astro";
 import Sidebar from "@/sections/Sidebar.astro";
 
-const { title, description } = Astro.props;
+import ClientRouter from "astro/components/ClientRouter.astro";
+
+const { pageTitle, headerTitle, description } = Astro.props;
+
+const newHeaderTitle = headerTitle ? headerTitle : pageTitle;
 ---
 
 <html lang="es" class="dark">
@@ -14,7 +18,8 @@ const { title, description } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Marcvs Pt | {title}</title>
+		<title>Marcvs Pt | {pageTitle}</title>
+		<ClientRouter />
 	</head>
 	<body class="text-primary-dark dark:text-primary">
 		<div
@@ -24,7 +29,7 @@ const { title, description } = Astro.props;
 		<Sidebar />
 
 		<div id="main-content" class="transition-all duration-300 md:ml-36">
-			<Header pageTitle={title} />
+			<Header headerTitle={newHeaderTitle} />
 			<main
 				class="min-h-auto mt-4 mx-auto px-3 sm:px-0 sm:max-w-md md:max-w-xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl prose-lg"
 			>
@@ -39,16 +44,28 @@ const { title, description } = Astro.props;
 		</style>
 
 		<script is:inline>
-			const $toggleSidebarBtn = document.querySelector(
-				"#sidebar-toggle-btn",
-			);
-			const $sidebar = document.querySelector("#sidebar");
-			const $mainContent = document.querySelector("#main-content");
+			function initializeSidebarToggle() {
+				const $toggleSidebarBtn = document.querySelector(
+					"#sidebar-toggle-btn",
+				);
+				const $sidebar = document.querySelector("#sidebar");
+				const $mainContent = document.querySelector("#main-content");
 
-			$toggleSidebarBtn.addEventListener("click", () => {
-				$sidebar.classList.toggle("-translate-x-full");
-				$mainContent.classList.toggle("md:ml-36");
-				$mainContent.classList.toggle("ml-36");
+				if ($toggleSidebarBtn && $sidebar && $mainContent) {
+					$toggleSidebarBtn.addEventListener("click", () => {
+						$sidebar.classList.toggle("-translate-x-full");
+						$mainContent.classList.toggle("md:ml-36");
+						$mainContent.classList.toggle("ml-36");
+					});
+				}
+			}
+
+			// Inicializar al cargar la página
+			initializeSidebarToggle();
+
+			// Re-inicializar después de cada transición de vista
+			document.addEventListener("astro:after-swap", () => {
+				initializeSidebarToggle();
 			});
 		</script>
 	</body>
