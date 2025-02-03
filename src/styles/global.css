@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-primary: #ffffff;
+    --color-secondary: #c4b5fd;
+    --color-accent: #8b5cf6;
+    --color-primary-dark: #374151;
+    --color-secondary-dark: #a855f7;
+    --color-accent-dark: #5b21b6;
+
+    --spacing-34: 8.5rem;
+}
