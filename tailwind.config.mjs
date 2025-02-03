@@ -10,20 +10,12 @@ export default {
 					dark: '#374151'
 				},
 				secondary: {
-					DEFAULT: '#DDD6FE',
+					DEFAULT: '#C4B5FD',
 					dark: '#A855F7'
-				},
-				terciary: {
-					DEFAULT: '#F3E8FF',
-					dark: '#C4B5FD'
 				},
 				accent: {
 					DEFAULT: '#8B5CF6',
 					dark: '#5B21B6'
-				},
-				fully: {
-					DEFAULT: '#f3f4f6',
-					dark: '#4c1d95'
 				},
 
 			},

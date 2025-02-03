@@ -10,23 +10,27 @@ const { frontmatter } = Astro.props;
 const { title, pubDate, updtPubDate, image, tags } = frontmatter;
 const newPubDate = getFormatedDate(pubDate);
 const newUpdtPubDate = getFormatedDate(updtPubDate);
+
+const plainPubDate: any = getFormatedDate(pubDate, "plain");
+const plainUpdtPubDate: any = getFormatedDate(updtPubDate, "plain");
 ---
 
-<BaseLayout title="Blog">
+<BaseLayout pageTitle={title} headerTitle="Blog">
     <article>
-        <h1 class="text-4xl font-bold">{title}</h1>
-        <p class="text-accent/80 dark:text-secondary mb-1">
-            Publicado el: <time datetime={pubDate.slice(0, 10)}
-                >{newPubDate}</time
-            >
+        <h1 class="text-4xl font-bold" transition:name=`post-title-${title}`>
+            {title}
+        </h1>
+        <p
+            class="text-accent/80 dark:text-secondary mb-1"
+            transition:name=`post-pubdate-${title}`
+        >
+            Publicado el: <time datetime={plainPubDate}>{newPubDate}</time>
         </p>
         {
             newUpdtPubDate && (
                 <p class="text-accent/80 dark:text-secondary mt-1 ">
                     Actualizado el:{" "}
-                    <time datetime={updtPubDate.slice(0, 10)}>
-                        {newUpdtPubDate}
-                    </time>
+                    <time datetime={plainUpdtPubDate}>{newUpdtPubDate}</time>
                 </p>
             )
         }
@@ -36,6 +40,7 @@ const newUpdtPubDate = getFormatedDate(updtPubDate);
                 class="w-auto h-auto max-h-[48rem] my-0"
                 src={image?.path}
                 alt={image?.alt}
+                transition:name=`post-image-${title}`
             />
             <Tags tags={tags} />
         </div>
@@ -115,7 +120,7 @@ const newUpdtPubDate = getFormatedDate(updtPubDate);
             "items-center",
             "px-4",
             "py-2",
-            "bg-terciary-dark/60",
+            "bg-secondary/60",
             "dark:bg-secondary-dark/50",
             "rounded-t-lg",
         );

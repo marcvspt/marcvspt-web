@@ -2,17 +2,19 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PostPreview from "@/components/PostPreview.astro";
 
-import { getAllPosts } from "@/scripts/utils";
+import { getAllPosts, sortPostsByDate } from "@/scripts/utils";
 
 const allPosts = getAllPosts();
+
+const sortedPosts = sortPostsByDate(allPosts);
 
 const pageTitle = "Blog";
 ---
 
-<BaseLayout title={pageTitle}>
-    <nav class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 ">
+<BaseLayout pageTitle={pageTitle}>
+    <nav class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-4">
     {
-        allPosts.map((post: any) => (
+        sortedPosts.map((post: any) => (
             <PostPreview postUrl={post.url}
                 postImage={post.frontmatter.image},
                 postTitle={post.frontmatter.title},

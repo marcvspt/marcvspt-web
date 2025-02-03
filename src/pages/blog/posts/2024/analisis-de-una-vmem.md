@@ -1,7 +1,7 @@
 ---
 layout: '@/layouts/PostLayout.astro'
 title: Análisis forense de una imagen VMEM
-pubDate: 2023-04-19
+pubDate: 2024-09-19
 updtPubDate:
 categories: [Forense, Análisis]
 tags: [forense, análisis, memoria, linux, windows]

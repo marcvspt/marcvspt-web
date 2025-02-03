@@ -5,9 +5,7 @@ import HackTheBoxIcon from "@/icons/HackTheBoxIcon.astro";
 import XIcon from "@/icons/XIcon.astro";
 import MailIcon from "@/icons/MailIcon.astro";
 
-import { SOCIAL_DATA } from "@/scripts/data.js";
-
-const currentYear = new Date().getFullYear();
+import { SOCIAL_DATA, currentYear } from "@/scripts/data.js";
 ---
 
 <footer
@@ -23,7 +21,7 @@ const currentYear = new Date().getFullYear();
                             href={social.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="dark:hover:text-terciary-dark hover:text-secondary-dark/80"
+                            class="dark:hover:text-secondary hover:text-secondary-dark/80"
                         >
                             {social.name === "LinkedIn" && <LinkedInIcon />}
                             {social.name === "GitHub" && <GitHubIcon />}
