@@ -1,13 +1,13 @@
 ---
-import NavLink from "@/components/NavLink.astro";
+import NavLink from "@/components/NavLink.astro"
 
-import DropdownIcon from "@/icons/DropdownIcon.astro";
+import DropdownIcon from "@/icons/DropdownIcon.astro"
 
-import { NAV_ITEMS, BLOG_ITEMS } from "@/scripts/data";
+import { NAV_ITEMS, BLOG_ITEMS } from "@/scripts/data"
 
-const currentPath = Astro.url.pathname;
-const isBlogActive = currentPath.startsWith("/blog");
-const isPostsActive = currentPath.startsWith("/blog/posts");
+const currentPath = Astro.url.pathname
+const isBlogActive = currentPath.startsWith("/blog")
+const isPostsActive = currentPath.startsWith("/blog/posts")
 ---
 
 <nav class="py-8 px-4">
@@ -52,22 +52,22 @@ const isPostsActive = currentPath.startsWith("/blog/posts");
 
 <script is:inline>
     function initializeDropdown() {
-        const $dropdownButton = document.querySelector("#submenu-dropdown-btn");
-        const $subMenu = document.querySelector("#submenu");
-        const $dropdownIcon = document.querySelector("#submenu-dropdown-icon");
+        const $dropdownButton = document.querySelector("#submenu-dropdown-btn")
+        const $subMenu = document.querySelector("#submenu")
+        const $dropdownIcon = document.querySelector("#submenu-dropdown-icon")
 
         if ($dropdownButton && $subMenu && $dropdownIcon) {
             $dropdownButton.addEventListener("click", (e) => {
-                e.stopPropagation();
-                $subMenu.classList.toggle("hidden");
-                $dropdownIcon.classList.toggle("rotate-180");
-            });
+                e.stopPropagation()
+                $subMenu.classList.toggle("hidden")
+                $dropdownIcon.classList.toggle("rotate-180")
+            })
         }
     }
 
-    initializeDropdown();
+    initializeDropdown()
 
     document.addEventListener("astro:after-swap", () => {
-        initializeDropdown();
-    });
+        initializeDropdown()
+    })
 </script>

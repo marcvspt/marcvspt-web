@@ -1,16 +1,16 @@
 ---
-import "@fontsource/onest";
+import "@fontsource/onest"
 
-import "@/styles/global.css";
+import "@/styles/global.css"
 
-import Header from "@/sections/Header.astro";
-import Sidebar from "@/sections/Sidebar.astro";
+import Header from "@/sections/Header.astro"
+import Sidebar from "@/sections/Sidebar.astro"
 
-import ClientRouter from "astro/components/ClientRouter.astro";
+import ClientRouter from "astro/components/ClientRouter.astro"
 
-const { pageTitle, headerTitle, description } = Astro.props;
+const { pageTitle, headerTitle, description } = Astro.props
 
-const newHeaderTitle = headerTitle ? headerTitle : pageTitle;
+const newHeaderTitle = headerTitle ? headerTitle : pageTitle
 ---
 
 <html lang="es" class="dark">
@@ -43,26 +43,26 @@ const newHeaderTitle = headerTitle ? headerTitle : pageTitle;
 			function initializeSidebarToggle() {
 				const $toggleSidebarBtn = document.querySelector(
 					"#sidebar-toggle-btn",
-				);
-				const $sidebar = document.querySelector("#sidebar");
-				const $mainContent = document.querySelector("#main-content");
+				)
+				const $sidebar = document.querySelector("#sidebar")
+				const $mainContent = document.querySelector("#main-content")
 
 				if ($toggleSidebarBtn && $sidebar && $mainContent) {
 					$toggleSidebarBtn.addEventListener("click", () => {
-						$sidebar.classList.toggle("-translate-x-full");
-						$mainContent.classList.toggle("md:ml-36");
-						$mainContent.classList.toggle("ml-36");
-					});
+						$sidebar.classList.toggle("-translate-x-full")
+						$mainContent.classList.toggle("md:ml-36")
+						$mainContent.classList.toggle("ml-36")
+					})
 				}
 			}
 
 			// Inicializar al cargar la página
-			initializeSidebarToggle();
+			initializeSidebarToggle()
 
 			// Re-inicializar después de cada transición de vista
 			document.addEventListener("astro:after-swap", () => {
-				initializeSidebarToggle();
-			});
+				initializeSidebarToggle()
+			})
 		</script>
 	</body>
 </html>

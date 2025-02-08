@@ -1,14 +1,14 @@
 ---
-import CategoryIcon from "@/icons/CategoryIcon.astro";
-import DateIcon from "@/icons/DateIcon.astro";
+import CategoryIcon from "@/icons/CategoryIcon.astro"
+import DateIcon from "@/icons/DateIcon.astro"
 
-import { getFormatedDate } from "@/scripts/utils";
+import { getFormatedDate } from "@/scripts/utils"
 
 const { postUrl, postImage, postTitle, postPubDate, postCategories } =
-    Astro.props;
+    Astro.props
 
-const newPostPubDate = getFormatedDate(postPubDate);
-const plainPubDate: any = getFormatedDate(postPubDate, "plain");
+const newPostPubDate = getFormatedDate(postPubDate)
+const plainPubDate: any = getFormatedDate(postPubDate, "plain")
 ---
 
 <a
