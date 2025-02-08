@@ -1,14 +1,14 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import PostPreview from "@/components/PostPreview.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import PostPreview from "@/components/PostPreview.astro"
 
-import { getAllPosts, sortPostsByDate } from "@/scripts/utils";
+import { getAllPosts, sortPostsByDate } from "@/scripts/utils"
 
-const allPosts = getAllPosts();
+const allPosts = getAllPosts()
 
-const sortedPosts = sortPostsByDate(allPosts);
+const sortedPosts = sortPostsByDate(allPosts)
 
-const pageTitle = "Blog";
+const pageTitle = "Blog"
 ---
 
 <BaseLayout pageTitle={pageTitle}>

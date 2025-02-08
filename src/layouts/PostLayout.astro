@@ -37,14 +37,17 @@ const plainUpdtPubDate: any = getFormatedDate(updtPubDate, "plain");
         <div class="flex flex-col justify-center items-center">
             <img
                 id="hero-image"
-                class="w-auto h-auto max-h-[48rem] my-0"
+                class="w-auto h-auto max-h-[48rem] mb-0"
                 src={image?.path}
                 alt={image?.alt}
                 transition:name=`post-image-${title}`
             />
             <Tags tags={tags} />
         </div>
-        <main id="post-content">
+        <main
+            id="post-content"
+            class="prose-a:text-accent-dark prose-a:dark:text-secondary prose-a:hover:underline prose-img:rounded-xl prose-headings:italic prose-headings:underline prose-li:[list-style:initial]"
+        >
             <slot />
         </main>
     </article>
@@ -188,21 +191,3 @@ const plainUpdtPubDate: any = getFormatedDate(updtPubDate, "plain");
         initializeCodeBlocks();
     });
 </script>
-
-<style is:global>
-    #tags ul li {
-        @apply list-none;
-    }
-    #post-content ul li a {
-        @apply underline;
-    }
-    #post-content ul li {
-        @apply list-disc;
-    }
-    #post-content ol li a {
-        @apply underline;
-    }
-    #post-content ol li {
-        @apply list-decimal;
-    }
-</style>

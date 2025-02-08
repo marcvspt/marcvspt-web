@@ -11,14 +11,14 @@ export const NAV_ITEMS = [
         title: "Sobre Mí",
         url: "/#about-me",
     },
-];
+]
 
 export const BLOG_ITEMS = [
     {
         title: "Posts",
         url: "/blog",
     },
-];
+]
 
 export const SOCIAL_DATA = [
     {
@@ -41,7 +41,7 @@ export const SOCIAL_DATA = [
         name: "Contactame",
         url: "mailto:marcvspt@gmail.com",
     },
-];
+]
 
 export const EXPERIENCE_DATA = [
     {
@@ -68,6 +68,6 @@ export const EXPERIENCE_DATA = [
         description:
             "Proyecto de grado de carrera técnica: Administración e instalación de enlaces inalámbricos mediante radiofrecuencias de un Proveedor de Servicios de Internet Inalámbrico. Administración de routers, access point, switches y antenas 5Ghz. Configuración enlaces inalámbricos punto-a-punto y punto-a-multipunto. Administración de redes LAN, WLAN y WAN.",
     },
-];
+]
 
-export const currentYear = new Date().getFullYear();
+export const currentYear = new Date().getFullYear()

@@ -98,5 +98,3 @@ También es posible instalar el **.deb** descargandolo de la páguna oficial de 
 * Página oficial del proyecto [LibreWolf](https://librewolf.net/#what-is-librewolf).
 * Código fuente [GitLab](https://gitlab.com/librewolf-community/browser).
 * Instalación en distribuciones basada en [Debian](https://librewolf.net/installation/debian/).
-
-1. Instalar dependencias

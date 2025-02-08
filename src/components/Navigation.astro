@@ -1,30 +1,46 @@
 ---
-import NavLink from "@/components/NavLink.astro";
+import NavLink from "@/components/NavLink.astro"
 
-import DropdownIcon from "@/icons/DropdownIcon.astro";
+import DropdownIcon from "@/icons/DropdownIcon.astro"
 
-import { NAV_ITEMS, BLOG_ITEMS } from "@/scripts/data";
+import { NAV_ITEMS, BLOG_ITEMS } from "@/scripts/data"
+
+const currentPath = Astro.url.pathname
+const isBlogActive = currentPath.startsWith("/blog")
+const isPostsActive = currentPath.startsWith("/blog/posts")
 ---
 
 <nav class="py-8 px-4">
     <ul class="space-y-2 w-full">
         {
             NAV_ITEMS.map((navItem) => (
-                <NavLink linkUrl={navItem.url}>{navItem.title}</NavLink>
+                <NavLink linkUrl={navItem.url} currentPath={currentPath}>
+                    {navItem.title}
+                </NavLink>
             ))
         }
         <li class="py-2">
             <button
                 id="submenu-dropdown-btn"
-                class="flex flex-row justify-between w-full hover:font-semibold"
+                class:list={{
+                    "py-2 flex flex-row justify-between w-full hover:font-semibold cursor-pointer": true,
+                    "font-semibold": isBlogActive,
+                }}
             >
                 Blog
                 <DropdownIcon id="submenu-dropdown-icon" />
             </button>
-            <ul id="submenu" class="py-2 hidden">
+            <ul
+                id="submenu"
+                class:list={{ "py-2": true, hidden: !isBlogActive }}
+            >
                 {
                     BLOG_ITEMS.map((blogItem) => (
-                        <NavLink className="px-4" linkUrl={blogItem.url}>
+                        <NavLink
+                            className={`px-4 ${isPostsActive && currentPath.startsWith(blogItem.url) ? "font-semibold" : ""}`}
+                            linkUrl={blogItem.url}
+                            currentPath={currentPath}
+                        >
                             {blogItem.title}
                         </NavLink>
                     ))
@@ -33,24 +49,25 @@ import { NAV_ITEMS, BLOG_ITEMS } from "@/scripts/data";
         </li>
     </ul>
 </nav>
+
 <script is:inline>
     function initializeDropdown() {
-        const $dropdownButton = document.querySelector("#submenu-dropdown-btn");
-        const $subMenu = document.querySelector("#submenu");
-        const $dropdownIcon = document.querySelector("#submenu-dropdown-icon");
+        const $dropdownButton = document.querySelector("#submenu-dropdown-btn")
+        const $subMenu = document.querySelector("#submenu")
+        const $dropdownIcon = document.querySelector("#submenu-dropdown-icon")
 
         if ($dropdownButton && $subMenu && $dropdownIcon) {
             $dropdownButton.addEventListener("click", (e) => {
-                e.stopPropagation();
-                $subMenu.classList.toggle("hidden");
-                $dropdownIcon.classList.toggle("rotate-180");
-            });
+                e.stopPropagation()
+                $subMenu.classList.toggle("hidden")
+                $dropdownIcon.classList.toggle("rotate-180")
+            })
         }
     }
 
-    initializeDropdown();
+    initializeDropdown()
 
     document.addEventListener("astro:after-swap", () => {
-        initializeDropdown();
-    });
+        initializeDropdown()
+    })
 </script>
