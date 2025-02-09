@@ -10,6 +10,8 @@
     --color-primary-dark: #374151;
     --color-secondary-dark: #a855f7;
     --color-accent-dark: #5b21b6;
+    --color-code-inline: #444444;
+    --color-code-data: #e1e4e8;
 
     --spacing-34: 8.5rem;
 }
@@ -43,3 +45,31 @@
 #post-content ol li {
     @apply list-decimal;
 }
+
+#post-content code {
+    @apply bg-code-inline text-code-data px-2 py-[0.125rem] rounded-[0.5rem];
+}
+
+
+#post-content .image-container {
+    @apply flex flex-col justify-center items-center;
+}
+
+#post-content .image-container img {
+    @apply w-auto h-auto max-h-[48rem] mb-0;
+}
+
+#post-content pre {
+    @apply relative pt-10 rounded-xl;
+}
+
+#post-content .code-block {
+    @apply pt-4 block text-wrap bg-inherit;
+
+}
+
+#post-content .code-block-header {
+    @apply absolute top-0 left-0 right-0 flex justify-between items-center px-4 py-2 bg-secondary/60 dark:bg-secondary-dark/50 rounded-t-lg;
+}
+
+
