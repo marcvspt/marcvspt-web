@@ -1,6 +1,7 @@
 ---
 layout: '@/layouts/PostLayout.astro'
 title: Certificado SSL autofirmado Apache2 y Nginx
+description: Configura un certificado SSL autofirmado para Apache2 y Nginx. Aprende a configurar dominios y subdominios con un solo certificado.
 pubDate: 2024-07-30
 updtPubDate:
 categories: [Instalación, Configuración]

@@ -1,6 +1,7 @@
 ---
 layout: '@/layouts/PostLayout.astro'
 title: Análisis forense de una imagen VMEM
+description: Aprender a analizar una imagen VMEM en Windows y Linux para un proceso de foresen digital
 pubDate: 2024-09-19
 updtPubDate:
 categories: [Forense, Análisis]

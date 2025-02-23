@@ -1,6 +1,7 @@
 ---
 layout: '@/layouts/PostLayout.astro'
 title: Writeup - Maquina "PC" HackTheBox
+description: Resolución paso a paso de la maquina "PC" de HackTheBox
 pubDate: 2023-07-10
 updtPubDate:
 categories: [Writeup, HackTheBox]

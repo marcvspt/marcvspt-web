@@ -1,8 +1,9 @@
 ---
 layout: '@/layouts/PostLayout.astro'
-title: Instalar LibreWolf en ParrotOS y derivados de Debian
+title: (Deprecated) Instalar LibreWolf en ParrotOS y derivados de Debian
+description: Instalar LibreWolf en ParrotOS y derivados de Debian
 pubDate: 2023-05-03
-updtPubDate:
+updtPubDate: 2025-02-23
 categories: [Instalación, Configuración]
 tags: [instalación, configuración, web, debian, linux]
 image:

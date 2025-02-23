@@ -1,6 +1,7 @@
 ---
 layout: '@/layouts/PostLayout.astro'
 title: Windows Exploit Suggester (python2) - Arreglo de errores
+description: Solución de errores en Windows Exploit Suggester (python2)
 pubDate: 2022-08-25
 updtPubDate:
 categories: [Errores, Bugs]
