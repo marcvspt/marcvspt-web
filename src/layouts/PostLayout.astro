@@ -14,7 +14,11 @@ const plainPubDate: any = getFormatedDate(pubDate, "plain");
 const plainUpdtPubDate: any = getFormatedDate(updtPubDate, "plain");
 ---
 
-<BaseLayout pageTitle={title} headerTitle="Blog">
+<BaseLayout
+    pageTitle={title}
+    headerTitle="Blog"
+    description={frontmatter.description}
+>
     <article>
         <h1 class="text-4xl font-bold" transition:name=`post-title-${title}`>
             {title}

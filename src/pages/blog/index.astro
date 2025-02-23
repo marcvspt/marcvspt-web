@@ -11,14 +11,13 @@ const sortedPosts = sortPostsByDate(allPosts)
 const pageTitle = "Blog"
 ---
 
-<BaseLayout pageTitle={pageTitle}>
+<BaseLayout pageTitle={pageTitle} description="Blog de Marcvs Pt. Posts de ciberseguridad, pentesting, inteligencia de amenazas, etc.">
     <nav class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5 mb-4">
     {
         sortedPosts.map((post: any) => (
             <PostPreview postUrl={post.url}
                 postImage={post.frontmatter.image},
                 postTitle={post.frontmatter.title},
-                postDescription={post.frontmatter.description},
                 postPubDate={post.frontmatter.pubDate},
                 postTags={post.frontmatter.tags},
                 postCategories={post.frontmatter.categories},
