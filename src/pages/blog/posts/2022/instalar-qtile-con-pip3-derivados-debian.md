@@ -1,6 +1,7 @@
 ---
 layout: '@/layouts/PostLayout.astro'
 title: Qtile - Instalación con pip3 y Configuración
+description: Instala y configura el entorno de escritorio Qtile con pip3 para sistemas basados en Debian
 pubDate: 2022-08-18
 updtPubDate:
 categories: [Instalación, Configuración]

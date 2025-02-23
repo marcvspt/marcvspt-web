@@ -1,6 +1,7 @@
 ---
 layout: '@/layouts/PostLayout.astro'
 title: MiddleWare para ataques SQL injection
+description: ¿Qué es un MiddleWare? Crea un MiddleWare para ataques SQL injection a través de WebSocket, gRPC y HTTP usando Python
 pubDate: 2023-05-24
 updtPubDate:
 categories: [Pentest, SQLi]

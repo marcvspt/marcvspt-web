@@ -1,6 +1,7 @@
 ---
 layout: '@/layouts/PostLayout.astro'
 title: Tor Browser Launcher - Arreglar error 404 en la descarga
+description: Arreglar error 404 en la descarga de Tor Browser Launcher
 pubDate: 2023-05-04
 updtPubDate:
 categories: [Errores, Bugs]

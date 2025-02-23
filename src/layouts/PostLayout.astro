@@ -7,18 +7,14 @@ import { getFormatedDate } from "@/scripts/utils";
 
 const { frontmatter } = Astro.props;
 
-const { title, pubDate, updtPubDate, image, tags } = frontmatter;
+const { title, description, pubDate, updtPubDate, image, tags } = frontmatter;
 const newPubDate = getFormatedDate(pubDate);
 const newUpdtPubDate = getFormatedDate(updtPubDate);
 const plainPubDate: any = getFormatedDate(pubDate, "plain");
 const plainUpdtPubDate: any = getFormatedDate(updtPubDate, "plain");
 ---
 
-<BaseLayout
-    pageTitle={title}
-    headerTitle="Blog"
-    description={frontmatter.description}
->
+<BaseLayout pageTitle={title} headerTitle="Blog" description={description}>
     <article>
         <h1 class="text-4xl font-bold" transition:name=`post-title-${title}`>
             {title}

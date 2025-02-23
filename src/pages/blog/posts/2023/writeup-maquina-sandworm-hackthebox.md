@@ -1,6 +1,7 @@
 ---
 layout: '@/layouts/PostLayout.astro'
 title: Writeup - Maquina "Sandworm" HackTheBox
+description: Resolución paso a paso de la maquina "Sandworm" de HackTheBox
 pubDate: 2023-07-18
 updtPubDate:
 categories: [Writeup, HackTheBox]
