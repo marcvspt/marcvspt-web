@@ -1,0 +1,99 @@
+---
+import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
+---
+
+<section
+  class="relative min-h-screen flex items-center justify-center overflow-hidden"
+>
+  <!-- Gradient Background -->
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900"
+  >
+  </div>
+
+  <!-- Animated Background Elements -->
+  <div class="absolute inset-0">
+    <div
+      class="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"
+    >
+    </div>
+    <div
+      class="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"
+      style="animation-delay: 2s;"
+    >
+    </div>
+    <div
+      class="absolute bottom-1/4 left-1/3 w-80 h-80 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"
+      style="animation-delay: 4s;"
+    >
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="animate-fade-in">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6">
+        <span
+          class="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent"
+        >
+          Bienvenido a
+        </span>
+        <br />
+        <span class="text-white">Mi Blog</span>
+      </h1>
+
+      <p
+        class="text-xl md:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+      >
+        Explorando ideas, compartiendo conocimiento y creando conexiones a
+        través de experiencias e investigaciones.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a
+          href="#posts"
+          class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 animate-glow"
+        >
+          Explorar Posts
+          <svg
+            class="ml-2 w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+
+        <a
+          href={SITE_PAGES.About.url}
+          class="inline-flex items-center px-8 py-3 border-2 border-slate-600 text-slate-300 hover:border-blue-500 hover:text-blue-400 font-semibold rounded-lg transition-all duration-300"
+        >
+          {SITE_PAGES.About.title}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div
+    class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+  >
+    <svg
+      class="w-6 h-6 text-slate-400"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>

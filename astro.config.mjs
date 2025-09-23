@@ -7,10 +7,6 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://marcvspt.tech/',
 
-  redirects: {
-    '/blog/posts': '/blog',
-  },
-
   integrations: [],
 
   vite: {

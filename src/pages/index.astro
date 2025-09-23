@@ -1,31 +1,18 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro"
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Hero from "@/components/Hero.astro";
+import BlogPosts from "@/components/BlogPosts.astro";
+import Footer from "@/components/Footer.astro";
 
-import ArticleContainer from "@/components/ArticleContainer.astro"
-
-import Experience from "@/sections/home/Experience.astro"
-import AboutMe from "@/sections/home/AboutMe.astro"
+import { SITE_PAGES } from "@/scripts/data.js";
 ---
 
-<BaseLayout
-	pageTitle="Inicio"
-	description="Ingeniero en Ciberseguridad con 2 años de experiencia realizando actividades de inteligencia de amenazas, respuesta ante incidentes, seguridad perimetral y pentesting."
->
-	<ArticleContainer id="hero">
-		<h1 class="font-bold text-3xl">Hola, soy Marco</h1>
-
-		<p class="text-xl mt-6 text-pretty">
-			Especialista en Ciberseguridad con <strong
-				class="text-accent dark:text-secondary/90"
-				>2 años de experiencia</strong
-			> realizando actividades de inteligencia de amenazas, respuesta ante
-			incidentes, seguridad perimetral y pentesting.
-		</p>
-	</ArticleContainer>
-	<ArticleContainer id="experience">
-		<Experience />
-	</ArticleContainer>
-	<ArticleContainer id="about-me">
-		<AboutMe />
-	</ArticleContainer>
-</BaseLayout>
+<Layout title={SITE_PAGES.Home.title} description={SITE_PAGES.Home.excerpt}>
+  <Header />
+  <main>
+    <Hero />
+    <BlogPosts />
+  </main>
+  <Footer />
+</Layout>

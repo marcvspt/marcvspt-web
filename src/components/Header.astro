@@ -1,0 +1,96 @@
+---
+import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
+---
+
+<header
+  class="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md border-b border-slate-800 z-50"
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a
+          href={SITE_PAGES.Home.url}
+          class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent hover:from-blue-300 hover:to-blue-500 transition-all duration-300"
+        >
+          {SITE_DATA.name}
+        </a>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex space-x-8">
+        {
+          Object.values(SITE_PAGES).map((page) => {
+            return (
+              <a
+                href={page.url}
+                class="text-slate-300 hover:text-blue-400 transition-colors duration-300"
+              >
+                {page.title}
+              </a>
+            );
+          })
+        }
+      </nav>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button
+          id="mobileMenuButton"
+          class="text-slate-300 hover:text-blue-400 transition-colors duration-300"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden pb-4">
+      <div class="flex flex-col space-y-2">
+        {
+          Object.values(SITE_PAGES).map((page) => {
+            return (
+              <a
+                href={page.url}
+                class="text-slate-300 hover:text-blue-400 transition-colors duration-300 py-2"
+              >
+                {page.title}
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById("mobileMenuButton");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (
+      !mobileMenuButton?.contains(e.target as Node) &&
+      !mobileMenu?.contains(e.target as Node)
+    ) {
+      mobileMenu?.classList.add("hidden");
+    }
+  });
+</script>
