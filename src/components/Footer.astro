@@ -1,0 +1,107 @@
+---
+import {
+  SITE_DATA,
+  SITE_PAGES,
+  SOCIAL_DATA,
+  EXTERNAL_RESOURCES,
+  currentYear,
+} from "@/scripts/data.js";
+
+import LinkedInIcon from "@/icons/linkedin.svg";
+import GitHubIcon from "@/icons/github.svg";
+import HackTheBoxIcon from "@/icons/hackthebox.svg";
+import MailIcon from "@/icons/email.svg";
+import XIcon from "@/icons/x.svg";
+---
+
+<footer class="bg-slate-900 border-t border-slate-800">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Logo y descripción -->
+      <div class="md:col-span-2">
+        <a
+          href="/"
+          class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
+        >
+          {SITE_DATA.name}
+        </a>
+        <p class="mt-4 text-slate-400 max-w-md">
+          {SITE_DATA.description}
+        </p>
+        <div class="flex items-center space-x-4 mt-6">
+          {
+            SOCIAL_DATA.map((social) => {
+              return (
+                <a
+                  id={`link-${social.name}`}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-slate-400 hover:text-blue-400 transition-colors duration-300"
+                  aria-label={social.name}
+                >
+                  {social.name === "LinkedIn" && <LinkedInIcon />}
+                  {social.name === "GitHub" && <GitHubIcon />}
+                  {social.name === "HackTheBox" && <HackTheBoxIcon />}
+                  {social.name === "X/Twitter" && <XIcon />}
+                  {social.name === "Contactame" && <MailIcon />}
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+
+      <!-- Enlaces rápidos -->
+      <div>
+        <h3 class="text-lg font-semibold text-white mb-4">Enlaces Rápidos</h3>
+        <ul class="space-y-2">
+          {
+            Object.values(SITE_PAGES).map((page) => {
+              return (
+                <li>
+                  <a
+                    href={page.url}
+                    class="text-slate-400 hover:text-blue-400 transition-colors duration-300"
+                  >
+                    {page.title}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+
+      <!-- Recursos útiles -->
+      <div>
+        <h3 class="text-lg font-semibold text-white mb-4">Recursos</h3>
+        <ul class="space-y-2">
+          {
+            EXTERNAL_RESOURCES.map((resource) => {
+              return (
+                <li>
+                  <a
+                    href={resource.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-slate-400 hover:text-blue-400 transition-colors duration-300"
+                  >
+                    {resource.name}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-800 mt-12 pt-8 text-center">
+      <p class="text-slate-400">
+        © {currentYear} Todos los derechos reservados. Hecho con ❤️ usando Astro
+        y Tailwind CSS.
+      </p>
+    </div>
+  </div>
+</footer>

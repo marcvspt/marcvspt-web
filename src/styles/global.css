@@ -1,75 +1,74 @@
 @import "tailwindcss";
 @plugin '@tailwindcss/typography';
+/* Configuración de fuentes */
+@theme {
+  --font-family-sans: Inter, system-ui, sans-serif;
+}
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* Animaciones personalizadas */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+  100% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+}
 
 @theme {
-    --color-primary: #ffffff;
-    --color-secondary: #c4b5fd;
-    --color-accent: #8b5cf6;
-    --color-primary-dark: #374151;
-    --color-secondary-dark: #a855f7;
-    --color-accent-dark: #5b21b6;
-    --color-code-inline: #444444;
-    --color-code-data: #e1e4e8;
-
-    --spacing-34: 8.5rem;
+  --animate-fade-in: fadeIn 0.8s ease-out;
+  --animate-slide-up: slideUp 0.6s ease-out;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
 }
 
-:root {
-    font-family: "Onest", system-ui, sans-serif;
-    scroll-behavior: smooth;
+/* Variables de tipografía para modo oscuro */
+@theme {
+  --color-prose-body-invert: rgb(203 213 225);
+  --color-prose-headings-invert: rgb(248 250 252);
+  --color-prose-lead-invert: rgb(148 163 184);
+  --color-prose-links-invert: rgb(96 165 250);
+  --color-prose-bold-invert: rgb(248 250 252);
+  --color-prose-counters-invert: rgb(148 163 184);
+  --color-prose-bullets-invert: rgb(100 116 139);
+  --color-prose-hr-invert: rgb(51 65 85);
+  --color-prose-quotes-invert: rgb(248 250 252);
+  --color-prose-quote-borders-invert: rgb(51 65 85);
+  --color-prose-captions-invert: rgb(148 163 184);
+  --color-prose-code-invert: rgb(248 250 252);
+  --color-prose-pre-code-invert: rgb(226 232 240);
+  --color-prose-pre-bg-invert: rgb(15 23 42);
+  --color-prose-th-borders-invert: rgb(51 65 85);
+  --color-prose-td-borders-invert: rgb(71 85 105);
 }
 
-/* ToggleTheme Styles */
-
-#themes-menu.open {
-    display: inline;
-    animation: scale-up-center 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+/* Configuración de prose para modo oscuro */
+.prose-invert {
+  --tw-prose-body: var(--color-prose-body-invert);
+  --tw-prose-headings: var(--color-prose-headings-invert);
+  --tw-prose-lead: var(--color-prose-lead-invert);
+  --tw-prose-links: var(--color-prose-links-invert);
+  --tw-prose-bold: var(--color-prose-bold-invert);
+  --tw-prose-counters: var(--color-prose-counters-invert);
+  --tw-prose-bullets: var(--color-prose-bullets-invert);
+  --tw-prose-hr: var(--color-prose-hr-invert);
+  --tw-prose-quotes: var(--color-prose-quotes-invert);
+  --tw-prose-quote-borders: var(--color-prose-quote-borders-invert);
+  --tw-prose-captions: var(--color-prose-captions-invert);
+  --tw-prose-code: var(--color-prose-code-invert);
+  --tw-prose-pre-code: var(--color-prose-pre-code-invert);
+  --tw-prose-pre-bg: var(--color-prose-pre-bg-invert);
+  --tw-prose-th-borders: var(--color-prose-th-borders-invert);
+  --tw-prose-td-borders: var(--color-prose-td-borders-invert);
 }
-
-@keyframes scale-up-center {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* POSTS Markdown Styles */
-
-#post-content ol li {
-    @apply list-decimal;
-}
-
-#post-content code {
-    @apply bg-code-inline text-code-data px-2 py-[0.125rem] rounded-[0.5rem];
-}
-
-
-#post-content .image-container {
-    @apply flex flex-col justify-center items-center;
-}
-
-#post-content .image-container img {
-    @apply w-auto h-auto max-h-[48rem] mb-0;
-}
-
-#post-content pre {
-    @apply relative pt-10 rounded-xl;
-}
-
-#post-content .code-block {
-    @apply pt-4 block text-wrap bg-inherit;
-
-}
-
-#post-content .code-block-header {
-    @apply absolute top-0 left-0 right-0 flex justify-between items-center px-4 py-2 bg-secondary/60 dark:bg-secondary-dark/50 rounded-t-lg;
-}
-
-

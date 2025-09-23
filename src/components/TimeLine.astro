@@ -1,0 +1,61 @@
+---
+import TimeLineCard from "./TimeLineCard.astro";
+import { PROFESIONAL_EXPERIENCE } from "@/scripts/data.js";
+---
+
+<section class="py-20 bg-slate-800/30">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span
+                    class="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
+                >
+                    Experiencia Profesional
+                </span>
+            </h2>
+            <p class="text-xl text-slate-400">
+                Lugares donde he trabajado y aprendido a lo largo de mi carrera.
+            </p>
+        </div>
+
+        <div class="relative">
+            <!-- Timeline line -->
+            <div
+                class="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-blue-500 to-blue-600"
+            >
+            </div>
+
+            <!-- Timeline items -->
+            <div class="space-y-12">
+                <TimeLineCard
+                    ocupation={PROFESIONAL_EXPERIENCE.gobierno.ocupation}
+                    description={PROFESIONAL_EXPERIENCE.gobierno.description}
+                    company={PROFESIONAL_EXPERIENCE.gobierno.company}
+                    time={PROFESIONAL_EXPERIENCE.gobierno.time}
+                    link={PROFESIONAL_EXPERIENCE.gobierno.link}
+                    side="left"
+                    delay="0.9s"
+                />
+                <TimeLineCard
+                    ocupation={PROFESIONAL_EXPERIENCE.rooms31.ocupation}
+                    description={PROFESIONAL_EXPERIENCE.rooms31.description}
+                    company={PROFESIONAL_EXPERIENCE.rooms31.company}
+                    time={PROFESIONAL_EXPERIENCE.rooms31.time}
+                    link={PROFESIONAL_EXPERIENCE.rooms31.link}
+                    side="right"
+                    delay="1s"
+                />
+                <TimeLineCard
+                    ocupation={PROFESIONAL_EXPERIENCE.conexionesTI.ocupation}
+                    description={PROFESIONAL_EXPERIENCE.conexionesTI
+                        .description}
+                    company={PROFESIONAL_EXPERIENCE.conexionesTI.company}
+                    time={PROFESIONAL_EXPERIENCE.conexionesTI.time}
+                    link={PROFESIONAL_EXPERIENCE.conexionesTI.link}
+                    side="left"
+                    delay="1.1s"
+                />
+            </div>
+        </div>
+    </div>
+</section>

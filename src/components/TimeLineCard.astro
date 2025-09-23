@@ -1,0 +1,64 @@
+---
+const { ocupation, description, time, side, delay, company, link } =
+    Astro.props;
+
+// TODO: usar company y link en la card para mandar a la web de la empresa
+const isLeft = side === "left";
+---
+
+<div
+    class="relative flex items-center animate-slide-up"
+    style={`animation-delay: ${delay};`}
+>
+    <!-- Contenido izquierdo -->
+    <div
+        class:list={[
+            "flex-1",
+            {
+                "text-right pr-8": !isLeft,
+                "pr-8": isLeft,
+            },
+        ]}
+    >
+        {
+            !isLeft && (
+                <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                    <h3 class="text-xl font-bold text-white mb-2">{time}</h3>
+                    <h4 class="text-lg font-semibold text-blue-400 mb-2">
+                        {ocupation}
+                    </h4>
+                    <p class="text-slate-300">{description}</p>
+                </div>
+            )
+        }
+    </div>
+
+    <!-- Punto central del timeline -->
+    <div
+        class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-slate-900"
+    >
+    </div>
+
+    <!-- Contenido derecho -->
+    <div
+        class:list={[
+            "flex-1",
+            {
+                "pr-8": !isLeft,
+                "pl-8": isLeft,
+            },
+        ]}
+    >
+        {
+            isLeft && (
+                <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+                    <h3 class="text-xl font-bold text-white mb-2">{time}</h3>
+                    <h4 class="text-lg font-semibold text-blue-400 mb-2">
+                        {ocupation}
+                    </h4>
+                    <p class="text-slate-300">{description}</p>
+                </div>
+            )
+        }
+    </div>
+</div>
