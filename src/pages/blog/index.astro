@@ -61,9 +61,7 @@ const avgReadTime = Math.round(
             </div>
             <div class="text-center">
               <div class="text-3xl font-bold text-blue-400">
-                {
-                  avgReadTime
-                }
+                {avgReadTime}
               </div>
               <div class="text-slate-400 text-sm">Min promedio</div>
             </div>
@@ -325,157 +323,245 @@ const avgReadTime = Math.round(
 </Layout>
 
 <script>
-  // Search functionality
-  const searchInput = document.getElementById(
-    "searchInput",
-  ) as HTMLInputElement;
-  const postsContainer = document.getElementById(
-    "postsContainer",
-  ) as HTMLElement;
-  const noResults = document.getElementById("noResults") as HTMLElement;
-  const postCards = document.querySelectorAll(
-    ".post-card",
-  ) as NodeListOf<HTMLElement>;
-  const categoryFilters = document.querySelectorAll(
-    ".category-filter",
-  ) as NodeListOf<HTMLButtonElement>;
-  const sortSelect = document.getElementById("sortSelect") as HTMLSelectElement;
-  const gridView = document.getElementById("gridView") as HTMLButtonElement;
-  const listView = document.getElementById("listView") as HTMLButtonElement;
+  // Variables globales para mantener el estado
+  let searchState = {
+    currentCategory: "all",
+    currentSearch: "",
+    currentSort: "date-desc",
+    currentView: "grid",
+    postsArray: [],
+  };
 
-  let currentCategory = "all";
-  let currentSearch = "";
-  let currentSort = "date-desc";
-  let currentView = "grid";
+  function initializeSearchFunctionality() {
+    // Obtener elementos del DOM
+    const searchInput = document.getElementById(
+      "searchInput",
+    ) as HTMLInputElement;
+    const postsContainer = document.getElementById(
+      "postsContainer",
+    ) as HTMLElement;
+    const noResults = document.getElementById("noResults") as HTMLElement;
+    const postCards = document.querySelectorAll(
+      ".post-card",
+    ) as NodeListOf<HTMLElement>;
+    const categoryFilters = document.querySelectorAll(
+      ".category-filter",
+    ) as NodeListOf<HTMLButtonElement>;
+    const sortSelect = document.getElementById(
+      "sortSelect",
+    ) as HTMLSelectElement;
+    const gridView = document.getElementById("gridView") as HTMLButtonElement;
+    const listView = document.getElementById("listView") as HTMLButtonElement;
 
-  // Convert NodeList to Array for sorting
-  let postsArray = Array.from(postCards);
+    // Verificar que los elementos existen
+    if (!searchInput || !postsContainer) return;
 
-  // Filter and sort posts function
-  function filterAndSortPosts() {
-    let visibleCount = 0;
+    // Actualizar array de posts
+    searchState.postsArray = Array.from(postCards);
 
-    // Sort posts
-    postsArray.sort((a, b) => {
-      const aTitle = a.dataset.title || "";
-      const bTitle = b.dataset.title || "";
-      const aDate = new Date(a.dataset.date || "").getTime();
-      const bDate = new Date(b.dataset.date || "").getTime();
-      const aReadTime = parseInt(a.dataset.readtime || "0");
-      const bReadTime = parseInt(b.dataset.readtime || "0");
+    // Función para filtrar y ordenar posts
+    function filterAndSortPosts() {
+      let visibleCount = 0;
 
-      switch (currentSort) {
-        case "date-asc":
-          return aDate - bDate;
-        case "date-desc":
-          return bDate - aDate;
-        case "title-asc":
-          return aTitle.localeCompare(bTitle);
-        case "title-desc":
-          return bTitle.localeCompare(aTitle);
-        case "readtime-asc":
-          return aReadTime - bReadTime;
-        case "readtime-desc":
-          return bReadTime - aReadTime;
-        default:
-          return bDate - aDate;
-      }
-    });
+      // Ordenar posts
+      searchState.postsArray.sort((a, b) => {
+        const aTitle = a.dataset.title || "";
+        const bTitle = b.dataset.title || "";
+        const aDate = new Date(a.dataset.date || "").getTime();
+        const bDate = new Date(b.dataset.date || "").getTime();
+        const aReadTime = parseInt(a.dataset.readtime || "0");
+        const bReadTime = parseInt(b.dataset.readtime || "0");
 
-    // Clear container and re-append sorted posts
-    postsContainer.innerHTML = "";
-
-    postsArray.forEach((card) => {
-      const category = card.dataset.category || "";
-      const title = card.dataset.title || "";
-      const tags = card.dataset.tags || "";
-
-      const matchesCategory =
-        currentCategory === "all" || category === currentCategory;
-      const matchesSearch =
-        currentSearch === "" ||
-        title.includes(currentSearch.toLowerCase()) ||
-        tags.includes(currentSearch.toLowerCase());
-
-      if (matchesCategory && matchesSearch) {
-        card.style.display = "block";
-        postsContainer.appendChild(card);
-        visibleCount++;
-      } else {
-        card.style.display = "none";
-      }
-    });
-
-    // Show/hide no results message
-    if (visibleCount === 0) {
-      noResults.classList.remove("hidden");
-      postsContainer.classList.add("hidden");
-    } else {
-      noResults.classList.add("hidden");
-      postsContainer.classList.remove("hidden");
-    }
-  }
-
-  // Search input handler
-  searchInput?.addEventListener("input", (e) => {
-    currentSearch = (e.target as HTMLInputElement).value;
-    filterAndSortPosts();
-  });
-
-  // Category filter handlers
-  categoryFilters.forEach((button) => {
-    button.addEventListener("click", () => {
-      // Remove active class from all buttons
-      categoryFilters.forEach((btn) => {
-        btn.classList.remove("active", "bg-blue-600", "text-white");
-        btn.classList.add("bg-slate-700", "text-slate-300");
+        switch (searchState.currentSort) {
+          case "date-asc":
+            return aDate - bDate;
+          case "date-desc":
+            return bDate - aDate;
+          case "title-asc":
+            return aTitle.localeCompare(bTitle);
+          case "title-desc":
+            return bTitle.localeCompare(aTitle);
+          case "readtime-asc":
+            return aReadTime - bReadTime;
+          case "readtime-desc":
+            return bReadTime - aReadTime;
+          default:
+            return bDate - aDate;
+        }
       });
 
-      // Add active class to clicked button
-      button.classList.add("active", "bg-blue-600", "text-white");
-      button.classList.remove("bg-slate-700", "text-slate-300");
+      // Limpiar container y reordenar posts
+      postsContainer.innerHTML = "";
+      searchState.postsArray.forEach((card) => {
+        const category = card.dataset.category || "";
+        const title = card.dataset.title || "";
+        const tags = card.dataset.tags || "";
 
-      currentCategory = button.dataset.category || "all";
+        const matchesCategory =
+          searchState.currentCategory === "all" ||
+          category === searchState.currentCategory;
+        const matchesSearch =
+          searchState.currentSearch === "" ||
+          title
+            .toLowerCase()
+            .includes(searchState.currentSearch.toLowerCase()) ||
+          tags.toLowerCase().includes(searchState.currentSearch.toLowerCase());
+
+        if (matchesCategory && matchesSearch) {
+          card.style.display = "block";
+          postsContainer.appendChild(card);
+          visibleCount++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      // Mostrar/ocultar mensaje de no resultados
+      if (noResults) {
+        if (visibleCount === 0) {
+          noResults.classList.remove("hidden");
+          postsContainer.classList.add("hidden");
+        } else {
+          noResults.classList.add("hidden");
+          postsContainer.classList.remove("hidden");
+        }
+      }
+    }
+
+    // Restaurar valores de los inputs
+    if (searchInput) {
+      searchInput.value = searchState.currentSearch;
+    }
+    if (sortSelect) {
+      sortSelect.value = searchState.currentSort;
+    }
+
+    // Remover listeners existentes para evitar duplicados
+    const newSearchInput = searchInput.cloneNode(true) as HTMLInputElement;
+    searchInput.parentNode?.replaceChild(newSearchInput, searchInput);
+
+    // Event listener para búsqueda
+    newSearchInput?.addEventListener("input", (e) => {
+      searchState.currentSearch = (e.target as HTMLInputElement).value;
       filterAndSortPosts();
     });
-  });
 
-  // Sort handler
-  sortSelect?.addEventListener("change", (e) => {
-    currentSort = (e.target as HTMLSelectElement).value;
-    filterAndSortPosts();
-  });
+    // Event listeners para filtros de categoría
+    categoryFilters.forEach((button) => {
+      // Remover listeners existentes
+      const newButton = button.cloneNode(true) as HTMLButtonElement;
+      button.parentNode?.replaceChild(newButton, button);
 
-  // View toggle handlers
-  gridView?.addEventListener("click", () => {
-    currentView = "grid";
-    gridView.classList.add("active", "bg-blue-600", "text-white");
-    listView.classList.remove("active", "bg-blue-600", "text-white");
-    listView.classList.add("text-slate-400");
+      newButton.addEventListener("click", () => {
+        // Remover clase activa de todos los botones
+        document.querySelectorAll(".category-filter").forEach((btn) => {
+          btn.classList.remove("active", "bg-blue-600", "text-white");
+          btn.classList.add("bg-slate-700", "text-slate-300");
+        });
 
-    postsContainer.className =
-      "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8";
-  });
+        // Agregar clase activa al botón clickeado
+        newButton.classList.add("active", "bg-blue-600", "text-white");
+        newButton.classList.remove("bg-slate-700", "text-slate-300");
 
-  listView?.addEventListener("click", () => {
-    currentView = "list";
-    listView.classList.add("active", "bg-blue-600", "text-white");
-    gridView.classList.remove("active", "bg-blue-600", "text-white");
-    gridView.classList.add("text-slate-400");
+        searchState.currentCategory = newButton.dataset.category || "all";
+        filterAndSortPosts();
+      });
 
-    postsContainer.className = "space-y-6";
-
-    // Modify cards for list view
-    postsArray.forEach((card) => {
-      if (card.style.display !== "none") {
-        card.className = card.className.replace("hover:scale-105", "");
+      // Restaurar estado activo
+      if (button.dataset.category === searchState.currentCategory) {
+        button.classList.add("active", "bg-blue-600", "text-white");
+        button.classList.remove("bg-slate-700", "text-slate-300");
       }
     });
-  });
 
-  // Initialize view toggle styles
-  gridView.classList.add("active", "bg-blue-600", "text-white");
-  listView.classList.add("text-slate-400");
+    // Event listener para ordenamiento
+    if (sortSelect) {
+      const newSortSelect = sortSelect.cloneNode(true) as HTMLSelectElement;
+      sortSelect.parentNode?.replaceChild(newSortSelect, sortSelect);
+      newSortSelect.value = searchState.currentSort;
+
+      newSortSelect.addEventListener("change", (e) => {
+        searchState.currentSort = (e.target as HTMLSelectElement).value;
+        filterAndSortPosts();
+      });
+    }
+
+    // Event listeners para vista
+    if (gridView) {
+      const newGridView = gridView.cloneNode(true) as HTMLButtonElement;
+      gridView.parentNode?.replaceChild(newGridView, gridView);
+
+      newGridView.addEventListener("click", () => {
+        searchState.currentView = "grid";
+        newGridView.classList.add("active", "bg-blue-600", "text-white");
+        newGridView.classList.remove("text-slate-400");
+
+        const currentListView = document.getElementById("listView");
+        if (currentListView) {
+          currentListView.classList.remove(
+            "active",
+            "bg-blue-600",
+            "text-white",
+          );
+          currentListView.classList.add("text-slate-400");
+        }
+
+        postsContainer.className =
+          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8";
+      });
+    }
+
+    if (listView) {
+      const newListView = listView.cloneNode(true) as HTMLButtonElement;
+      listView.parentNode?.replaceChild(newListView, listView);
+
+      newListView.addEventListener("click", () => {
+        searchState.currentView = "list";
+        newListView.classList.add("active", "bg-blue-600", "text-white");
+        newListView.classList.remove("text-slate-400");
+
+        const currentGridView = document.getElementById("gridView");
+        if (currentGridView) {
+          currentGridView.classList.remove(
+            "active",
+            "bg-blue-600",
+            "text-white",
+          );
+          currentGridView.classList.add("text-slate-400");
+        }
+
+        postsContainer.className = "space-y-6";
+
+        // Modificar cards para vista de lista
+        searchState.postsArray.forEach((card) => {
+          if (card.style.display !== "none") {
+            card.className = card.className.replace("hover:scale-105", "");
+          }
+        });
+      });
+    }
+
+    // Restaurar estado de vista
+    if (searchState.currentView === "grid") {
+      gridView?.classList.add("active", "bg-blue-600", "text-white");
+      listView?.classList.add("text-slate-400");
+      postsContainer.className =
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8";
+    } else {
+      listView?.classList.add("active", "bg-blue-600", "text-white");
+      gridView?.classList.add("text-slate-400");
+      postsContainer.className = "space-y-6";
+    }
+
+    // Ejecutar filtrado inicial
+    filterAndSortPosts();
+  }
+
+  // Ejecutar en carga inicial
+  document.addEventListener("DOMContentLoaded", initializeSearchFunctionality);
+
+  // Ejecutar después de cada View Transition
+  document.addEventListener("astro:page-load", initializeSearchFunctionality);
 </script>
 
 <style>
