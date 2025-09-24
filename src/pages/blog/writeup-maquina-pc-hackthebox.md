@@ -3,7 +3,7 @@ id: 6
 title: 'Writeup - Maquina "PC" HackTheBox'
 excerpt: 'Resolución paso a paso de la maquina "PC" de HackTheBox'
 date: '2023-07-10'
-readTime: ''
+readTime: '23 min'
 category: 'WriteUp'
 tags: [HackTheBox, gRPC, Python, Linux]
 image: '/img/blog/writeups/pc/pc.webp'

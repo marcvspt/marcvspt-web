@@ -3,7 +3,7 @@ id: 9
 title: 'Análisis forense de una imagen VMEM'
 excerpt: 'Aprender a analizar una imagen VMEM en Windows y Linux para un proceso de foresen digital'
 date: '2024-09-19'
-readTime: ''
+readTime: '7 min'
 category: 'Forense'
 tags: [Memoria, Python, Volatility, VMEM, Linux, Windows]
 image: '/img/blog/forense/vmem/vmem.webp'
