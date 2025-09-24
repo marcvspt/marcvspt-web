@@ -1,8 +1,9 @@
 ---
+import CardExperience from "./CardExperience.astro";
+
 const { ocupation, description, time, side, delay, company, link } =
     Astro.props;
 
-// TODO: usar company y link en la card para mandar a la web de la empresa
 const isLeft = side === "left";
 ---
 
@@ -10,6 +11,11 @@ const isLeft = side === "left";
     class="relative flex items-center animate-slide-up"
     style={`animation-delay: ${delay};`}
 >
+    <!-- Punto central del timeline -->
+    <div
+        class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-slate-900"
+    >
+    </div>
     <!-- Contenido izquierdo -->
     <div
         class:list={[
@@ -22,21 +28,15 @@ const isLeft = side === "left";
     >
         {
             !isLeft && (
-                <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-                    <h3 class="text-xl font-bold text-white mb-2">{time}</h3>
-                    <h4 class="text-lg font-semibold text-blue-400 mb-2">
-                        {ocupation}
-                    </h4>
-                    <p class="text-slate-300">{description}</p>
-                </div>
+                <CardExperience
+                    ocupation={ocupation}
+                    description={description}
+                    time={time}
+                    company={company}
+                    link={link}
+                />
             )
         }
-    </div>
-
-    <!-- Punto central del timeline -->
-    <div
-        class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-slate-900"
-    >
     </div>
 
     <!-- Contenido derecho -->
@@ -51,13 +51,13 @@ const isLeft = side === "left";
     >
         {
             isLeft && (
-                <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
-                    <h3 class="text-xl font-bold text-white mb-2">{time}</h3>
-                    <h4 class="text-lg font-semibold text-blue-400 mb-2">
-                        {ocupation}
-                    </h4>
-                    <p class="text-slate-300">{description}</p>
-                </div>
+                <CardExperience
+                    ocupation={ocupation}
+                    description={description}
+                    time={time}
+                    company={company}
+                    link={link}
+                />
             )
         }
     </div>

@@ -1,23 +1,23 @@
 export const SITE_DATA = {
     name: "Marcvs Pt",
-    description: "Un espacio dedicado a compartir conocimiento, explorar ideas y conectar con una comunidad apasionada por la tecnología y la ciberseguridad",
+    description: "Blog dedicado a compartir mi conocimiento en tecnología, redes y ciberseguridad a partir de mi experiencia laboral, laboratorios y proyectos personales como especialista en cibergseuridad.",
     url: "https://marcvspt.tech",
 }
 
 export const SITE_PAGES = {
     Home: {
         title: "Inicio",
-        excerpt: SITE_DATA.description,
+        description: SITE_DATA.description,
         url: "/",
     },
     Blog: {
         title: "Blog",
-        excerpt: "Explora mis artículos y tutoriales sobre desarrollo web, ciberseguridad y más.",
+        description: "Explora mis artículos y tutoriales sobre tecnología, ciberseguridad, redes y más.",
         url: "/blog",
     },
     About: {
-        title: "Sobre Mí",
-        excerpt: "Conoce más sobre mí, mi experiencia en desarrollo web y mi pasión por compartir conocimiento a través de este blog.",
+        title: "Sobre mí",
+        description: "Ingeniero en Ciberseguridad con 2 años de experiencia realizando actividades de inteligencia de amenazas, respuesta ante incidentes, seguridad perimetral y pentesting.",
         url: "/about",
     }
 };
@@ -68,7 +68,7 @@ export const EXTERNAL_RESOURCES = [
 export const TECHNOLOGIES = [
     {
         name: "Firewall",
-        percentaje: "90%",
+        percentaje: "65%",
     },
     {
         name: "WAF/SEG",
@@ -87,20 +87,20 @@ export const TECHNOLOGIES = [
         percentaje: "30%",
     },
     {
-        name: "Burpsuite",
-        percentaje: "25%",
+        name: "Pentesting Web",
+        percentaje: "40%",
     },
     {
-        name: "Nmap",
-        percentaje: "90%",
+        name: "SIEM",
+        percentaje: "50%",
     },
     {
         name: "Wireshark/tcpdump",
         percentaje: "15%",
     },
     {
-        name: "Sysinternals",
-        percentaje: "35%",
+        name: "Forense",
+        percentaje: "10%",
     },
     {
         name: "Bash",

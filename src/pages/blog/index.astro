@@ -25,7 +25,7 @@ const avgReadTime = Math.round(
 );
 ---
 
-<Layout title={SITE_PAGES.Blog.title} description={SITE_PAGES.Blog.excerpt}>
+<Layout title={SITE_PAGES.Blog.title} description={SITE_PAGES.Blog.description}>
   <Header />
 
   <main class="pt-16">
@@ -62,7 +62,7 @@ const avgReadTime = Math.round(
             <div class="text-center">
               <div class="text-3xl font-bold text-blue-400">
                 {
-                  avgReadTime /* TODO: agregar tiempos de lectura o cambiar atributo */
+                  avgReadTime
                 }
               </div>
               <div class="text-slate-400 text-sm">Min promedio</div>

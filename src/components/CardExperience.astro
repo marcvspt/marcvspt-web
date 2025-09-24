@@ -1,0 +1,21 @@
+---
+const { time, ocupation, description, company, link } = Astro.props;
+
+import LinkIcon from "@/icons/link.svg";
+---
+
+<div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+    <h3 class="text-xl font-bold text-white mb-2">{time}</h3>
+    <h4 class="text-lg font-semibold text-blue-400 mb-2">
+        {ocupation}
+    </h4>
+    <p class="text-slate-300">{description}</p>
+
+    <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-slate-400 hover:text-blue-400 transition-colors duration-300 inline-flex gap-2 items-center mt-4"
+        ><small>{company} </small><LinkIcon />
+    </a>
+</div>
