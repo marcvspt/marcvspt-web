@@ -13,12 +13,14 @@ import {
   SITE_PAGES,
   TECHNOLOGIES,
   PROFESIONAL_EXPERIENCE,
+  SITE_DATA,
 } from "@/scripts/data.js";
 ---
 
 <Layout
   title={SITE_PAGES.About.title}
   description={SITE_PAGES.About.description}
+  canonical={SITE_DATA.url + SITE_PAGES.About.url}
 >
   <Header />
 

@@ -5,10 +5,14 @@ import Hero from "@/components/Hero.astro";
 import BlogPosts from "@/components/BlogPosts.astro";
 import Footer from "@/components/Footer.astro";
 
-import { SITE_PAGES } from "@/scripts/data.js";
+import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
 ---
 
-<Layout title={SITE_PAGES.Home.title} description={SITE_PAGES.Home.description}>
+<Layout
+  title={SITE_PAGES.Home.title}
+  description={SITE_PAGES.Home.description}
+  canonical={SITE_DATA.url + SITE_PAGES.Home.url}
+>
   <Header />
   <main>
     <Hero />

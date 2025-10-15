@@ -1,7 +1,7 @@
 export const SITE_DATA = {
     name: "Marcvs Pt",
     description: "Blog dedicado a compartir mi conocimiento en tecnología, redes y ciberseguridad a partir de mi experiencia laboral, laboratorios y proyectos personales como especialista en cibergseuridad.",
-    url: "https://marcvspt.tech",
+    url: "https://www.marcvspt.tech",
 }
 
 export const SITE_PAGES = {
