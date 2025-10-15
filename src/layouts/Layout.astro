@@ -3,14 +3,15 @@ import "@/styles/global.css";
 
 import { SITE_DATA } from "@/scripts/data.js";
 
-import ClientRouter from "astro/components/ClientRouter.astro";
+import { ClientRouter } from "astro:transitions";
 
 export interface Props {
   title: string;
   description?: string;
+  canonical?: string;
 }
 
-const { title, description = SITE_DATA.description } = Astro.props;
+const { title, description = SITE_DATA.description, canonical } = Astro.props;
 ---
 
 <!doctype html>
@@ -20,6 +21,7 @@ const { title, description = SITE_DATA.description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
     <title>{SITE_DATA.name} | {title}</title>
     <ClientRouter />
   </head>

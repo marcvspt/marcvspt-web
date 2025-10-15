@@ -3,7 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 
-import { SITE_PAGES } from "@/scripts/data.js";
+import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
 
 // Get all blog posts from markdown files
 const allPosts = await Astro.glob("./*.md");
@@ -25,7 +25,11 @@ const avgReadTime = Math.round(
 );
 ---
 
-<Layout title={SITE_PAGES.Blog.title} description={SITE_PAGES.Blog.description}>
+<Layout
+  title={SITE_PAGES.Blog.title}
+  description={SITE_PAGES.Blog.description}
+  canonical={SITE_DATA.url + SITE_PAGES.Blog.url}
+>
   <Header />
 
   <main class="pt-16">
