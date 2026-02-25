@@ -8,7 +8,6 @@ category: 'Errores'
 tags: [Python2, pip2, Linux, Windows]
 image: '/img/blog/solutions/windows-exploit-suggester/Windows-Exploit-Suggester.webp'
 featured: false
-layout: '@/layouts/BlogPostLayout.astro'
 ---
 
 ## ¿Qué es Windows Exploit Suggester?

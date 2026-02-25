@@ -8,7 +8,6 @@ category: 'Pentest'
 tags: [SQLi, HTTP, WebSocet, gRPC, Python3, pip3]
 image: '/img/blog/tools/middleware/middleware.webp'
 featured: true
-layout: '@/layouts/BlogPostLayout.astro'
 ---
 
 ## ¿Qué es un MiddleWare?s

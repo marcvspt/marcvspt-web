@@ -8,7 +8,6 @@ category: 'WriteUp'
 tags: [HackTheBox, PGP, GPG, GnuPG, Python, Linux]
 image: '/img/blog/writeups/sandworm/sandworm.webp'
 featured: false
-layout: '@/layouts/BlogPostLayout.astro'
 ---
 
 Los **######** significan que la información en esas secciones se omitió por fines prácticos.

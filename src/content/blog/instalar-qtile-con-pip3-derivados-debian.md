@@ -8,7 +8,6 @@ category: 'Instalación'
 tags: [Python3, pip3, Debian, Linux]
 image: '/img/blog/configs/qtile/customized.webp'
 featured: false
-layout: '@/layouts/BlogPostLayout.astro'
 ---
 
 ## ¿Qué es Qtile?

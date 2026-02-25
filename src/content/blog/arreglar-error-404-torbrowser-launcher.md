@@ -8,7 +8,6 @@ category: 'Errores'
 tags: [Tor, Web, Linux]
 image: '/img/blog/solutions/torbrowser/torbrowser.webp'
 featured: false
-layout: '@/layouts/BlogPostLayout.astro'
 ---
 
 ## ¿Qué es Tor?

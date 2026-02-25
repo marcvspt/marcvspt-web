@@ -8,7 +8,6 @@ category: 'Instalación'
 tags: [Web, Debian, Linux]
 image: '/img/blog/configs/librewolf/librewolf.webp'
 featured: false
-layout: '@/layouts/BlogPostLayout.astro'
 ---
 
 ## ¿Qué es librewolf?

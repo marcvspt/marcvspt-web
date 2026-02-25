@@ -8,7 +8,6 @@ category: 'WriteUp'
 tags: [HackTheBox, gRPC, Python, Linux]
 image: '/img/blog/writeups/pc/pc.webp'
 featured: false
-layout: '@/layouts/BlogPostLayout.astro'
 ---
 
 Los **######** significan que la información en esas secciones se omitió por fines prácticos.

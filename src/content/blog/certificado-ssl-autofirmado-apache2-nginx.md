@@ -8,7 +8,6 @@ category: 'Configuración'
 tags: [HTTP, HTTPS, SSL, TLS, Web, Debian, Apache, Nginx, Linux]
 image: '/img/blog/configs/certssl/certssl.webp'
 featured: true
-layout: '@/layouts/BlogPostLayout.astro'
 ---
 
 ## ¿Qué es SSL?
