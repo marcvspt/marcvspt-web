@@ -1,5 +1,4 @@
 ---
-id: 3
 title: '(Deprecated) Instalar LibreWolf en ParrotOS y derivados de Debian'
 excerpt: 'Instalar LibreWolf en ParrotOS y derivados de Debian'
 date: '2023-05-03'

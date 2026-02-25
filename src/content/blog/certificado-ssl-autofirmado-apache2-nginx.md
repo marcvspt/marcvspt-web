@@ -1,5 +1,4 @@
 ---
-id: 8
 title: 'Certificado SSL autofirmado Apache2 y Nginx'
 excerpt: 'Configura un certificado SSL autofirmado para Apache2 y Nginx. Aprende a configurar dominios y subdominios con un solo certificado'
 date: '2024-07-30'

@@ -19,7 +19,6 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 
 const frontmatter = {
-    id: post.data.id,
     title: post.data.title,
     excerpt: post.data.excerpt,
     date: post.data.date,

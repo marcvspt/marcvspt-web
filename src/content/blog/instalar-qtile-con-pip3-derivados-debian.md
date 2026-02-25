@@ -1,5 +1,4 @@
 ---
-id: 1
 title: 'Qtile - Instalación con pip3 y Configuración'
 excerpt: 'Instala y configura el entorno de escritorio Qtile con pip3 para sistemas basados en Debian'
 date: '2022-08-18'

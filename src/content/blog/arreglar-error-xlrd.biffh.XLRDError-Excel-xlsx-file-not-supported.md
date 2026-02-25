@@ -1,5 +1,4 @@
 ---
-id: 2
 title: 'Windows Exploit Suggester (python2) - Arreglo de errores'
 excerpt: 'Solución de errores en Windows Exploit Suggester (python2)'
 date: '2022-08-25'

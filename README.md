@@ -8,7 +8,7 @@ pnpm run dev
 
 ## Crear un post
 
-1. Para crear un post debemos crear un nuevo archivo `.md` en la carpeta [`src/pages/blog`](src/pages/blog/) donde el nombre será el *slug*.
+1. Para crear un post debemos crear un nuevo archivo `.md` en la carpeta [`src/content/blog`](src/content/blog/) donde el nombre será el *slug*.
 
 2. Incluir los siguientes datos en el *frontmatter* al inicio del post
 
@@ -22,10 +22,9 @@ category: 'Blog'
 tags: [Crear, Un, Post, Nuevo]
 image: '/path/or/url/img.webp'
 featured: true
-layout: '@/layouts/BlogPostLayout.astro'
 ```
 
-El atributo `featured` es para hacerlo destacado y `layout` es la ruta para el template/componente que da estilo y forma al post (**NO CAMBIAR AMENOS QUE SEA NECESARIO**)
+El atributo `featured` es para hacerlo destacado y `id` debe seguir el orden de acuerdo al ultimo post
 
 ## Creditos
 

@@ -1,5 +1,4 @@
 ---
-id: 5
 title: 'MiddleWare para ataques SQL injection'
 excerpt: '¿Qué es un MiddleWare? Crea un MiddleWare para ataques SQL injection a través de WebSocket, gRPC y HTTP usando Python'
 date: '2023-05-24'

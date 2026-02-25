@@ -34,13 +34,13 @@ const avgReadTime = Math.round(
   <main class="pt-16">
     <!-- Hero Section -->
     <section
-      class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20"
+      class="bg-linear-to-r from-slate-900 via-blue-900 to-slate-900 py-20"
     >
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <h1 class="text-4xl md:text-6xl font-bold mb-6">
             <span
-              class="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
+              class="bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
             >
               Blog
             </span>
@@ -327,13 +327,13 @@ const avgReadTime = Math.round(
 
 <script>
   // Variables globales para mantener el estado
-  let searchState = {
-    currentCategory: "all",
-    currentSearch: "",
-    currentSort: "date-desc",
-    currentView: "grid",
-    postsArray: [],
-  };
+    let searchState = {
+      currentCategory: "all",
+      currentSearch: "",
+      currentSort: "date-desc",
+      currentView: "grid",
+      postsArray: [] as HTMLElement[],
+    };
 
   function initializeSearchFunctionality() {
     // Obtener elementos del DOM
