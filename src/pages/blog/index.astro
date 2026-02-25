@@ -1,4 +1,6 @@
 ---
+import { getCollection } from "astro:content";
+
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -6,14 +8,11 @@ import Footer from "@/components/Footer.astro";
 import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
 
 // Get all blog posts from markdown files
-const allPosts = await Astro.glob("./*.md");
+const allPosts = await getCollection("blog", ({ data }) => !data.draft);
 
 // Process and sort posts
 const processedPosts = allPosts
-  .map((post) => ({
-    ...post.frontmatter,
-    url: post.url,
-  }))
+  .map((post) => ({ ...post.data, slug: post.slug }))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 const categories = [...new Set(processedPosts.map((post) => post.category))];
@@ -35,13 +34,13 @@ const avgReadTime = Math.round(
   <main class="pt-16">
     <!-- Hero Section -->
     <section
-      class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20"
+      class="bg-linear-to-r from-slate-900 via-blue-900 to-slate-900 py-20"
     >
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
           <h1 class="text-4xl md:text-6xl font-bold mb-6">
             <span
-              class="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
+              class="bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
             >
               Blog
             </span>
@@ -271,7 +270,7 @@ const avgReadTime = Math.round(
                   </div>
 
                   <a
-                    href={post.url}
+                    href={`/blog/${post.slug}`}
                     class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-colors duration-300"
                   >
                     Leer más
@@ -328,13 +327,13 @@ const avgReadTime = Math.round(
 
 <script>
   // Variables globales para mantener el estado
-  let searchState = {
-    currentCategory: "all",
-    currentSearch: "",
-    currentSort: "date-desc",
-    currentView: "grid",
-    postsArray: [],
-  };
+    let searchState = {
+      currentCategory: "all",
+      currentSearch: "",
+      currentSort: "date-desc",
+      currentView: "grid",
+      postsArray: [] as HTMLElement[],
+    };
 
   function initializeSearchFunctionality() {
     // Obtener elementos del DOM

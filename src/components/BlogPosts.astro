@@ -1,22 +1,18 @@
 ---
+import { getCollection } from "astro:content";
+
 // Get all blog posts from markdown files
-const allPosts = await Astro.glob("../pages/blog/*.md");
+const allPosts = await getCollection("blog", ({ data }) => !data.draft);
 
 // Process and sort posts, take only the first 3 for the homepage
 const posts = allPosts
-  .map((post) => ({
-    ...post.frontmatter,
-    url: post.url,
-  }))
+  .map((post) => ({ ...post.data, slug: post.slug }))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 3);
 
 // Get featured posts for the homepage
 const featuredPosts = allPosts
-  .map((post) => ({
-    ...post.frontmatter,
-    url: post.url,
-  }))
+  .map((post) => ({ ...post.data, slug: post.slug }))
   .filter((post) => post.featured)
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 3);
@@ -79,7 +75,7 @@ const featuredPosts = allPosts
 
               <a
                 href={
-                  post.url /* TODO: Convertir toda la Card en clicable o cambiar el efecto */
+                  `/blog/${post.slug}` /* TODO: Convertir toda la Card en clicable o cambiar el efecto */
                 }
                 class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-colors duration-300"
               >
@@ -170,7 +166,7 @@ const featuredPosts = allPosts
                   <p class="text-slate-300 mb-4 line-clamp-3">{post.excerpt}</p>
 
                   <a
-                    href={post.url}
+                    href={`/blog/${post.slug}`}
                     class="inline-flex items-center text-yellow-400 hover:text-yellow-300 font-medium transition-colors duration-300"
                   >
                     Leer más

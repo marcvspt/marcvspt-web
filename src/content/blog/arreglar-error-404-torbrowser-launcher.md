@@ -1,5 +1,4 @@
 ---
-id: 4
 title: 'Tor Browser Launcher - Arreglar error 404 en la descarga'
 excerpt: 'Arreglar error 404 en la descarga de Tor Browser Launcher'
 date: '2023-05-04'
@@ -8,7 +7,6 @@ category: 'Errores'
 tags: [Tor, Web, Linux]
 image: '/img/blog/solutions/torbrowser/torbrowser.webp'
 featured: false
-layout: '@/layouts/BlogPostLayout.astro'
 ---
 
 ## ¿Qué es Tor?

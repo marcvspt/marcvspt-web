@@ -1,5 +1,4 @@
 ---
-id: 1
 title: 'Qtile - Instalación con pip3 y Configuración'
 excerpt: 'Instala y configura el entorno de escritorio Qtile con pip3 para sistemas basados en Debian'
 date: '2022-08-18'
@@ -8,7 +7,6 @@ category: 'Instalación'
 tags: [Python3, pip3, Debian, Linux]
 image: '/img/blog/configs/qtile/customized.webp'
 featured: false
-layout: '@/layouts/BlogPostLayout.astro'
 ---
 
 ## ¿Qué es Qtile?

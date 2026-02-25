@@ -1,5 +1,4 @@
 ---
-id: 7
 title: 'Writeup - Maquina "Sandworm" HackTheBox'
 excerpt: 'Resolución paso a paso de la maquina "Sandworm" de HackTheBox'
 date: '2023-07-18'
@@ -8,7 +7,6 @@ category: 'WriteUp'
 tags: [HackTheBox, PGP, GPG, GnuPG, Python, Linux]
 image: '/img/blog/writeups/sandworm/sandworm.webp'
 featured: false
-layout: '@/layouts/BlogPostLayout.astro'
 ---
 
 Los **######** significan que la información en esas secciones se omitió por fines prácticos.
