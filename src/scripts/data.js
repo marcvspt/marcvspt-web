@@ -114,8 +114,8 @@ export const TECHNOLOGIES = [
 
 export const PROFESIONAL_EXPERIENCE = {
     gobierno: {
-        ocupation: "Coordinador de Ciberseguridad",
-        description: "Administración de Firewalls de nueva generación. Configuración de VPN site-to-site y client-to-site. Monitoreo de sistemas EDR, XDR, SIEM, SEG y WAF. Investigación de eventos e incidentes de seguridad.",
+        ocupation: "Lider de Ciberseguridad",
+        description: "Administración de Firewalls de nueva generación. Configuración de VPN site-to-site y client-to-site. Monitoreo de sistemas EDR, XDR, SIEM, SEG y WAF. Investigación de eventos e incidentes de seguridad. Supervisión de proyectos de ciberseguridad e implementación de controles de seguridad.",
         time: "Noviembre 2023 - Presente",
         company: "Orgazación gubernamental",
         link: "#",

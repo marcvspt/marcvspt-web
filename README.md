@@ -13,18 +13,17 @@ pnpm run dev
 2. Incluir los siguientes datos en el *frontmatter* al inicio del post
 
 ```yaml
-id: 1
 title: 'Título relativamente corto'
 excerpt: 'Descripción concisa'
 date: '2000-01-01'
 readTime: '1 min'
-category: 'Blog'
-tags: [Crear, Un, Post, Nuevo]
+category: 'Categoria'
+tags: [Crear, Un, Post, Nuevo, Con, Etiquetas]
 image: '/path/or/url/img.webp'
 featured: true
 ```
 
-El atributo `featured` es para hacerlo destacado y `id` debe seguir el orden de acuerdo al ultimo post
+> El atributo `featured` es para hacerlo destacado (solo acepta `true` o `false`) e `image` debe ser una imagen `.webp` que debe estar dentro la ruta [`public/img/blog`](public/img/blog/) en su categoria (si no existe, se crea ese directorio) y en un directorio con un nombre corto relacionado al titulo del post.
 
 ## Creditos
 
