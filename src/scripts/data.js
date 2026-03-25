@@ -17,7 +17,7 @@ export const SITE_PAGES = {
     },
     About: {
         title: "Sobre mí",
-        description: "Ingeniero en Ciberseguridad con 2 años de experiencia realizando actividades de inteligencia de amenazas, respuesta ante incidentes, seguridad perimetral y pentesting.",
+        description: "Ingeniero en Ciberseguridad con 3 años de experiencia realizando actividades de inteligencia de amenazas, respuesta ante incidentes, seguridad perimetral y pentesting.",
         url: "/about",
     }
 };
@@ -47,12 +47,16 @@ export const SOCIAL_DATA = [
 
 export const EXTERNAL_RESOURCES = [
     {
+        name: "CyberThreat AI",
+        url: "https://ctai.marcvspt.tech/",
+    },
+    {
         name: "CyberChef",
         url: "https://gchq.github.io/CyberChef/",
     },
     {
         name: "HackTricks",
-        url: "book.hacktricks.wiki/",
+        url: "https://book.hacktricks.wiki/",
     },
     {
         name: "Payloads All The Things",
@@ -68,11 +72,11 @@ export const EXTERNAL_RESOURCES = [
 export const TECHNOLOGIES = [
     {
         name: "Firewall",
-        percentaje: "65%",
+        percentaje: "80%",
     },
     {
         name: "WAF/SEG",
-        percentaje: "30%",
+        percentaje: "60%",
     },
     {
         name: "Linux",
@@ -84,7 +88,7 @@ export const TECHNOLOGIES = [
     },
     {
         name: "Endpoint Security (AV/EDR/XDR)",
-        percentaje: "30%",
+        percentaje: "50%",
     },
     {
         name: "Pentesting Web",
