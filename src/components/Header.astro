@@ -8,10 +8,10 @@ import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
-      <div class="flex-shrink-0">
+      <div class="shrink-0">
         <a
           href={SITE_PAGES.Home.url}
-          class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent hover:from-blue-300 hover:to-blue-500 transition-all duration-300"
+          class="text-2xl font-bold bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent hover:from-blue-300 hover:to-blue-500 transition-all duration-300"
         >
           {SITE_DATA.name}
         </a>
@@ -31,6 +31,14 @@ import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
             );
           })
         }
+        <a
+          href="https://ctai.marcvspt.tech"
+          class="text-slate-300 hover:text-blue-400 transition-colors duration-300"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CyberThreat AI
+        </a>
       </nav>
 
       <!-- Mobile menu button -->
