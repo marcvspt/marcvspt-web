@@ -12,7 +12,7 @@ const allPosts = await getCollection("blog", ({ data }) => !data.draft);
 
 // Process and sort posts
 const processedPosts = allPosts
-  .map((post) => ({ ...post.data, slug: post.slug }))
+  .map((post) => ({ ...post.data, slug: post.id }))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 const categories = [...new Set(processedPosts.map((post) => post.category))];
@@ -327,13 +327,13 @@ const avgReadTime = Math.round(
 
 <script>
   // Variables globales para mantener el estado
-    let searchState = {
-      currentCategory: "all",
-      currentSearch: "",
-      currentSort: "date-desc",
-      currentView: "grid",
-      postsArray: [] as HTMLElement[],
-    };
+  let searchState = {
+    currentCategory: "all",
+    currentSearch: "",
+    currentSort: "date-desc",
+    currentView: "grid",
+    postsArray: [] as HTMLElement[],
+  };
 
   function initializeSearchFunctionality() {
     // Obtener elementos del DOM
