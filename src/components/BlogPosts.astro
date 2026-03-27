@@ -6,13 +6,13 @@ const allPosts = await getCollection("blog", ({ data }) => !data.draft);
 
 // Process and sort posts, take only the first 3 for the homepage
 const posts = allPosts
-  .map((post) => ({ ...post.data, slug: post.slug }))
+  .map((post) => ({ ...post.data, slug: post.id }))
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 3);
 
 // Get featured posts for the homepage
 const featuredPosts = allPosts
-  .map((post) => ({ ...post.data, slug: post.slug }))
+  .map((post) => ({ ...post.data, slug: post.id }))
   .filter((post) => post.featured)
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 3);
