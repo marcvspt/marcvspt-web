@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 
-import Layout from "@/layouts/Layout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 
@@ -24,7 +24,7 @@ const avgReadTime = Math.round(
 );
 ---
 
-<Layout
+<BaseLayout
   title={SITE_PAGES.Blog.title}
   description={SITE_PAGES.Blog.description}
   canonical={SITE_DATA.url + SITE_PAGES.Blog.url}
@@ -323,7 +323,7 @@ const avgReadTime = Math.round(
   </main>
 
   <Footer />
-</Layout>
+</BaseLayout>
 
 <script>
   // Variables globales para mantener el estado

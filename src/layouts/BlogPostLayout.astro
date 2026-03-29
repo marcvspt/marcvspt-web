@@ -1,5 +1,5 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 
@@ -40,7 +40,7 @@ const formatDate = (dateObj: Date) => {
 };
 ---
 
-<Layout title={`Blog - ${title}`} description={excerpt}>
+<BaseLayout title={`Blog - ${title}`} description={excerpt}>
   <Header />
 
   <main class="pt-16">
@@ -280,7 +280,7 @@ const formatDate = (dateObj: Date) => {
   </main>
 
   <Footer />
-</Layout>
+</BaseLayout>
 
 <script>
   function initializeInteractivity() {
