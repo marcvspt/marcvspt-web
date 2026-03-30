@@ -69,7 +69,7 @@ export const EXTERNAL_RESOURCES = [
 ]
 
 
-export const TECHNOLOGIES = [
+export const SKILLS = [
     {
         name: "Firewall",
         percentaje: "80%",
