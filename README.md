@@ -25,7 +25,15 @@ pnpm run dev #http://localhost:4321
 
 ```text
 src/
-├── content.config.ts
+├── assets/
+│   ├── coffee.svg
+│   ├── control.svg
+│   ├── email.svg
+│   ├── github.svg
+│   ├── hackthebox.svg
+│   ├── link.svg
+│   ├── linkedin.svg
+│   └── x.svg
 ├── components/
 │   ├── BlogPosts.astro
 │   ├── CardExperience.astro
@@ -36,30 +44,32 @@ src/
 │   └── TimeLineCard.astro
 ├── data/
 │   └── blog/
-│       └── [todos-los-posts].md
-├── icons/
-│   ├── coffee.svg
-│   ├── control.svg
-│   ├── email.svg
-│   ├── github.svg
-│   ├── hackthebox.svg
-│   ├── link.svg
-│   ├── linkedin.svg
-│   └── x.svg
+│       ├── analisis-vmem.md
+│       ├── arreglar-error-404-torbrowser-launcher.md
+│       ├── arreglar-error-xlrd.biffh.XLRDError-Excel-xlsx-file-not-supported.md
+│       ├── certificado-ssl-autofirmado-apache2-nginx.md
+│       ├── desplegar-proyecto-astro-dokploy.md
+│       ├── instalar-librewolf-parrot-derivados-debian.md
+│       ├── instalar-qtile-pip3-derivados-debian.md
+│       ├── middleware-sqli.md
+│       ├── writeup-maquina-pc-hackthebox.md
+│       └── writeup-maquina-sandworm-hackthebox.md
 ├── layouts/
-│   ├── BlogPostLayout.astro
-│   └── BaseLayout.astro
+│   ├── BaseLayout.astro
+│   └── BlogPostLayout.astro
 ├── pages/
 │   ├── about.astro
+│   ├── blog/
+│   │   ├── index.astro
+│   │   └── [...slug].astro
 │   ├── index.astro
-│   ├── rss.xml.ts
-│   └── blog/
-│       ├── [...slug].astro
-│       └── index.astro
+│   └── rss.xml.ts
 ├── scripts/
-│   └── data.ts
-└── styles/
-    └── global.css
+│   ├── data.ts
+│   └── types.ts
+├── styles/
+|    └── global.css
+└── content.config.ts
 ```
 
 ## Crear un post

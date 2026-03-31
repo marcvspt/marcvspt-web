@@ -1,7 +1,7 @@
 {
   "name": "marcvspt-web",
   "type": "module",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "license": "GPL-3.0-only",
   "scripts": {
     "dev": "astro dev",
@@ -14,7 +14,7 @@
     "@astrojs/rss": "4.0.18",
     "@tailwindcss/typography": "0.5.19",
     "@tailwindcss/vite": "4.2.2",
-    "astro": "6.1.1",
+    "astro": "6.1.2",
     "tailwindcss": "4.2.2"
   }
 }

@@ -11,7 +11,11 @@ export interface Props {
   canonical?: string;
 }
 
-const { title, description = SITE_DATA.description, canonical } = Astro.props;
+const {
+  title,
+  description = SITE_DATA.description,
+  canonical,
+} = Astro.props as Props;
 ---
 
 <!doctype html>

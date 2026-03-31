@@ -1,6 +1,7 @@
 ---
-import { getCollection, render, type CollectionEntry } from "astro:content";
+import { getCollection, render } from "astro:content";
 import BlogPostLayout from "@/layouts/BlogPostLayout.astro";
+import type { BlogPostEntry, BlogPostFrontmatter } from "@/scripts/types";
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -12,13 +13,13 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-    post: CollectionEntry<"blog">;
+    post: BlogPostEntry;
 }
 
-const { post } = Astro.props;
+const { post } = Astro.props as Props;
 const { Content } = await render(post);
 
-const frontmatter = {
+const frontmatter: BlogPostFrontmatter = {
     title: post.data.title,
     excerpt: post.data.excerpt,
     date: post.data.date,

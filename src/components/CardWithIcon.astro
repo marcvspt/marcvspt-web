@@ -1,5 +1,10 @@
 ---
-const { title, description } = Astro.props;
+interface Props {
+    title: string;
+    description: string;
+}
+
+const { title, description } = Astro.props as Props;
 ---
 
 <div class="bg-slate-800/30 rounded-xl p-6 border border-slate-700">

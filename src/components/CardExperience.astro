@@ -1,7 +1,15 @@
 ---
-const { time, ocupation, description, company, link } = Astro.props;
+interface Props {
+    time: string;
+    ocupation: string;
+    description: string;
+    company: string;
+    link: string;
+}
 
-import LinkIcon from "@/icons/link.svg";
+const { time, ocupation, description, company, link } = Astro.props as Props;
+
+import LinkIcon from "@/assets/link.svg";
 ---
 
 <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">

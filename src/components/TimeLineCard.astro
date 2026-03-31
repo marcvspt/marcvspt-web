@@ -1,8 +1,18 @@
 ---
 import CardExperience from "./CardExperience.astro";
 
+interface Props {
+    ocupation: string;
+    description: string;
+    time: string;
+    side: "left" | "right";
+    delay: string;
+    company: string;
+    link: string;
+}
+
 const { ocupation, description, time, side, delay, company, link } =
-    Astro.props;
+    Astro.props as Props;
 
 const isLeft = side === "left";
 ---

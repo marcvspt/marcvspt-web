@@ -1,10 +1,18 @@
-export const SITE_DATA = {
+import type {
+    LinkItem,
+    ProfessionalExperience,
+    SiteData,
+    SitePages,
+    Skill,
+} from "@/scripts/types";
+
+export const SITE_DATA: SiteData = {
     name: "Marcvs Pt",
     description: "Blog dedicado a compartir mi conocimiento en tecnología, redes y ciberseguridad a partir de mi experiencia laboral, laboratorios y proyectos personales como especialista en cibergseuridad.",
     url: "https://www.marcvspt.tech",
 }
 
-export const SITE_PAGES = {
+export const SITE_PAGES: SitePages = {
     Home: {
         title: "Inicio",
         description: SITE_DATA.description,
@@ -22,7 +30,7 @@ export const SITE_PAGES = {
     }
 };
 
-export const SOCIAL_DATA = [
+export const SOCIAL_DATA: LinkItem[] = [
     {
         name: "LinkedIn",
         url: "https://www.linkedin.com/in/marcopat01/",
@@ -45,7 +53,7 @@ export const SOCIAL_DATA = [
     },
 ]
 
-export const EXTERNAL_RESOURCES = [
+export const EXTERNAL_RESOURCES: LinkItem[] = [
     {
         name: "CyberThreat AI",
         url: "https://ctai.marcvspt.tech/",
@@ -69,7 +77,7 @@ export const EXTERNAL_RESOURCES = [
 ]
 
 
-export const SKILLS = [
+export const SKILLS: Skill[] = [
     {
         name: "Firewall",
         percentaje: "80%",
@@ -116,7 +124,7 @@ export const SKILLS = [
     },
 ]
 
-export const PROFESIONAL_EXPERIENCE = {
+export const PROFESIONAL_EXPERIENCE: ProfessionalExperience = {
     gobierno: {
         ocupation: "Lider de Ciberseguridad",
         description: "Administración de Firewalls de nueva generación. Configuración de VPN site-to-site y client-to-site. Monitoreo de sistemas EDR, XDR, SIEM, SEG y WAF. Investigación de eventos e incidentes de seguridad. Supervisión de proyectos de ciberseguridad e implementación de controles de seguridad.",
