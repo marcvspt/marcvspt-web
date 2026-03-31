@@ -22,8 +22,8 @@
       "@/sections/*": [
         "src/sections/*"
       ],
-      "@/icons/*": [
-        "src/icons/*"
+      "@/assets/*": [
+        "src/assets/*"
       ],
       "@/scripts/*": [
         "src/scripts/*"
