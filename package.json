@@ -1,7 +1,7 @@
 {
   "name": "marcvspt-web",
   "type": "module",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "license": "GPL-3.0-only",
   "scripts": {
     "dev": "astro dev",
@@ -10,11 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/netlify": "7.0.5",
+    "@astrojs/netlify": "7.0.8",
     "@astrojs/rss": "4.0.18",
+    "@astrojs/sitemap": "3.7.2",
     "@tailwindcss/typography": "0.5.19",
-    "@tailwindcss/vite": "4.2.2",
-    "astro": "6.1.2",
-    "tailwindcss": "4.2.2"
+    "@tailwindcss/vite": "4.3.0",
+    "astro": "6.3.1",
+    "tailwindcss": "4.3.0"
   }
 }
