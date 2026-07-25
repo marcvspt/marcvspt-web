@@ -55,8 +55,12 @@ export const SOCIAL_DATA: LinkItem[] = [
 
 export const EXTERNAL_RESOURCES: LinkItem[] = [
     {
-        name: "CyberThreat AI",
+        name: "CyberThreat AI (CTAI)",
         url: "https://ctai.marcvspt.tech/",
+    },
+    {
+        name: "Open Personal Resource Planning (OPRP)",
+        url: "https://oprp.marcvspt.tech/",
     },
     {
         name: "CyberChef",
@@ -70,10 +74,6 @@ export const EXTERNAL_RESOURCES: LinkItem[] = [
         name: "Payloads All The Things",
         url: "https://swisskyrepo.github.io/PayloadsAllTheThings/",
     },
-    {
-        name: "OWASP Top 10 2021 - Español",
-        url: "https://owasp.org/Top10/es/",
-    }
 ]
 
 
