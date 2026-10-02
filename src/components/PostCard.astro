@@ -1,0 +1,64 @@
+---
+import type { BlogPostCard } from '@/scripts/types';
+import { formatPostDate, getPostUrl, getReadTimeMinutes } from '@/scripts/blog';
+
+interface Props {
+  post: BlogPostCard;
+  variant?: 'recent' | 'featured' | 'catalog';
+  index?: number;
+}
+const { post, variant = 'recent', index = 0 } = Astro.props;
+const highlighted = variant === 'featured';
+const catalog = variant === 'catalog';
+---
+
+<article
+  class:list={[
+    'group bg-slate-800/80 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700 transition-all duration-300 hover:transform hover:scale-105 animate-slide-up',
+    highlighted ? 'hover:border-yellow-500/50' : 'hover:border-blue-500/50',
+    { 'post-card': catalog },
+  ]}
+  style={`animation-delay: ${index * (catalog ? 0.1 : 0.2)}s`}
+  data-category={catalog ? post.category : undefined}
+  data-title={catalog ? post.title : undefined}
+  data-tags={catalog ? post.tags.join(' ') : undefined}
+  data-date={catalog ? post.date.getTime() : undefined}
+  data-readtime={catalog ? getReadTimeMinutes(post.readTime) : undefined}
+>
+  <div class="relative overflow-hidden">
+    <img src={post.image} alt={post.title} class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div class="absolute top-4 left-4">
+      <span class:list={['text-white px-3 py-1 rounded-full text-sm font-medium', highlighted ? 'bg-yellow-600/90 flex items-center gap-2' : catalog ? 'bg-slate-900/80' : 'bg-blue-600/90']}>
+        {highlighted && <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>}
+        {highlighted ? 'Destacado' : post.category}
+      </span>
+    </div>
+    {highlighted ? (
+      <div class="absolute top-4 right-4"><span class="bg-slate-900/80 text-white px-3 py-1 rounded-full text-sm">{post.category}</span></div>
+    ) : catalog && post.featured && (
+      <div class="absolute top-4 right-4">
+        <svg class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24" role="img" aria-label="Destacado">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      </div>
+    )}
+  </div>
+  <div class="p-6">
+    <div class="flex items-center text-sm text-slate-400 mb-3">
+      <time datetime={post.date.toISOString()}>{formatPostDate(post.date)}</time>
+      <span class="mx-2">•</span><span>{post.readTime}</span>
+    </div>
+    <h3 class:list={['text-xl font-bold text-white mb-3 transition-colors duration-300', highlighted ? 'group-hover:text-yellow-400' : 'group-hover:text-blue-400']}>{post.title}</h3>
+    <p class="text-slate-300 mb-4 line-clamp-3">{post.excerpt}</p>
+    {catalog && (
+      <div class="flex flex-wrap gap-2 mb-4">
+        {post.tags.slice(0, 2).map((tag) => <span class="px-2 py-1 bg-slate-700 text-slate-300 text-xs rounded-md">{tag}</span>)}
+        {post.tags.length > 2 && <span class="px-2 py-1 bg-slate-600 text-slate-400 text-xs rounded-md">+{post.tags.length - 2}</span>}
+      </div>
+    )}
+    <a href={getPostUrl(post.slug)} class:list={['inline-flex items-center font-medium transition-colors duration-300', highlighted ? 'text-yellow-400 hover:text-yellow-300' : 'text-blue-400 hover:text-blue-300']} aria-label={`Leer más: ${post.title}`}>
+      Leer más
+      <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+    </a>
+  </div>
+</article>

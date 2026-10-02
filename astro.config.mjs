@@ -6,10 +6,11 @@ import tailwindcss from '@tailwindcss/vite';
 import netlify from '@astrojs/netlify';
 
 import sitemap from '@astrojs/sitemap';
+import { SITE_URL } from './src/scripts/site.js';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.marcvspt.tech/',
+  site: SITE_URL,
   output: 'static',
 
   vite: {

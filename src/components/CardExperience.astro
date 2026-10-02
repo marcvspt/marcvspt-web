@@ -1,11 +1,7 @@
 ---
-interface Props {
-    time: string;
-    ocupation: string;
-    description: string;
-    company: string;
-    link: string;
-}
+import type { ProfessionalExperienceItem } from '@/scripts/types';
+
+type Props = ProfessionalExperienceItem;
 
 const { time, ocupation, description, company, link } = Astro.props as Props;
 

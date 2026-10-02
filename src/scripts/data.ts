@@ -1,3 +1,4 @@
+import { SITE_URL } from './site.js';
 import type {
     LinkItem,
     ProfessionalExperience,
@@ -9,7 +10,7 @@ import type {
 export const SITE_DATA: SiteData = {
     name: "Marcvs Pt",
     description: "Blog dedicado a compartir mi conocimiento en tecnología, redes y ciberseguridad a partir de mi experiencia laboral, laboratorios y proyectos personales como especialista en cibergseuridad.",
-    url: "https://www.marcvspt.tech",
+    url: SITE_URL.replace(/\/$/, ""),
 }
 
 export const SITE_PAGES: SitePages = {
