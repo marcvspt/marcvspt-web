@@ -9,7 +9,7 @@ image: '/img/blog/infraestructura/astro-dokploy/astro-dokploy.webp'
 featured: true
 ---
 
-> En este post, no se enseñará como iniciarlizar un VPS, como instalar/desplegar Dokploy y tampoco configurar los Providers, se centrará unicamente en la configuración y datos a tener en cuenta para el despliegue de Astro
+> En este post, no se enseñará como inicializar un VPS, como instalar/desplegar Dokploy y tampoco configurar los Providers, se centrará unicamente en la configuración y datos a tener en cuenta para el despliegue de Astro
 
 ## ¿Qué es Dokploy?
 

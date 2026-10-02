@@ -1,14 +1,10 @@
 ---
 import CardExperience from "./CardExperience.astro";
+import type { ProfessionalExperienceItem } from '@/scripts/types';
 
-interface Props {
-    ocupation: string;
-    description: string;
-    time: string;
+interface Props extends ProfessionalExperienceItem {
     side: "left" | "right";
     delay: string;
-    company: string;
-    link: string;
 }
 
 const { ocupation, description, time, side, delay, company, link } =

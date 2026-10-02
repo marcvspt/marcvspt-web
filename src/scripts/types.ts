@@ -12,7 +12,7 @@ export interface SitePage {
     url: string;
 }
 
-export type SitePages = Record<string, SitePage>;
+export type SitePages = Record<"Home" | "Blog" | "About", SitePage>;
 
 export interface LinkItem {
     name: string;
@@ -38,14 +38,5 @@ export type BlogPostEntry = CollectionEntry<"blog">;
 
 export type BlogPostData = BlogPostEntry["data"];
 
-export interface BlogPostFrontmatter {
-    title: string;
-    excerpt: string;
-    date: Date;
-    updated?: Date;
-    readTime: string;
-    category: string;
-    tags: string[];
-    image: string;
-    featured: boolean;
-}
+export type BlogPostFrontmatter = Omit<BlogPostData, "draft">;
+export type BlogPostCard = BlogPostData & { slug: string };
