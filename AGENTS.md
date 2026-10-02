@@ -15,11 +15,20 @@ Estas instrucciones se aplican a todo el repositorio.
 - Sitio personal y blog técnico en español, construido con Astro 7, TypeScript, Tailwind CSS 4 y `@tailwindcss/typography`. Consulta `package.json` para las versiones concretas y mantén los cambios compatibles con ellas.
 - El destino de despliegue configurado es Netlify, con `@astrojs/netlify` y salida estática (`output: 'static'`) en `astro.config.mjs`. Mantén la compatibilidad con ese entorno; no cambies el adaptador, el proveedor ni el modo de salida salvo que el alcance solicitado lo requiera.
 - Sigue las convenciones de Astro: componentes `.astro`, rutas basadas en archivos y colecciones de contenido. Conserva el funcionamiento de los eventos durante la navegación con `ClientRouter` y limpia los listeners cuando se reemplaza la página.
+- Prioriza el SSR de Astro cuando sea viable y aporte valor, por ejemplo para datos actualizados por petición, autenticación o contenido personalizado. Favorece resolver los datos y generar el HTML en Astro, manteniendo en el cliente la lógica que necesite interacción con el navegador.
+- Para contenido que no depende de la petición, conserva la generación estática cuando sea suficiente. El proyecto actualmente usa `output: 'static'`: el renderizado durante el build no es SSR por petición. Si una funcionalidad requiere SSR, adapta las rutas y la configuración necesarias dentro de su alcance, mantén la compatibilidad con Netlify y documenta el cambio en README y AGENTS.md; esta preferencia no implica migrar todo el sitio a SSR.
 - Usa Tailwind CSS 4 para los estilos y su configuración existente mediante `@tailwindcss/vite`, `@import`, `@theme` y `@plugin`. Para el contenido Markdown, conserva `@tailwindcss/typography` y las clases `prose` / `prose-invert`; evita duplicar utilidades disponibles o introducir configuraciones de otras versiones de Tailwind.
 - `src/pages/` define las rutas; `src/components/` contiene componentes reutilizables y `src/layouts/` las plantillas.
 - La colección `blog` se define en `src/content.config.ts` y carga artículos desde `src/data/blog/`. Respeta el esquema del frontmatter y el filtro de borradores `draft`.
 - Las imágenes públicas se guardan en `public/`; los estilos globales, en `src/styles/global.css`.
 - Debes usar los alias definidos en `tsconfig.json` para los imports internos de `src/`, por ejemplo `@/components/`, `@/layouts/`, `@/scripts/`, `@/assets/` y `@/styles/`. No asumas que existe un alias genérico para cualquier ruta: usa los patrones configurados. En archivos que ejecuta Node fuera de Astro, como `astro.config.mjs`, usa rutas relativas compatibles con ese entorno. Respeta el estilo de los archivos que modifiques.
+
+## Coherencia de la UI
+
+- Mantén una UI coherente entre todas las secciones de la aplicación: inicio, página personal, catálogo, artículos y cualquier sección nueva. Respeta la paleta, tipografía, jerarquía de títulos, espaciados, anchos de contenido, bordes, iconografía y animaciones existentes.
+- Reutiliza los layouts, componentes y estilos compartidos para elementos equivalentes, como navegación, tarjetas, botones, enlaces y etiquetas. Si necesitas una variante, intégrala en el patrón existente y evita crear estilos aislados que rompan la coherencia visual.
+- Mantén consistentes los estados de interacción (hover, foco, activo, deshabilitado), los mensajes y el comportamiento en móvil y escritorio. Conserva la accesibilidad y la navegación por teclado al modificar la UI.
+- Al cambiar un componente compartido, considera su efecto en todas las secciones que lo usan y señala al propietario qué vistas debe comprobar visualmente.
 
 ## Blog, RSS y sitemap
 
