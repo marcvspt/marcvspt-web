@@ -23,6 +23,13 @@ Estas instrucciones se aplican a todo el repositorio.
 - Las imágenes públicas se guardan en `public/`; los estilos globales, en `src/styles/global.css`.
 - Debes usar los alias definidos en `tsconfig.json` para los imports internos de `src/`, por ejemplo `@/components/`, `@/layouts/`, `@/scripts/`, `@/assets/` y `@/styles/`. No asumas que existe un alias genérico para cualquier ruta: usa los patrones configurados. En archivos que ejecuta Node fuera de Astro, como `astro.config.mjs`, usa rutas relativas compatibles con ese entorno. Respeta el estilo de los archivos que modifiques.
 
+## Coherencia de la UI
+
+- Mantén una UI coherente entre todas las secciones de la aplicación: inicio, página personal, catálogo, artículos y cualquier sección nueva. Respeta la paleta, tipografía, jerarquía de títulos, espaciados, anchos de contenido, bordes, iconografía y animaciones existentes.
+- Reutiliza los layouts, componentes y estilos compartidos para elementos equivalentes, como navegación, tarjetas, botones, enlaces y etiquetas. Si necesitas una variante, intégrala en el patrón existente y evita crear estilos aislados que rompan la coherencia visual.
+- Mantén consistentes los estados de interacción (hover, foco, activo, deshabilitado), los mensajes y el comportamiento en móvil y escritorio. Conserva la accesibilidad y la navegación por teclado al modificar la UI.
+- Al cambiar un componente compartido, considera su efecto en todas las secciones que lo usan y señala al propietario qué vistas debe comprobar visualmente.
+
 ## Blog, RSS y sitemap
 
 - El dominio se define una sola vez en `src/scripts/site.js` (`SITE_URL`). La configuración de Astro y `SITE_DATA.url` lo consumen; modifica esa fuente cuando cambie el dominio.
