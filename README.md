@@ -23,7 +23,7 @@ Las versiones concretas están en [package.json](package.json). La configuració
 
 ### Requisitos
 
-- Node.js **22 o superior**.
+- Node.js **24 o superior**.
 - `pnpm` disponible en el entorno.
 
 Ejecuta los comandos desde la raíz del repositorio:

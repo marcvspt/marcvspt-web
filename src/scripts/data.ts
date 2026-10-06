@@ -54,6 +54,10 @@ export const SOCIAL_DATA: LinkItem[] = [
 
 export const EXTERNAL_RESOURCES: LinkItem[] = [
     {
+        name: "CyberEvents MX",
+        url: "https://cemx.marcvspt.tech/",
+    },
+    {
         name: "CyberThreat AI (CTAI)",
         url: "https://ctai.marcvspt.tech/",
     },
@@ -62,17 +66,10 @@ export const EXTERNAL_RESOURCES: LinkItem[] = [
         url: "https://oprp.marcvspt.tech/",
     },
     {
-        name: "CyberChef",
-        url: "https://gchq.github.io/CyberChef/",
-    },
-    {
         name: "HackTricks",
         url: "https://book.hacktricks.wiki/",
     },
-    {
-        name: "Payloads All The Things",
-        url: "https://swisskyrepo.github.io/PayloadsAllTheThings/",
-    },
+
 ]
 
 
