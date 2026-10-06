@@ -18,6 +18,10 @@ export interface LinkItem {
     url: string;
 }
 
+export interface SocialLinkItem extends LinkItem {
+    id: "linkedin" | "github" | "hackthebox" | "twitter" | "contact";
+}
+
 export interface Skill {
     name: string;
     percentaje: string;

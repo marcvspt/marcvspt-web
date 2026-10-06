@@ -1,4 +1,5 @@
 ---
+import { TEXTS_GENERAL } from "@/scripts/texts";
 import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
 ---
 
@@ -37,7 +38,7 @@ import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
           target="_blank"
           rel="noopener noreferrer"
         >
-          CyberThreat AI
+          {TEXTS_GENERAL.header.cyberThreat}
         </a>
         <a
           href="https://cemx.marcvspt.tech"
@@ -45,7 +46,7 @@ import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
           target="_blank"
           rel="noopener noreferrer"
         >
-          CyberEvents MX
+          {TEXTS_GENERAL.header.cyberEvents}
         </a>
       </nav>
 
@@ -54,7 +55,7 @@ import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
         <button
           id="mobileMenuButton"
           type="button"
-          aria-label="Menú de navegación"
+          aria-label={TEXTS_GENERAL.header.menu}
           aria-expanded="false"
           aria-controls="mobileMenu"
           class="text-slate-300 hover:text-blue-400 transition-colors duration-300"

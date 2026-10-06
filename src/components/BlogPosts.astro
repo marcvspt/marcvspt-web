@@ -1,4 +1,5 @@
 ---
+import { TEXTS_GENERAL } from "@/scripts/texts";
 import PostCard from "@/components/PostCard.astro";
 import { getPublishedPostCards } from "@/scripts/blog";
 
@@ -15,11 +16,11 @@ const featuredPosts = allPosts.filter((post) => post.featured).slice(0, 3);
         <span
           class="bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
         >
-          Artículos Recientes
+          {TEXTS_GENERAL.home.posts.recent}
         </span>
       </h2>
       <p class="text-xl text-slate-400 max-w-2xl mx-auto">
-        Artículos sobre Ciberseguridad, Linux, Windows, Redes y más
+        {TEXTS_GENERAL.home.posts.description}
       </p>
     </div>
 
@@ -38,11 +39,11 @@ const featuredPosts = allPosts.filter((post) => post.featured).slice(0, 3);
           <div class="text-center mb-16">
             <h2 class="text-4xl md:text-5xl font-bold mb-4">
               <span class="bg-linear-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
-                Artículos Destacados
+                {TEXTS_GENERAL.home.posts.featured}
               </span>
             </h2>
             <p class="text-xl text-slate-400 max-w-2xl mx-auto">
-              Los artículos más importantes y populares del blog
+              {TEXTS_GENERAL.home.posts.featuredDescription}
             </p>
           </div>
 
@@ -60,7 +61,7 @@ const featuredPosts = allPosts.filter((post) => post.featured).slice(0, 3);
         href="/blog"
         class="inline-flex items-center px-8 py-3 bg-linear-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-white font-semibold rounded-lg transition-all duration-300 border border-slate-600 hover:border-blue-500/50"
       >
-        Ver Todos los Artículos
+        {TEXTS_GENERAL.home.posts.viewAll}
         <svg
           class="ml-2 w-5 h-5"
           fill="none"

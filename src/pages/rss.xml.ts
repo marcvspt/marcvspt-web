@@ -1,3 +1,4 @@
+import { TEXTS_GENERAL } from "@/scripts/texts";
 import rss from '@astrojs/rss'
 import type { APIRoute } from 'astro'
 import { getPublishedPosts, getPostUrl } from '@/scripts/blog'
@@ -5,7 +6,7 @@ import { SITE_DATA } from '@/scripts/data.js'
 
 export const GET: APIRoute = async (context) => {
     if (!context.site) {
-        throw new Error('Define site en astro.config.mjs para generar el RSS.')
+        throw new Error(TEXTS_GENERAL.errors.rssSite)
     }
     const posts = await getPublishedPosts()
 
@@ -19,6 +20,6 @@ export const GET: APIRoute = async (context) => {
             pubDate: post.data.date,
             link: getPostUrl(post.id),
         })),
-        customData: `<language>es-mx</language>`,
+        customData: `<language>${TEXTS_GENERAL.locale.rss}</language>`,
     })
 }

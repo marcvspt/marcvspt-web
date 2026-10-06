@@ -1,3 +1,4 @@
+import { TEXTS_GENERAL } from "@/scripts/texts";
 export type SortOrder = 'date-desc' | 'date-asc' | 'title-asc' | 'title-desc' | 'readtime-asc' | 'readtime-desc';
 type View = 'grid' | 'list';
 interface SearchState {
@@ -39,7 +40,7 @@ function initializeSearch() {
         element,
         category: element.dataset.category ?? '',
         title: element.dataset.title ?? '',
-        searchText: `${element.dataset.title ?? ''} ${element.dataset.tags ?? ''}`.toLocaleLowerCase('es-MX'),
+        searchText: `${element.dataset.title ?? ''} ${element.dataset.tags ?? ''}`.toLocaleLowerCase(TEXTS_GENERAL.locale.format),
         date: Number(element.dataset.date) || 0,
         readTime: Number(element.dataset.readtime) || 0,
     }));
@@ -85,8 +86,8 @@ function initializeSearch() {
                 switch (state.sort) {
                     case 'date-asc': return a.date - b.date;
                     case 'date-desc': return b.date - a.date;
-                    case 'title-asc': return a.title.localeCompare(b.title, 'es-MX');
-                    case 'title-desc': return b.title.localeCompare(a.title, 'es-MX');
+                    case 'title-asc': return a.title.localeCompare(b.title, TEXTS_GENERAL.locale.format);
+                    case 'title-desc': return b.title.localeCompare(a.title, TEXTS_GENERAL.locale.format);
                     case 'readtime-asc': return a.readTime - b.readTime;
                     case 'readtime-desc': return b.readTime - a.readTime;
                 }
@@ -95,7 +96,7 @@ function initializeSearch() {
             posts.forEach((post) => fragment.append(post.element));
             container.append(fragment);
         }
-        const query = state.search.trim().toLocaleLowerCase('es-MX');
+        const query = state.search.trim().toLocaleLowerCase(TEXTS_GENERAL.locale.format);
         let visible = 0;
         posts.forEach((post) => {
             const matches = (state.category === 'all' || state.category === post.category) && post.searchText.includes(query);

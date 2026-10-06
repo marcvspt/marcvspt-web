@@ -1,4 +1,5 @@
 ---
+import { TEXTS_GENERAL } from "@/scripts/texts";
 import { SITE_PAGES } from "@/scripts/data.js";
 ---
 
@@ -36,17 +37,16 @@ import { SITE_PAGES } from "@/scripts/data.js";
         <span
           class="bg-linear-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent"
         >
-          Bienvenido a
+          {TEXTS_GENERAL.home.welcome}
         </span>
         <br />
-        <span class="text-white">Mi Blog</span>
+        <span class="text-white">{TEXTS_GENERAL.home.title}</span>
       </h1>
 
       <p
         class="text-xl md:text-2xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed"
       >
-        Explorando ideas, compartiendo conocimiento y creando conexiones a
-        través de experiencias e investigaciones.
+        {TEXTS_GENERAL.home.description}
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -54,7 +54,7 @@ import { SITE_PAGES } from "@/scripts/data.js";
           href="#posts"
           class="inline-flex items-center px-8 py-3 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 animate-glow"
         >
-          Explorar Posts
+          {TEXTS_GENERAL.home.explore}
           <svg
             class="ml-2 w-5 h-5"
             fill="none"
