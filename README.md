@@ -75,7 +75,6 @@ El servidor de desarrollo usa normalmente `http://localhost:4321`; consulta la d
 │   │   ├── blog.ts          # Artículos publicados, fechas y URL
 │   │   ├── blog-search.ts   # Búsqueda, filtros, orden y vista del catálogo
 │   │   ├── data.ts          # Datos personales, navegación y experiencia
-│   │   ├── site.js          # Dominio único del sitio
 │   │   └── types.ts         # Tipos compartidos
 │   ├── styles/global.css    # Tailwind, Typography y estilos compartidos
 │   └── content.config.ts   # Colección y esquema del blog
@@ -147,7 +146,7 @@ Publicar o actualizar contenido requiere generar y desplegar de nuevo el sitio.
 ### Datos y dominio
 
 - Edita `src/scripts/data.ts` para cambiar el nombre, descripción, navegación, enlaces, habilidades o experiencia.
-- Cambia el dominio únicamente en `src/scripts/site.js`, mediante `SITE_URL`. La configuración de Astro y `SITE_DATA.url` consumen esa misma fuente.
+- Cambia el dominio únicamente en la propiedad `site` de `astro.config.mjs`. Las canónicas usan `Astro.site`, y los endpoints de RSS y robots obtienen el dominio del contexto de Astro. Mantén esta propiedad configurada para generar también el sitemap; `SITE_DATA` contiene el nombre y la descripción, sin duplicar el dominio.
 - `src/scripts/blog.ts` centraliza el filtro de borradores, el orden por fecha, las tarjetas, las URL de artículos y el tiempo de lectura en minutos. Las fechas visibles se formatean en español de México usando UTC.
 
 ### Imports, estilos y navegación

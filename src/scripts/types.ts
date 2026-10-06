@@ -3,7 +3,6 @@ import type { CollectionEntry } from "astro:content";
 export interface SiteData {
     name: string;
     description: string;
-    url: string;
 }
 
 export interface SitePage {

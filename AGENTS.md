@@ -16,7 +16,7 @@ Estas instrucciones se aplican a todo el repositorio.
 - El destino de despliegue configurado es Netlify, con `@astrojs/netlify` y salida estática (`output: 'static'`) en `astro.config.mjs`. Mantén la compatibilidad con ese entorno; no cambies el adaptador, el proveedor ni el modo de salida salvo que el alcance solicitado lo requiera.
 - Sigue las convenciones de Astro: componentes `.astro`, rutas basadas en archivos y colecciones de contenido. Conserva el funcionamiento de los eventos durante la navegación con `ClientRouter` y limpia los listeners cuando se reemplaza la página.
 - Prioriza el SSR de Astro cuando sea viable y aporte valor, por ejemplo para datos actualizados por petición, autenticación o contenido personalizado. Favorece resolver los datos y generar el HTML en Astro, manteniendo en el cliente la lógica que necesite interacción con el navegador.
-- Para contenido que no depende de la petición, conserva la generación estática cuando sea suficiente. El proyecto actualmente usa `output: 'static'`: el renderizado durante el build no es SSR por petición. Si una funcionalidad requiere SSR, adapta las rutas y la configuración necesarias dentro de su alcance, mantén la compatibilidad con Netlify y documenta el cambio en README y AGENTS.md; esta preferencia no implica migrar todo el sitio a SSR.
+- Para contenido que no depende de la petición, conserva la generación estática cuando sea suficiente. El proyecto actualmente usa `output: 'static'`: el renderizado durante el build no es SSR por petición. Si una funcionalidad requiere SSR, adapta las rutas y la configuración necesarias dentro de su alcance, mantén la compatibilidad con Netlify y documenta el cambio en `README.md` y `AGENTS.md`; esta preferencia no implica migrar todo el sitio a SSR.
 - Usa Tailwind CSS 4 para los estilos y su configuración existente mediante `@tailwindcss/vite`, `@import`, `@theme` y `@plugin`. Para el contenido Markdown, conserva `@tailwindcss/typography` y las clases `prose` / `prose-invert`; evita duplicar utilidades disponibles o introducir configuraciones de otras versiones de Tailwind.
 - `src/pages/` define las rutas; `src/components/` contiene componentes reutilizables y `src/layouts/` las plantillas.
 - La colección `blog` se define en `src/content.config.ts` y carga artículos desde `src/data/blog/`. Respeta el esquema del frontmatter y el filtro de borradores `draft`.
@@ -32,7 +32,7 @@ Estas instrucciones se aplican a todo el repositorio.
 
 ## Blog, RSS y sitemap
 
-- El dominio se define una sola vez en `src/scripts/site.js` (`SITE_URL`). La configuración de Astro y `SITE_DATA.url` lo consumen; modifica esa fuente cuando cambie el dominio.
+- El dominio se define una sola vez en la propiedad `site` de `astro.config.mjs`. Los componentes usan `Astro.site` y los endpoints usan `context.site` (o `site` al desestructurar el contexto); no dupliques el dominio en `SITE_DATA`. Mantén `site` configurado para generar canónicas, RSS y sitemap.
 - El sitemap usa `@astrojs/sitemap`; `src/pages/robots.txt.ts` y `src/layouts/BaseLayout.astro` apuntan a `/sitemap-index.xml`.
 - El RSS se genera en `src/pages/rss.xml.ts` con `@astrojs/rss` y se publica en `/rss.xml`. Mantén su título, descripción, idioma, fechas y enlaces coherentes con los datos del sitio y los artículos publicados.
 - Reutiliza `getPublishedPosts`, `getPublishedPostCards` y `getPostUrl` de `src/scripts/blog.ts` según corresponda. Conserva el filtro de `draft` y la coherencia de las URL entre portada, catálogo, artículos, RSS, canónicas y sitemap; no dupliques estas reglas en cada consumidor.
@@ -40,7 +40,7 @@ Estas instrucciones se aplican a todo el repositorio.
 ## Mantenimiento de las instrucciones y documentación
 
 - No edites salidas generadas en `dist/`, `.astro/` ni dependencias en `node_modules/`.
-- Actualiza el README cuando cambien la configuración, el flujo de trabajo o las instrucciones para publicar contenido.
+- Actualiza el `README.md` cuando cambien la configuración, el flujo de trabajo o las instrucciones para publicar contenido.
 - Debes actualizar este `AGENTS.md` en la misma tarea cuando haya cambios importantes en arquitectura, tecnologías, dependencias relevantes, estructura, alias, despliegue, comandos, flujo de trabajo, RSS, sitemap o reglas del proyecto. Revisa las instrucciones existentes, corrige las que queden obsoletas y documenta las nuevas convenciones para que los siguientes agentes trabajen con información vigente.
-- Mantén `AGENTS.md` y README coherentes con el código y la configuración reales; no documentes funcionalidades o validaciones que no existan o no se hayan realizado.
+- Mantén `AGENTS.md` y `README.md` coherentes con el código y la configuración reales; no documentes funcionalidades o validaciones que no existan o no se hayan realizado.
 - Mantén los cambios dentro del alcance solicitado y conserva el trabajo existente del propietario.
