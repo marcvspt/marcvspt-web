@@ -1,4 +1,5 @@
 ---
+import { TEXTS_GENERAL } from "@/scripts/texts";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 import Header from "@/components/Header.astro";
@@ -39,7 +40,7 @@ import {
                 <img
                   class="rounded-full"
                   src="/img/logo.webp"
-                  alt="Logo de la página, mi avatar"
+                  alt={TEXTS_GENERAL.about.avatarAlt}
                 />
               </div>
             </div>
@@ -57,10 +58,9 @@ import {
             class="text-xl text-slate-300 max-w-2xl mx-auto animate-slide-up"
             style="animation-delay: 0.2s;"
           >
-            Especialista en Ciberseguridad con <strong
-              >3 años de experiencia</strong
-            > realizando actividades de inteligencia de amenazas, respuesta ante incidentes,
-            seguridad perimetral y pentesting
+            {TEXTS_GENERAL.about.intro.before} <strong
+              >{TEXTS_GENERAL.about.intro.highlight}</strong
+            > {TEXTS_GENERAL.about.intro.after}
           </p>
         </div>
       </div>
@@ -73,63 +73,48 @@ import {
           <!-- Main Story -->
           <div class="lg:col-span-2 space-y-8">
             <div class="animate-slide-up" style="animation-delay: 0.3s;">
-              <h2 class="text-3xl font-bold text-white mb-6">Mi historia</h2>
+              <h2 class="text-3xl font-bold text-white mb-6">{TEXTS_GENERAL.about.story.title}</h2>
               <div class="prose prose-lg prose-invert max-w-none">
                 <p class="text-slate-300 leading-relaxed mb-6">
-                  ¡Hola! Soy Marco, especialista en ciberseguridad. Actualmente
-                  coordino la ciberseguridad de los servicios digitales de un
-                  organismo gubernamental. Mi trabajo abarca desde la
-                  identificación hasta la mitigación de riesgos de seguridad
-                  informática a través de pruebas de penetración, hardenizado de
-                  servidores y dispositivos de red, implementación de medidas de
-                  seguridad, respuesta ante incidentes y concientización con el
-                  objetivo de proteger los activos de información.
+                  {TEXTS_GENERAL.about.story.introduction}
                 </p>
 
                 <p class="text-slate-300 leading-relaxed mb-6">
-                  Especializado en pentesting web, sin embargo, mis
-                  conocimientos y habilidades se extienden en temas de seguridad
-                  perimetral con Firewalls de red, host, web y de correos así
-                  como la inteligencia de amenazas.
+                  {TEXTS_GENERAL.about.story.specialization}
                 </p>
 
                 <p class="text-slate-300 leading-relaxed mb-6">
-                  Este blog nació de mi deseo de compartir mi conocimiento y
-                  ayudar a otros profesionales y estudiantes en su en sus
-                  actividades diarias en temas de tecnologia y ciberseguridad.
-                  Aquí encontrarás tutoriales, tips, y descubrimientos sobre
-                  ciberseguridad.
+                  {TEXTS_GENERAL.about.story.blog}
                 </p>
               </div>
             </div>
 
             <div class="animate-slide-up" style="animation-delay: 0.4s;">
-              <h2 class="text-3xl font-bold text-white mb-6">Mi filosofía</h2>
+              <h2 class="text-3xl font-bold text-white mb-6">{TEXTS_GENERAL.about.philosophy.title}</h2>
               <div
                 class="bg-slate-800/50 rounded-xl p-6 border border-slate-700"
               >
                 <blockquote class="text-lg text-slate-300 italic">
-                  "Si sólo haces lo que sabes hacer, no serás más de lo que
-                  eres."
+                  {TEXTS_GENERAL.about.philosophy.quote}
                 </blockquote>
               </div>
             </div>
 
             <div class="animate-slide-up" style="animation-delay: 0.5s;">
               <h2 class="text-3xl font-bold text-white mb-6">
-                Cuando No Estoy Trabajando
+                {TEXTS_GENERAL.about.hobbies.title}
               </h2>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <CardWithIcon
-                  title="Cafeterias"
-                  description="Me encanta visitar cafeterías locales, para disfrutar de un buen café y de la comida que preparan mientras convivo con mis amigos o escucho un podcast."
+                  title={TEXTS_GENERAL.about.hobbies.coffee.title}
+                  description={TEXTS_GENERAL.about.hobbies.coffee.description}
                 >
                   <CoffeeIcon slot="icon" />
                 </CardWithIcon>
 
                 <CardWithIcon
-                  title="Videojuegos"
-                  description="Me gusta desconectar jugando videojuegos, especialmente Shooters y juegos tipo Sandbox y aventura ya sea con mis amigos o por mi cuenta."
+                  title={TEXTS_GENERAL.about.hobbies.games.title}
+                  description={TEXTS_GENERAL.about.hobbies.games.description}
                 >
                   <ControlIcon slot="icon" />
                 </CardWithIcon>
@@ -142,7 +127,7 @@ import {
             <!-- Skills -->
             <div class="animate-slide-up" style="animation-delay: 0.6s;">
               <h3 class="text-2xl font-bold text-white mb-6">
-                Habilidades y Conocimientos
+                {TEXTS_GENERAL.about.skillsTitle}
               </h3>
               <div class="space-y-4">
                 {
@@ -181,12 +166,11 @@ import {
             <span
               class="bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
             >
-              Experiencia profesional
+              {TEXTS_GENERAL.about.experience.title}
             </span>
           </h2>
           <p class="text-xl text-slate-400">
-            Lugares donde he trabajado y los puestos que he tenido a lo largo de
-            mi carrera en redes y ciberseguridad.
+            {TEXTS_GENERAL.about.experience.description}
           </p>
         </div>
 

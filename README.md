@@ -23,7 +23,7 @@ Las versiones concretas están en [package.json](package.json). La configuració
 
 ### Requisitos
 
-- Node.js **22 o superior**.
+- Node.js **24 o superior**.
 - `pnpm` disponible en el entorno.
 
 Ejecuta los comandos desde la raíz del repositorio:
@@ -75,7 +75,7 @@ El servidor de desarrollo usa normalmente `http://localhost:4321`; consulta la d
 │   │   ├── blog.ts          # Artículos publicados, fechas y URL
 │   │   ├── blog-search.ts   # Búsqueda, filtros, orden y vista del catálogo
 │   │   ├── data.ts          # Datos personales, navegación y experiencia
-│   │   ├── site.js          # Dominio único del sitio
+│   │   ├── texts.ts         # Textos generales del sitio, fuera del Markdown
 │   │   └── types.ts         # Tipos compartidos
 │   ├── styles/global.css    # Tailwind, Typography y estilos compartidos
 │   └── content.config.ts   # Colección y esquema del blog
@@ -88,6 +88,12 @@ El servidor de desarrollo usa normalmente `http://localhost:4321`; consulta la d
 ```
 
 El árbol resume los archivos principales. `dist/`, `.astro/` y `node_modules/` son directorios generados y no deben editarse manualmente.
+
+## Textos del sitio
+
+Los textos ajenos al Markdown se centralizan en `src/scripts/texts.ts`, dentro de `TEXTS_GENERAL`, agrupados por sección. Incluye textos de interfaz, accesibilidad, metadatos, datos personales y mensajes del navegador. Para cambiarlos o añadirlos, edita ese catálogo e impórtalo mediante `@/scripts/texts`. Los textos con parámetros usan funciones, como `TEXTS_GENERAL.post.readMoreLabel(title)`.
+
+Las URL, identificadores, porcentajes y otros valores técnicos permanecen en sus módulos de datos. Los iconos sociales se seleccionan mediante un `id` estable, independiente del nombre mostrado. `TEXTS_GENERAL.locale` reúne el idioma del HTML, RSS y formato de fechas y búsqueda. Esta estructura prepara una futura internacionalización; todavía no incluye selección de idioma ni rutas por idioma. El contenido y frontmatter de los artículos siguen en Markdown y quedan fuera del catálogo.
 
 ## Crear y publicar un artículo
 
@@ -147,7 +153,7 @@ Publicar o actualizar contenido requiere generar y desplegar de nuevo el sitio.
 ### Datos y dominio
 
 - Edita `src/scripts/data.ts` para cambiar el nombre, descripción, navegación, enlaces, habilidades o experiencia.
-- Cambia el dominio únicamente en `src/scripts/site.js`, mediante `SITE_URL`. La configuración de Astro y `SITE_DATA.url` consumen esa misma fuente.
+- Cambia el dominio únicamente en la propiedad `site` de `astro.config.mjs`. Las canónicas usan `Astro.site`, y los endpoints de RSS y robots obtienen el dominio del contexto de Astro. Mantén esta propiedad configurada para generar también el sitemap; `SITE_DATA` contiene el nombre y la descripción, sin duplicar el dominio.
 - `src/scripts/blog.ts` centraliza el filtro de borradores, el orden por fecha, las tarjetas, las URL de artículos y el tiempo de lectura en minutos. Las fechas visibles se formatean en español de México usando UTC.
 
 ### Imports, estilos y navegación

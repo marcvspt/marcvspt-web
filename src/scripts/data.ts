@@ -1,6 +1,7 @@
-import { SITE_URL } from './site.js';
+import { TEXTS_GENERAL } from "@/scripts/texts";
 import type {
     LinkItem,
+    SocialLinkItem,
     ProfessionalExperience,
     SiteData,
     SitePages,
@@ -8,143 +9,144 @@ import type {
 } from "@/scripts/types";
 
 export const SITE_DATA: SiteData = {
-    name: "Marcvs Pt",
-    description: "Blog dedicado a compartir mi conocimiento en tecnología, redes y ciberseguridad a partir de mi experiencia laboral, laboratorios y proyectos personales como especialista en cibergseuridad.",
-    url: SITE_URL.replace(/\/$/, ""),
+    name: TEXTS_GENERAL.site.name,
+    description: TEXTS_GENERAL.site.description,
 }
 
 export const SITE_PAGES: SitePages = {
     Home: {
-        title: "Inicio",
+        title: TEXTS_GENERAL.pages.Home.title,
         description: SITE_DATA.description,
         url: "/",
     },
     Blog: {
-        title: "Blog",
-        description: "Explora mis artículos y tutoriales sobre tecnología, ciberseguridad, redes y más.",
+        title: TEXTS_GENERAL.pages.Blog.title,
+        description: TEXTS_GENERAL.pages.Blog.description,
         url: "/blog",
     },
     About: {
-        title: "Sobre mí",
-        description: "Ingeniero en Ciberseguridad con 3 años de experiencia realizando actividades de inteligencia de amenazas, respuesta ante incidentes, seguridad perimetral y pentesting.",
+        title: TEXTS_GENERAL.pages.About.title,
+        description: TEXTS_GENERAL.pages.About.description,
         url: "/about",
     }
 };
 
-export const SOCIAL_DATA: LinkItem[] = [
+export const SOCIAL_DATA: SocialLinkItem[] = [
     {
-        name: "LinkedIn",
+        id: "linkedin",
+        name: TEXTS_GENERAL.social.linkedin.name,
         url: "https://www.linkedin.com/in/marcopat01/",
     },
     {
-        name: "GitHub",
+        id: "github",
+        name: TEXTS_GENERAL.social.github.name,
         url: "https://github.com/marcvspt",
     },
     {
-        name: "HackTheBox",
+        id: "hackthebox",
+        name: TEXTS_GENERAL.social.hackthebox.name,
         url: "https://app.hackthebox.com/profile/935643",
     },
     {
-        name: "X/Twitter",
+        id: "twitter",
+        name: TEXTS_GENERAL.social.twitter.name,
         url: "https://x.com/marcvspt",
     },
     {
-        name: "Contactame",
+        id: "contact",
+        name: TEXTS_GENERAL.social.contact.name,
         url: "mailto:marcvspt@gmail.com",
     },
 ]
 
 export const EXTERNAL_RESOURCES: LinkItem[] = [
     {
-        name: "CyberThreat AI (CTAI)",
+        name: TEXTS_GENERAL.resources.cyberEvents.name,
+        url: "https://cemx.marcvspt.tech/",
+    },
+    {
+        name: TEXTS_GENERAL.resources.cyberThreat.name,
         url: "https://ctai.marcvspt.tech/",
     },
     {
-        name: "Open Personal Resource Planning (OPRP)",
+        name: TEXTS_GENERAL.resources.oprp.name,
         url: "https://oprp.marcvspt.tech/",
     },
     {
-        name: "CyberChef",
-        url: "https://gchq.github.io/CyberChef/",
-    },
-    {
-        name: "HackTricks",
+        name: TEXTS_GENERAL.resources.hackTricks.name,
         url: "https://book.hacktricks.wiki/",
     },
-    {
-        name: "Payloads All The Things",
-        url: "https://swisskyrepo.github.io/PayloadsAllTheThings/",
-    },
+
 ]
 
 
 export const SKILLS: Skill[] = [
     {
-        name: "Firewall",
+        name: TEXTS_GENERAL.skills.firewall.name,
         percentaje: "80%",
     },
     {
-        name: "WAF/SEG",
+        name: TEXTS_GENERAL.skills.wafSeg.name,
         percentaje: "60%",
     },
     {
-        name: "Linux",
+        name: TEXTS_GENERAL.skills.linux.name,
         percentaje: "60%",
     },
     {
-        name: "Windows",
+        name: TEXTS_GENERAL.skills.windows.name,
         percentaje: "20%",
     },
     {
-        name: "Endpoint Security (AV/EDR/XDR)",
+        name: TEXTS_GENERAL.skills.endpoint.name,
         percentaje: "50%",
     },
     {
-        name: "Pentesting Web",
+        name: TEXTS_GENERAL.skills.pentesting.name,
         percentaje: "40%",
     },
     {
-        name: "SIEM",
+        name: TEXTS_GENERAL.skills.siem.name,
         percentaje: "50%",
     },
     {
-        name: "Wireshark/tcpdump",
+        name: TEXTS_GENERAL.skills.wireshark.name,
         percentaje: "15%",
     },
     {
-        name: "Forense",
+        name: TEXTS_GENERAL.skills.forensics.name,
         percentaje: "10%",
     },
     {
-        name: "Bash",
+        name: TEXTS_GENERAL.skills.bash.name,
         percentaje: "70%",
     },
     {
-        name: "PowerShell",
+        name: TEXTS_GENERAL.skills.powershell.name,
         percentaje: "5%",
     },
 ]
 
 export const PROFESIONAL_EXPERIENCE: ProfessionalExperience = {
     gobierno: {
-        ocupation: "Lider de Ciberseguridad",
-        description: "Administración de Firewalls de nueva generación. Configuración de VPN site-to-site y client-to-site. Monitoreo de sistemas EDR, XDR, SIEM, SEG y WAF. Investigación de eventos e incidentes de seguridad. Supervisión de proyectos de ciberseguridad e implementación de controles de seguridad.",
-        time: "Noviembre 2023 - Presente",
-        company: "Orgazación gubernamental",
+        ocupation: TEXTS_GENERAL.experience.gobierno.ocupation,
+        description: TEXTS_GENERAL.experience.gobierno.description,
+        time: TEXTS_GENERAL.experience.gobierno.time,
+        company: TEXTS_GENERAL.experience.gobierno.company,
         link: "#",
     },
     rooms31: {
-        ocupation: "Practicante de Ciberseguridad",
-        description: "Proyecto de grado de ingeniería: Pentest a servicios web en modalidad de caja gris. Pruebas de seguridad a dos APIs y dos interfaces web. Determinación de severidad de vulnerabilidades y su explotabilidad.",
-        time: "Enero 2023 - Abril 2023",
-        company: "31 Rooms",
+        ocupation: TEXTS_GENERAL.experience.rooms31.ocupation,
+        description: TEXTS_GENERAL.experience.rooms31.description,
+        time: TEXTS_GENERAL.experience.rooms31.time,
+        company: TEXTS_GENERAL.experience.rooms31.company,
         link: "https://31rooms.com/",
     },
     conexionesTI: {
-        ocupation: "Practicante de Redes",
-        description: "Proyecto de grado de carrera técnica: Administración e instalación de enlaces inalámbricos mediante radiofrecuencias de un Proveedor de Servicios de Internet Inalámbrico. Administración de routers, access point, switches y antenas 5Ghz. Configuración enlaces inalámbricos punto-a-punto y punto-a-multipunto. Administración de redes LAN, WLAN y WAN.",
-        time: "Mayo 2021 - Agosto 2021",
-        company: "Conexiones TI",
+        ocupation: TEXTS_GENERAL.experience.conexionesTI.ocupation,
+        description: TEXTS_GENERAL.experience.conexionesTI.description,
+        time: TEXTS_GENERAL.experience.conexionesTI.time,
+        company: TEXTS_GENERAL.experience.conexionesTI.company,
         link: "https://www.conexionesti.com/",
     }
 }

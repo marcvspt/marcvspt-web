@@ -1,4 +1,5 @@
 ---
+import { TEXTS_GENERAL } from "@/scripts/texts";
 import {
   SITE_DATA,
   SITE_PAGES,
@@ -33,18 +34,18 @@ import XIcon from "@/assets/x.svg";
             SOCIAL_DATA.map((social) => {
               return (
                 <a
-                  id={`link-${social.name}`}
+                  id={`link-${social.id}`}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-slate-400 hover:text-blue-400 transition-colors duration-300"
                   aria-label={social.name}
                 >
-                  {social.name === "LinkedIn" && <LinkedInIcon />}
-                  {social.name === "GitHub" && <GitHubIcon />}
-                  {social.name === "HackTheBox" && <HackTheBoxIcon />}
-                  {social.name === "X/Twitter" && <XIcon />}
-                  {social.name === "Contactame" && <MailIcon />}
+                  {social.id === "linkedin" && <LinkedInIcon />}
+                  {social.id === "github" && <GitHubIcon />}
+                  {social.id === "hackthebox" && <HackTheBoxIcon />}
+                  {social.id === "twitter" && <XIcon />}
+                  {social.id === "contact" && <MailIcon />}
                 </a>
               );
             })
@@ -54,7 +55,7 @@ import XIcon from "@/assets/x.svg";
 
       <!-- Enlaces rápidos -->
       <div>
-        <h3 class="text-lg font-semibold text-white mb-4">Enlaces Rápidos</h3>
+        <h3 class="text-lg font-semibold text-white mb-4">{TEXTS_GENERAL.footer.quickLinks}</h3>
         <ul class="space-y-2">
           {
             Object.values(SITE_PAGES).map((page) => {
@@ -75,7 +76,7 @@ import XIcon from "@/assets/x.svg";
 
       <!-- Recursos útiles -->
       <div>
-        <h3 class="text-lg font-semibold text-white mb-4">Recursos</h3>
+        <h3 class="text-lg font-semibold text-white mb-4">{TEXTS_GENERAL.footer.resources}</h3>
         <ul class="space-y-2">
           {
             EXTERNAL_RESOURCES.map((resource) => {
@@ -99,12 +100,12 @@ import XIcon from "@/assets/x.svg";
 
     <div class="border-t border-slate-800 mt-12 pt-8 text-center">
       <p class="text-slate-400">
-        © {currentYear}. Este proyecto está licenciado bajo los términos de la <a
+        © {currentYear}. {TEXTS_GENERAL.footer.licenseIntro} <a
           href="https://github.com/marcvspt/marcvspt-web/blob/master/LICENSE"
           target="_blank"
           rel="noopener noreferrer"
           class="hover:text-secondary/90 transition duration-100 ease-in-out"
-          ><strong>GNU General Public License v3.0</strong></a
+          ><strong>{TEXTS_GENERAL.footer.licenseName}</strong></a
         >.
       </p>
     </div>

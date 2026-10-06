@@ -1,4 +1,5 @@
 ---
+import { TEXTS_GENERAL } from "@/scripts/texts";
 import "@/styles/global.css";
 
 import { SITE_DATA } from "@/scripts/data.js";
@@ -16,11 +17,14 @@ const {
   description = SITE_DATA.description,
   canonical,
 } = Astro.props as Props;
-const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site ?? SITE_DATA.url).href;
+if (!Astro.site) {
+  throw new Error(TEXTS_GENERAL.errors.canonicalSite);
+}
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang={TEXTS_GENERAL.locale.language} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,7 +32,7 @@ const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site ?? SITE
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <title>{SITE_DATA.name} | {title}</title>
+    <title>{TEXTS_GENERAL.site.pageTitle(SITE_DATA.name, title)}</title>
     <ClientRouter />
   </head>
   <body class="bg-slate-900 text-slate-100 font-sans antialiased">

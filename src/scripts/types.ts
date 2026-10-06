@@ -3,7 +3,6 @@ import type { CollectionEntry } from "astro:content";
 export interface SiteData {
     name: string;
     description: string;
-    url: string;
 }
 
 export interface SitePage {
@@ -17,6 +16,10 @@ export type SitePages = Record<"Home" | "Blog" | "About", SitePage>;
 export interface LinkItem {
     name: string;
     url: string;
+}
+
+export interface SocialLinkItem extends LinkItem {
+    id: "linkedin" | "github" | "hackthebox" | "twitter" | "contact";
 }
 
 export interface Skill {

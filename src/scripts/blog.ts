@@ -1,3 +1,4 @@
+import { TEXTS_GENERAL } from "@/scripts/texts";
 import { getCollection } from 'astro:content';
 import type { BlogPostCard } from './types';
 
@@ -14,7 +15,7 @@ export function getPostUrl(slug: string): string {
     return `/blog/${slug}/`;
 }
 
-const dateFormatter = new Intl.DateTimeFormat('es-MX', {
+const dateFormatter = new Intl.DateTimeFormat(TEXTS_GENERAL.locale.format, {
     year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
 });
 
