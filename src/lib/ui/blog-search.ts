@@ -1,4 +1,4 @@
-import { TEXTS_GENERAL } from "@/scripts/texts";
+import { SITE_LOCALE } from '@/lib/site.ts';
 export type SortOrder = 'date-desc' | 'date-asc' | 'title-asc' | 'title-desc' | 'readtime-asc' | 'readtime-desc';
 type View = 'grid' | 'list';
 interface SearchState {
@@ -40,7 +40,7 @@ function initializeSearch() {
         element,
         category: element.dataset.category ?? '',
         title: element.dataset.title ?? '',
-        searchText: `${element.dataset.title ?? ''} ${element.dataset.tags ?? ''}`.toLocaleLowerCase(TEXTS_GENERAL.locale.format),
+        searchText: `${element.dataset.title ?? ''} ${element.dataset.tags ?? ''}`.toLocaleLowerCase(SITE_LOCALE.sort),
         date: Number(element.dataset.date) || 0,
         readTime: Number(element.dataset.readtime) || 0,
     }));
@@ -86,8 +86,8 @@ function initializeSearch() {
                 switch (state.sort) {
                     case 'date-asc': return a.date - b.date;
                     case 'date-desc': return b.date - a.date;
-                    case 'title-asc': return a.title.localeCompare(b.title, TEXTS_GENERAL.locale.format);
-                    case 'title-desc': return b.title.localeCompare(a.title, TEXTS_GENERAL.locale.format);
+                    case 'title-asc': return a.title.localeCompare(b.title, SITE_LOCALE.sort);
+                    case 'title-desc': return b.title.localeCompare(a.title, SITE_LOCALE.sort);
                     case 'readtime-asc': return a.readTime - b.readTime;
                     case 'readtime-desc': return b.readTime - a.readTime;
                 }
@@ -96,7 +96,7 @@ function initializeSearch() {
             posts.forEach((post) => fragment.append(post.element));
             container.append(fragment);
         }
-        const query = state.search.trim().toLocaleLowerCase(TEXTS_GENERAL.locale.format);
+        const query = state.search.trim().toLocaleLowerCase(SITE_LOCALE.sort);
         let visible = 0;
         posts.forEach((post) => {
             const matches = (state.category === 'all' || state.category === post.category) && post.searchText.includes(query);

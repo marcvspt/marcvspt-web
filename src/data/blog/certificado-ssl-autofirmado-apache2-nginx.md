@@ -1,8 +1,8 @@
 ---
 title: 'Certificado SSL autofirmado Apache2 y Nginx'
-excerpt: 'Configura un certificado SSL autofirmado para Apache2 y Nginx. Aprende a configurar dominios y subdominios con un solo certificado'
-date: '2024-07-30'
-readTime: '34 min'
+description: 'Configura un certificado SSL autofirmado para Apache2 y Nginx. Aprende a configurar dominios y subdominios con un solo certificado'
+publishedAt: '2024-07-30'
+readTimeMinutes: 34
 category: 'Configuración'
 tags: [HTTP, HTTPS, SSL, TLS, Web, Debian, Apache, Nginx, Linux]
 image: '/img/blog/configs/certssl/certssl.webp'

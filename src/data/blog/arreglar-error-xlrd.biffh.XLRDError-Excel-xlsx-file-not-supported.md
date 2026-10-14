@@ -1,8 +1,8 @@
 ---
 title: 'Windows Exploit Suggester (python2) - Arreglo de errores'
-excerpt: 'Solución de errores en Windows Exploit Suggester (python2)'
-date: '2022-08-25'
-readTime: '5 min'
+description: 'Solución de errores en Windows Exploit Suggester (python2)'
+publishedAt: '2022-08-25'
+readTimeMinutes: 5
 category: 'Errores'
 tags: [Python2, pip2, Linux, Windows]
 image: '/img/blog/solutions/windows-exploit-suggester/Windows-Exploit-Suggester.webp'

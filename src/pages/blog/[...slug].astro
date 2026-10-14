@@ -1,8 +1,8 @@
 ---
 import { render } from "astro:content";
-import { getPublishedPosts } from "@/scripts/blog";
+import { getPublishedPosts } from "@/lib/blog/content.ts";
 import BlogPostLayout from "@/layouts/BlogPostLayout.astro";
-import type { BlogPostEntry, BlogPostFrontmatter } from "@/scripts/types";
+import type { BlogPostEntry, BlogPostFrontmatter } from "@/lib/types/blog.ts";
 
 export async function getStaticPaths() {
     const posts = await getPublishedPosts();
