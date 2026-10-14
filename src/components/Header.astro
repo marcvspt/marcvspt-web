@@ -1,6 +1,8 @@
 ---
-import { TEXTS_GENERAL } from "@/scripts/texts";
-import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
+import { TEXTS_GENERAL } from "@/lib/texts.ts";
+import { SITE_DATA } from '@/lib/site.ts';
+import { MAIN_NAVIGATION, SITE_PAGES } from '@/lib/navigation.ts';
+import { HEADER_RESOURCES } from '@/lib/links.ts';
 ---
 
 <header
@@ -11,7 +13,7 @@ import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
       <!-- Logo -->
       <div class="shrink-0">
         <a
-          href={SITE_PAGES.Home.url}
+          href={SITE_PAGES.Home.href}
           class="text-2xl font-bold bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent hover:from-blue-300 hover:to-blue-500 transition-all duration-300"
         >
           {SITE_DATA.name}
@@ -21,33 +23,27 @@ import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
       <!-- Navigation -->
       <nav class="hidden md:flex space-x-8">
         {
-          Object.values(SITE_PAGES).map((page) => {
+          MAIN_NAVIGATION.map((page) => {
             return (
               <a
-                href={page.url}
+                href={page.href}
                 class="text-slate-300 hover:text-blue-400 transition-colors duration-300"
               >
-                {page.title}
+                {page.label}
               </a>
             );
           })
         }
-        <a
-          href="https://ctai.marcvspt.tech"
-          class="text-slate-300 hover:text-blue-400 transition-colors duration-300"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {TEXTS_GENERAL.header.cyberThreat}
-        </a>
-        <a
-          href="https://cemx.marcvspt.tech"
-          class="text-slate-300 hover:text-blue-400 transition-colors duration-300"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {TEXTS_GENERAL.header.cyberEvents}
-        </a>
+        {HEADER_RESOURCES.map((resource) => (
+          <a
+            href={resource.href}
+            class="text-slate-300 hover:text-blue-400 transition-colors duration-300"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {resource.label}
+          </a>
+        ))}
       </nav>
 
       <!-- Mobile menu button -->
@@ -80,13 +76,13 @@ import { SITE_DATA, SITE_PAGES } from "@/scripts/data.js";
     <div id="mobileMenu" class="hidden md:hidden pb-4">
       <div class="flex flex-col space-y-2">
         {
-          Object.values(SITE_PAGES).map((page) => {
+          MAIN_NAVIGATION.map((page) => {
             return (
               <a
-                href={page.url}
+                href={page.href}
                 class="text-slate-300 hover:text-blue-400 transition-colors duration-300 py-2"
               >
-                {page.title}
+                {page.label}
               </a>
             );
           })

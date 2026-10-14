@@ -1,8 +1,9 @@
-import { TEXTS_GENERAL } from "@/scripts/texts";
+import { TEXTS_GENERAL } from "@/lib/texts.ts";
 import rss from '@astrojs/rss'
 import type { APIRoute } from 'astro'
-import { getPublishedPosts, getPostUrl } from '@/scripts/blog'
-import { SITE_DATA } from '@/scripts/data.js'
+import { getPublishedPosts } from '@/lib/blog/content.ts';
+import { getPostUrl } from '@/lib/blog/presentation.ts';
+import { SITE_DATA, SITE_LOCALE } from '@/lib/site.ts';
 
 export const GET: APIRoute = async (context) => {
     if (!context.site) {
@@ -16,10 +17,10 @@ export const GET: APIRoute = async (context) => {
         site: context.site,
         items: posts.map((post) => ({
             title: post.data.title,
-            description: post.data.excerpt,
-            pubDate: post.data.date,
+            description: post.data.description,
+            pubDate: post.data.publishedAt,
             link: getPostUrl(post.id),
         })),
-        customData: `<language>${TEXTS_GENERAL.locale.rss}</language>`,
+        customData: `<language>${SITE_LOCALE.rss}</language>`,
     })
 }

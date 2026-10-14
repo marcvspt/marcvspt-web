@@ -1,8 +1,8 @@
 ---
 title: 'Desplegar proyecto de Astro en Dokploy'
-excerpt: 'Despliega tu proyecto de Astro con Server Side Rendering (SSR) o Static Site Generation (SSG) utilizando la plataforma de Dokploy.'
-date: '2026-03-29'
-readTime: '12 min'
+description: 'Despliega tu proyecto de Astro con Server Side Rendering (SSR) o Static Site Generation (SSG) utilizando la plataforma de Dokploy.'
+publishedAt: '2026-03-29'
+readTimeMinutes: 12
 category: 'Infraestructura'
 tags: [Astro, Dokploy, Cloud, VPS, Infraestructura, Deploy, Railpack, SSR, SSG]
 image: '/img/blog/infraestructura/astro-dokploy/astro-dokploy.webp'

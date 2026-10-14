@@ -1,8 +1,8 @@
 ---
 title: 'MiddleWare para ataques SQL injection'
-excerpt: '¿Qué es un MiddleWare? Crea un MiddleWare para ataques SQL injection a través de WebSocket, gRPC y HTTP usando Python'
-date: '2023-05-24'
-readTime: '14 min'
+description: '¿Qué es un MiddleWare? Crea un MiddleWare para ataques SQL injection a través de WebSocket, gRPC y HTTP usando Python'
+publishedAt: '2023-05-24'
+readTimeMinutes: 14
 category: 'Pentest'
 tags: [SQLi, HTTP, WebSocet, gRPC, Python3, pip3]
 image: '/img/blog/tools/middleware/middleware.webp'

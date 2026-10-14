@@ -71,12 +71,17 @@ El servidor de desarrollo usa normalmente `http://localhost:4321`; consulta la d
 │   │   │   └── [...slug].astro
 │   │   ├── robots.txt.ts
 │   │   └── rss.xml.ts
-│   ├── scripts/
-│   │   ├── blog.ts          # Artículos publicados, fechas y URL
-│   │   ├── blog-search.ts   # Búsqueda, filtros, orden y vista del catálogo
-│   │   ├── data.ts          # Datos personales, navegación y experiencia
-│   │   ├── texts.ts         # Textos generales del sitio, fuera del Markdown
-│   │   └── types.ts         # Tipos compartidos
+│   ├── lib/
+│   │   ├── site.ts          # Marca y configuración regional
+│   │   ├── navigation.ts    # Páginas y orden de navegación
+│   │   ├── links.ts         # Redes, recursos externos y licencia
+│   │   ├── profile.ts       # Habilidades y experiencia
+│   │   ├── texts.ts         # Textos generales, fuera del Markdown
+│   │   ├── types/           # Contratos de sitio, perfil y blog
+│   │   ├── blog/
+│   │   │   ├── content.ts   # Artículos publicados y datos de tarjetas
+│   │   │   └── presentation.ts # URL y formato de fechas y lectura
+│   │   └── ui/blog-search.ts # Búsqueda, filtros, orden y vista del catálogo
 │   ├── styles/global.css    # Tailwind, Typography y estilos compartidos
 │   └── content.config.ts   # Colección y esquema del blog
 ├── astro.config.mjs
@@ -91,9 +96,11 @@ El árbol resume los archivos principales. `dist/`, `.astro/` y `node_modules/` 
 
 ## Textos del sitio
 
-Los textos ajenos al Markdown se centralizan en `src/scripts/texts.ts`, dentro de `TEXTS_GENERAL`, agrupados por sección. Incluye textos de interfaz, accesibilidad, metadatos, datos personales y mensajes del navegador. Para cambiarlos o añadirlos, edita ese catálogo e impórtalo mediante `@/scripts/texts`. Los textos con parámetros usan funciones, como `TEXTS_GENERAL.post.readMoreLabel(title)`.
+Los textos ajenos al Markdown se centralizan en `src/lib/texts.ts`, dentro de `TEXTS_GENERAL`, agrupados por sección. Incluye textos de interfaz, accesibilidad, metadatos, datos personales y mensajes del navegador. Para cambiarlos o añadirlos, edita ese catálogo e impórtalo mediante `@/lib/texts.ts`. Los textos con parámetros usan funciones, como `TEXTS_GENERAL.post.readMoreLabel(title)` y `TEXTS_GENERAL.post.readTime(minutes)`.
 
-Las URL, identificadores, porcentajes y otros valores técnicos permanecen en sus módulos de datos. Los iconos sociales se seleccionan mediante un `id` estable, independiente del nombre mostrado. `TEXTS_GENERAL.locale` reúne el idioma del HTML, RSS y formato de fechas y búsqueda. Esta estructura prepara una futura internacionalización; todavía no incluye selección de idioma ni rutas por idioma. El contenido y frontmatter de los artículos siguen en Markdown y quedan fuera del catálogo.
+Las URL e identificadores viven en `src/lib/navigation.ts` y `src/lib/links.ts`; las habilidades y experiencia, en `src/lib/profile.ts`. Los enlaces usan el contrato `id`, `label`, `href`; los metadatos de página usan `title`, `description`. Los iconos sociales se seleccionan mediante un `id` estable, independiente de su etiqueta. Los porcentajes son números (`percentage`), y el símbolo `%` se añade al renderizar. La experiencia usa `occupation` y `href`.
+
+`SITE_LOCALE` en `src/lib/site.ts` reúne el idioma del HTML y RSS y la configuración regional de fechas y búsqueda. Las fechas editoriales se muestran en UTC para conservar su día. Todavía no hay selección de idioma ni rutas por idioma. El contenido y frontmatter de los artículos siguen en Markdown y quedan fuera del catálogo. Los tipos del blog derivan de la colección, según el patrón de [colecciones de Astro](https://docs.astro.build/en/guides/content-collections/).
 
 ## Crear y publicar un artículo
 
@@ -104,9 +111,9 @@ Las URL, identificadores, porcentajes y otros valores técnicos permanecen en su
 ```markdown
 ---
 title: 'Configurar un firewall en Linux'
-excerpt: 'Reglas básicas para controlar el tráfico de entrada y salida.'
-date: '2026-10-01'
-readTime: '5 min'
+description: 'Reglas básicas para controlar el tráfico de entrada y salida.'
+publishedAt: '2026-10-01'
+readTimeMinutes: 5
 category: 'Linux'
 tags: ['Linux', 'Redes', 'Seguridad']
 image: '/img/blog/linux/configurar-firewall-linux/portada.webp'
@@ -126,10 +133,10 @@ El esquema se define en [src/content.config.ts](src/content.config.ts).
 | Campo | Tipo | Obligatorio | Uso o valor predeterminado |
 | --- | --- | --- | --- |
 | `title` | Texto | Sí | Título del artículo |
-| `excerpt` | Texto | Sí | Descripción breve para tarjetas, metadatos y RSS |
-| `date` | Fecha | Sí | Fecha de publicación; usa `AAAA-MM-DD` |
-| `updated` | Fecha | No | Fecha de actualización mostrada en el artículo |
-| `readTime` | Texto | Sí | Tiempo de lectura manual, por ejemplo `'5 min'` |
+| `description` | Texto | Sí | Descripción breve para tarjetas, metadatos y RSS |
+| `publishedAt` | Fecha | Sí | Fecha de publicación; usa `YYYY-MM-DD` entre comillas |
+| `updatedAt` | Fecha | No | Fecha de actualización mostrada en el artículo |
+| `readTimeMinutes` | Entero positivo | Sí | Tiempo de lectura manual en minutos, por ejemplo `5` |
 | `category` | Texto | Sí | Categoría usada en tarjetas y filtros |
 | `tags` | Lista de textos | No | Etiquetas; por defecto `[]` |
 | `image` | Texto | Sí | Ruta pública de la imagen de portada |
@@ -144,7 +151,7 @@ Guarda la portada del ejemplo en `public/img/blog/linux/configurar-firewall-linu
 - Cambia a `draft: false` cuando esté listo. Si omites el campo, el artículo se considera publicado.
 - Los archivos cuyo nombre empieza por `_` quedan fuera de la colección por el patrón del loader.
 - Usa `featured: true` para incluirlo entre los destacados. La portada muestra hasta tres artículos recientes y hasta tres destacados, ordenados por fecha de publicación.
-- Para una actualización, puedes añadir `updated: '2026-10-02'`. El orden del blog y la fecha de publicación del RSS siguen usando `date`.
+- Para una actualización, puedes añadir `updatedAt: '2026-10-02'`. El orden del blog y la fecha de publicación del RSS siguen usando `publishedAt`.
 
 Publicar o actualizar contenido requiere generar y desplegar de nuevo el sitio.
 
@@ -152,17 +159,17 @@ Publicar o actualizar contenido requiere generar y desplegar de nuevo el sitio.
 
 ### Datos y dominio
 
-- Edita `src/scripts/data.ts` para cambiar el nombre, descripción, navegación, enlaces, habilidades o experiencia.
+- Edita `src/lib/texts.ts` para copy, `src/lib/site.ts` para configuración regional, `src/lib/navigation.ts` para rutas y orden del menú, `src/lib/links.ts` para enlaces, y `src/lib/profile.ts` para porcentajes y enlaces de experiencia.
 - Cambia el dominio únicamente en la propiedad `site` de `astro.config.mjs`. Las canónicas usan `Astro.site`, y los endpoints de RSS y robots obtienen el dominio del contexto de Astro. Mantén esta propiedad configurada para generar también el sitemap; `SITE_DATA` contiene el nombre y la descripción, sin duplicar el dominio.
-- `src/scripts/blog.ts` centraliza el filtro de borradores, el orden por fecha, las tarjetas, las URL de artículos y el tiempo de lectura en minutos. Las fechas visibles se formatean en español de México usando UTC.
+- `src/lib/blog/content.ts` centraliza el filtro de borradores, el orden por fecha de publicación y los datos de tarjetas. `src/lib/blog/presentation.ts` construye URL y formatea fechas y tiempos de lectura; las fechas visibles se muestran en español de México usando UTC. El catálogo ordena y calcula promedios directamente desde `readTimeMinutes`, sin extraer números de textos.
 
 ### Imports, estilos y navegación
 
-Usa los alias definidos en `tsconfig.json`, como `@/components/`, `@/layouts/`, `@/scripts/`, `@/assets/` y `@/styles/`. Solo existen los patrones configurados; `@/` no es un alias genérico para cualquier archivo. `astro.config.mjs` usa rutas relativas compatibles con Node.
+Usa los alias definidos en `tsconfig.json`: `@/pages/`, `@/components/`, `@/layouts/`, `@/lib/`, `@/assets/` y `@/styles/`. Incluye la extensión real (`.ts`, `.astro`, `.svg`, `.css`) e importa el archivo concreto, sin barrels ni reexportaciones de conveniencia. Solo existen los patrones configurados; `@/` no es un alias genérico para cualquier archivo. `astro.config.mjs` usa rutas relativas compatibles con Node.
 
 Los estilos globales se definen en `src/styles/global.css` mediante Tailwind CSS 4 (`@import`, `@theme` y `@plugin`). El contenido de los artículos utiliza Tailwind Typography; el recorte de las tarjetas usa `line-clamp-3`.
 
-El layout incluye `ClientRouter`. El menú y el buscador se inicializan con `astro:page-load` y limpian sus eventos antes de reemplazar la página. El buscador conserva categoría, búsqueda, orden y vista durante la navegación dentro de la sesión de la página.
+El layout incluye `ClientRouter`. El menú y el buscador (`src/lib/ui/blog-search.ts`) se inicializan con `astro:page-load` y limpian sus eventos antes de reemplazar la página. El buscador conserva categoría, búsqueda, orden y vista durante la navegación dentro de la sesión de la página.
 
 ## RSS, sitemap y SEO
 
@@ -211,6 +218,8 @@ Después del build, comprueba en el preview:
 Estas comprobaciones las ejecuta el propietario. Generar el build no sustituye la revisión de las interacciones en el navegador.
 
 ## Colaboración y mantenimiento
+
+Consulta [CONTRIBUTING.md](CONTRIBUTING.md) para preparar contribuciones al sitio o al blog y seguir la convención de mensajes de commit.
 
 Consulta [AGENTS.md](AGENTS.md) antes de trabajar con un agente. Mantén este README y las instrucciones de agentes coherentes con el código. Cuando cambien de forma importante la arquitectura, tecnologías, alias, despliegue o flujo de trabajo, actualiza también `AGENTS.md` en la misma tarea.
 

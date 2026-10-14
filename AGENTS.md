@@ -2,6 +2,11 @@
 
 Estas instrucciones se aplican a todo el repositorio.
 
+## Contribuciones y mensajes de commit
+
+- Seguir [CONTRIBUTING.md](CONTRIBUTING.md) para preparar contribuciones y redactar commits.
+- Usar prefijos con inicial mayúscula, como `Fix:`, `Feature:` y `Docs:`, seguidos de una descripción breve en español. El ámbito es opcional: `Fix(search): corrige el estado sin resultados`. Conservar `Fix:` y `Feature:` en lugar de `fix:` y `feat:`.
+
 ## Ejecución de comandos y dependencias
 
 - El propietario ejecuta todos los comandos de `pnpm`. No ejecutes `pnpm install`, `pnpm add`, `pnpm update`, `pnpm remove`, `pnpm run`, `pnpm build`, `pnpm exec`, `pnpm dlx` ni otros comandos de pnpm.
@@ -21,8 +26,9 @@ Estas instrucciones se aplican a todo el repositorio.
 - `src/pages/` define las rutas; `src/components/` contiene componentes reutilizables y `src/layouts/` las plantillas.
 - La colección `blog` se define en `src/content.config.ts` y carga artículos desde `src/data/blog/`. Respeta el esquema del frontmatter y el filtro de borradores `draft`.
 - Las imágenes públicas se guardan en `public/`; los estilos globales, en `src/styles/global.css`.
-- Centraliza los textos ajenos al Markdown en `src/scripts/texts.ts`, dentro de `TEXTS_GENERAL`, agrupados por sección e importados mediante `@/scripts/texts`. Incluye interfaz, accesibilidad, metadatos, datos personales y mensajes; usa funciones para textos con parámetros. El contenido y frontmatter de los artículos permanecen en Markdown. Las URL, identificadores y valores técnicos siguen en los módulos de datos; no selecciones iconos ni comportamiento por etiquetas traducibles (los enlaces sociales usan `SocialLinkItem.id`). `TEXTS_GENERAL.locale` reúne el idioma del HTML y RSS y la configuración regional de fechas y búsqueda. No hay selección de idioma ni rutas internacionalizadas todavía.
-- Debes usar los alias definidos en `tsconfig.json` para los imports internos de `src/`, por ejemplo `@/components/`, `@/layouts/`, `@/scripts/`, `@/assets/` y `@/styles/`. No asumas que existe un alias genérico para cualquier ruta: usa los patrones configurados. En archivos que ejecuta Node fuera de Astro, como `astro.config.mjs`, usa rutas relativas compatibles con ese entorno. Respeta el estilo de los archivos que modifiques.
+- Centraliza los textos ajenos al Markdown en `src/lib/texts.ts`, dentro de `TEXTS_GENERAL`, agrupados por sección e importados mediante `@/lib/texts.ts`. Incluye interfaz, accesibilidad, metadatos, datos personales y mensajes; usa funciones para textos con parámetros. El contenido y frontmatter de los artículos permanecen en Markdown. No selecciones iconos ni comportamiento por etiquetas traducibles: los enlaces sociales usan `SocialLinkItem.id`.
+- Configuración de marca e idioma en `src/lib/site.ts` (`SITE_DATA`, `SITE_LOCALE`); páginas y orden de navegación en `src/lib/navigation.ts` (`SITE_PAGES`, `MAIN_NAVIGATION`); enlaces sociales, externos, del header y de licencia en `src/lib/links.ts`; habilidades y experiencia en `src/lib/profile.ts`. Importar cada módulo directamente. Los enlaces usan `id`, `label`, `href`; los metadatos usan `title`, `description`. Tipos separados en `src/lib/types/site.ts`, `profile.ts` y `blog.ts`; estos últimos derivan de la colección. Porcentajes numéricos en `percentage`; experiencia con `occupation` y `href`. No hay selección de idioma ni rutas internacionalizadas.
+- Debes usar los alias definidos en `tsconfig.json` para los imports internos de `src/`: `@/pages/`, `@/components/`, `@/layouts/`, `@/lib/`, `@/assets/` y `@/styles/`. Usa la extensión real explícita e importa el archivo concreto, sin barrels ni reexportaciones de conveniencia. No existen `@/scripts/`, `@/sections/` ni un alias genérico. En archivos que ejecuta Node fuera de Astro, como `astro.config.mjs`, usa rutas relativas compatibles con ese entorno. Respeta el estilo de los archivos que modifiques.
 
 ## Coherencia de la UI
 
@@ -36,7 +42,8 @@ Estas instrucciones se aplican a todo el repositorio.
 - El dominio se define una sola vez en la propiedad `site` de `astro.config.mjs`. Los componentes usan `Astro.site` y los endpoints usan `context.site` (o `site` al desestructurar el contexto); no dupliques el dominio en `SITE_DATA`. Mantén `site` configurado para generar canónicas, RSS y sitemap.
 - El sitemap usa `@astrojs/sitemap`; `src/pages/robots.txt.ts` y `src/layouts/BaseLayout.astro` apuntan a `/sitemap-index.xml`.
 - El RSS se genera en `src/pages/rss.xml.ts` con `@astrojs/rss` y se publica en `/rss.xml`. Mantén su título, descripción, idioma, fechas y enlaces coherentes con los datos del sitio y los artículos publicados.
-- Reutiliza `getPublishedPosts`, `getPublishedPostCards` y `getPostUrl` de `src/scripts/blog.ts` según corresponda. Conserva el filtro de `draft` y la coherencia de las URL entre portada, catálogo, artículos, RSS, canónicas y sitemap; no dupliques estas reglas en cada consumidor.
+- Reutiliza `getPublishedPosts` y `getPublishedPostCards` de `src/lib/blog/content.ts` para publicados y tarjetas; `getPostUrl`, `formatPostDate` y `formatReadTime` de `src/lib/blog/presentation.ts` para URL y presentación. `SITE_LOCALE` configura idioma del HTML, RSS, fechas y búsqueda; las fechas editoriales se muestran en UTC. El navegador usa `src/lib/ui/blog-search.ts`, conservando estado y limpieza de listeners en las transiciones.
+- El frontmatter usa `title`, `description`, `publishedAt`, `readTimeMinutes`, `category` e `image`; `updatedAt` es opcional. Las fechas se escriben como `YYYY-MM-DD` entre comillas y el esquema las convierte en `Date`. `readTimeMinutes` es un entero positivo: no guardar unidades ni textos y no volver a parsear una cadena de lectura. Formatear con `formatReadTime`; promedios y orden usan el número directamente. Mantener `publishedAt` para orden y RSS, y `updatedAt` para actualización visible. Conservar el filtro de `draft` y las URL existentes entre portada, catálogo, artículos, RSS, canónicas y sitemap.
 
 ## Mantenimiento de las instrucciones y documentación
 

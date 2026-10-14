@@ -1,5 +1,5 @@
 // Textos del sitio en español. El contenido y frontmatter del Markdown quedan fuera.
-// Las URL, identificadores y valores técnicos permanecen en sus módulos de datos.
+// Las URL, identificadores y valores técnicos viven en site.ts, navigation.ts, links.ts y profile.ts.
 export const TEXTS_GENERAL = {
     "site": {
         "pageTitle": (name: string, title: string) => `${name} | ${title}`,
@@ -87,19 +87,19 @@ export const TEXTS_GENERAL = {
     },
     "experience": {
         "gobierno": {
-            "ocupation": "Lider de Ciberseguridad",
+            "occupation": "Lider de Ciberseguridad",
             "description": "Administración de Firewalls de nueva generación. Configuración de VPN site-to-site y client-to-site. Monitoreo de sistemas EDR, XDR, SIEM, SEG y WAF. Investigación de eventos e incidentes de seguridad. Supervisión de proyectos de ciberseguridad e implementación de controles de seguridad.",
             "time": "Noviembre 2023 - Presente",
             "company": "Orgazación gubernamental"
         },
         "rooms31": {
-            "ocupation": "Practicante de Ciberseguridad",
+            "occupation": "Practicante de Ciberseguridad",
             "description": "Proyecto de grado de ingeniería: Pentest a servicios web en modalidad de caja gris. Pruebas de seguridad a dos APIs y dos interfaces web. Determinación de severidad de vulnerabilidades y su explotabilidad.",
             "time": "Enero 2023 - Abril 2023",
             "company": "31 Rooms"
         },
         "conexionesTI": {
-            "ocupation": "Practicante de Redes",
+            "occupation": "Practicante de Redes",
             "description": "Proyecto de grado de carrera técnica: Administración e instalación de enlaces inalámbricos mediante radiofrecuencias de un Proveedor de Servicios de Internet Inalámbrico. Administración de routers, access point, switches y antenas 5Ghz. Configuración enlaces inalámbricos punto-a-punto y punto-a-multipunto. Administración de redes LAN, WLAN y WAN.",
             "time": "Mayo 2021 - Agosto 2021",
             "company": "Conexiones TI"
@@ -130,6 +130,7 @@ export const TEXTS_GENERAL = {
         "quickLinks": "Enlaces Rápidos"
     },
     "post": {
+        "readTime": (minutes: number) => `${minutes} min`,
         "featured": "Destacado",
         "readMore": "Leer más",
         "share": "Compartir este artículo",
@@ -208,11 +209,6 @@ export const TEXTS_GENERAL = {
         },
         "avatarAlt": "Logo de la página, mi avatar",
         "skillsTitle": "Habilidades y Conocimientos"
-    },
-    "locale": {
-        "language": "es",
-        "format": "es-MX",
-        "rss": "es-mx"
     },
     "errors": {
         "canonicalSite": "Define site en astro.config.mjs para generar las URL canónicas.",

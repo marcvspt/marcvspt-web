@@ -1,7 +1,7 @@
 ---
-import { TEXTS_GENERAL } from "@/scripts/texts";
-import type { BlogPostCard } from '@/scripts/types';
-import { formatPostDate, getPostUrl, getReadTimeMinutes } from '@/scripts/blog';
+import { TEXTS_GENERAL } from "@/lib/texts.ts";
+import type { BlogPostCard } from '@/lib/types/blog.ts';
+import { formatPostDate, getPostUrl, formatReadTime } from '@/lib/blog/presentation.ts';
 
 interface Props {
   post: BlogPostCard;
@@ -23,8 +23,8 @@ const catalog = variant === 'catalog';
   data-category={catalog ? post.category : undefined}
   data-title={catalog ? post.title : undefined}
   data-tags={catalog ? post.tags.join(' ') : undefined}
-  data-date={catalog ? post.date.getTime() : undefined}
-  data-readtime={catalog ? getReadTimeMinutes(post.readTime) : undefined}
+  data-date={catalog ? post.publishedAt.getTime() : undefined}
+  data-readtime={catalog ? post.readTimeMinutes : undefined}
 >
   <div class="relative overflow-hidden">
     <img src={post.image} alt={post.title} class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -46,11 +46,11 @@ const catalog = variant === 'catalog';
   </div>
   <div class="p-6">
     <div class="flex items-center text-sm text-slate-400 mb-3">
-      <time datetime={post.date.toISOString()}>{formatPostDate(post.date)}</time>
-      <span class="mx-2">•</span><span>{post.readTime}</span>
+      <time datetime={post.publishedAt.toISOString()}>{formatPostDate(post.publishedAt)}</time>
+      <span class="mx-2">•</span><span>{formatReadTime(post.readTimeMinutes)}</span>
     </div>
     <h3 class:list={['text-xl font-bold text-white mb-3 transition-colors duration-300', highlighted ? 'group-hover:text-yellow-400' : 'group-hover:text-blue-400']}>{post.title}</h3>
-    <p class="text-slate-300 mb-4 line-clamp-3">{post.excerpt}</p>
+    <p class="text-slate-300 mb-4 line-clamp-3">{post.description}</p>
     {catalog && (
       <div class="flex flex-wrap gap-2 mb-4">
         {post.tags.slice(0, 2).map((tag) => <span class="px-2 py-1 bg-slate-700 text-slate-300 text-xs rounded-md">{tag}</span>)}

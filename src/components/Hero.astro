@@ -1,6 +1,6 @@
 ---
-import { TEXTS_GENERAL } from "@/scripts/texts";
-import { SITE_PAGES } from "@/scripts/data.js";
+import { TEXTS_GENERAL } from "@/lib/texts.ts";
+import { SITE_PAGES } from "@/lib/navigation.ts";
 ---
 
 <section
@@ -70,7 +70,7 @@ import { SITE_PAGES } from "@/scripts/data.js";
         </a>
 
         <a
-          href={SITE_PAGES.About.url}
+          href={SITE_PAGES.About.href}
           class="inline-flex items-center px-8 py-3 border-2 border-slate-600 text-slate-300 hover:border-blue-500 hover:text-blue-400 font-semibold rounded-lg transition-all duration-300"
         >
           {SITE_PAGES.About.title}

@@ -1,12 +1,9 @@
 ---
-import { TEXTS_GENERAL } from "@/scripts/texts";
-import {
-  SITE_DATA,
-  SITE_PAGES,
-  SOCIAL_DATA,
-  EXTERNAL_RESOURCES,
-  currentYear,
-} from "@/scripts/data.js";
+import { TEXTS_GENERAL } from "@/lib/texts.ts";
+import { SITE_DATA } from '@/lib/site.ts';
+import { SITE_PAGES, MAIN_NAVIGATION } from '@/lib/navigation.ts';
+import { SOCIAL_DATA, EXTERNAL_RESOURCES, LICENSE_LINK } from '@/lib/links.ts';
+const currentYear = new Date().getFullYear();
 
 import LinkedInIcon from "@/assets/linkedin.svg";
 import GitHubIcon from "@/assets/github.svg";
@@ -21,7 +18,7 @@ import XIcon from "@/assets/x.svg";
       <!-- Logo y descripción -->
       <div class="md:col-span-2">
         <a
-          href="/"
+          href={SITE_PAGES.Home.href}
           class="text-2xl font-bold bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
         >
           {SITE_DATA.name}
@@ -35,11 +32,11 @@ import XIcon from "@/assets/x.svg";
               return (
                 <a
                   id={`link-${social.id}`}
-                  href={social.url}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   class="text-slate-400 hover:text-blue-400 transition-colors duration-300"
-                  aria-label={social.name}
+                  aria-label={social.label}
                 >
                   {social.id === "linkedin" && <LinkedInIcon />}
                   {social.id === "github" && <GitHubIcon />}
@@ -58,14 +55,14 @@ import XIcon from "@/assets/x.svg";
         <h3 class="text-lg font-semibold text-white mb-4">{TEXTS_GENERAL.footer.quickLinks}</h3>
         <ul class="space-y-2">
           {
-            Object.values(SITE_PAGES).map((page) => {
+            MAIN_NAVIGATION.map((page) => {
               return (
                 <li>
                   <a
-                    href={page.url}
+                    href={page.href}
                     class="text-slate-400 hover:text-blue-400 transition-colors duration-300"
                   >
-                    {page.title}
+                    {page.label}
                   </a>
                 </li>
               );
@@ -83,12 +80,12 @@ import XIcon from "@/assets/x.svg";
               return (
                 <li>
                   <a
-                    href={resource.url}
+                    href={resource.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-slate-400 hover:text-blue-400 transition-colors duration-300"
                   >
-                    {resource.name}
+                    {resource.label}
                   </a>
                 </li>
               );
@@ -101,11 +98,11 @@ import XIcon from "@/assets/x.svg";
     <div class="border-t border-slate-800 mt-12 pt-8 text-center">
       <p class="text-slate-400">
         © {currentYear}. {TEXTS_GENERAL.footer.licenseIntro} <a
-          href="https://github.com/marcvspt/marcvspt-web/blob/master/LICENSE"
+          href={LICENSE_LINK.href}
           target="_blank"
           rel="noopener noreferrer"
           class="hover:text-secondary/90 transition duration-100 ease-in-out"
-          ><strong>{TEXTS_GENERAL.footer.licenseName}</strong></a
+          ><strong>{LICENSE_LINK.label}</strong></a
         >.
       </p>
     </div>

@@ -1,13 +1,13 @@
 ---
-import CardExperience from "./CardExperience.astro";
-import type { ProfessionalExperienceItem } from '@/scripts/types';
+import CardExperience from '@/components/CardExperience.astro';
+import type { ProfessionalExperienceItem } from '@/lib/types/profile.ts';
 
 interface Props extends ProfessionalExperienceItem {
     side: "left" | "right";
     delay: string;
 }
 
-const { ocupation, description, time, side, delay, company, link } =
+const { occupation, description, time, side, delay, company, href } =
     Astro.props as Props;
 
 const isLeft = side === "left";
@@ -35,11 +35,11 @@ const isLeft = side === "left";
         {
             !isLeft && (
                 <CardExperience
-                    ocupation={ocupation}
+                    occupation={occupation}
                     description={description}
                     time={time}
                     company={company}
-                    link={link}
+                    href={href}
                 />
             )
         }
@@ -58,11 +58,11 @@ const isLeft = side === "left";
         {
             isLeft && (
                 <CardExperience
-                    ocupation={ocupation}
+                    occupation={occupation}
                     description={description}
                     time={time}
                     company={company}
-                    link={link}
+                    href={href}
                 />
             )
         }

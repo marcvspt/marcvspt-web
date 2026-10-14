@@ -18,14 +18,11 @@
       "@/components/*": [
         "./src/components/*"
       ],
-      "@/sections/*": [
-        "./src/sections/*"
-      ],
       "@/assets/*": [
         "./src/assets/*"
       ],
-      "@/scripts/*": [
-        "./src/scripts/*"
+      "@/lib/*": [
+        "./src/lib/*"
       ],
       "@/styles/*": [
         "./src/styles/*"

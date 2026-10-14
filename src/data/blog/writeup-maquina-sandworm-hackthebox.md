@@ -1,8 +1,8 @@
 ---
 title: 'Writeup - Maquina "Sandworm" HackTheBox'
-excerpt: 'Resolución paso a paso de la maquina "Sandworm" de HackTheBox'
-date: '2023-07-18'
-readTime: '35 min'
+description: 'Resolución paso a paso de la maquina "Sandworm" de HackTheBox'
+publishedAt: '2023-07-18'
+readTimeMinutes: 35
 category: 'WriteUp'
 tags: [HackTheBox, PGP, GPG, GnuPG, Python, Linux]
 image: '/img/blog/writeups/sandworm/sandworm.webp'

@@ -1,10 +1,11 @@
 ---
-import { TEXTS_GENERAL } from "@/scripts/texts";
+import { TEXTS_GENERAL } from "@/lib/texts.ts";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import { formatPostDate } from "@/scripts/blog";
-import type { BlogPostFrontmatter } from "@/scripts/types";
+import { formatPostDate, formatReadTime } from '@/lib/blog/presentation.ts';
+import { SITE_PAGES } from '@/lib/navigation.ts';
+import type { BlogPostFrontmatter } from '@/lib/types/blog.ts';
 
 export interface Props {
   frontmatter: BlogPostFrontmatter;
@@ -13,10 +14,10 @@ export interface Props {
 const { frontmatter } = Astro.props as Props;
 const {
   title,
-  excerpt,
-  date,
-  updated,
-  readTime,
+  description,
+  publishedAt,
+  updatedAt,
+  readTimeMinutes,
   category,
   tags,
   image,
@@ -26,7 +27,7 @@ const {
 
 ---
 
-<BaseLayout title={TEXTS_GENERAL.post.pageTitle(title)} description={excerpt}>
+<BaseLayout title={TEXTS_GENERAL.post.pageTitle(title)} description={description}>
   <Header />
 
   <main class="pt-16">
@@ -38,17 +39,17 @@ const {
           <ol class="flex items-center space-x-2 text-sm text-slate-400">
             <li>
               <a
-                href="/"
+                href={SITE_PAGES.Home.href}
                 class="hover:text-blue-400 transition-colors duration-300"
-                >{TEXTS_GENERAL.pages.Home.title}</a
+                >{SITE_PAGES.Home.label}</a
               >
             </li>
             <li><span class="mx-2">/</span></li>
             <li>
               <a
-                href="/blog"
+                href={SITE_PAGES.Blog.href}
                 class="hover:text-blue-400 transition-colors duration-300"
-                >{TEXTS_GENERAL.pages.Blog.title}</a
+                >{SITE_PAGES.Blog.label}</a
               >
             </li>
             <li><span class="mx-2">/</span></li>
@@ -91,7 +92,7 @@ const {
           class="text-xl text-slate-300 mb-8 leading-relaxed animate-slide-up"
           style="animation-delay: 0.3s;"
         >
-          {excerpt}
+          {description}
         </p>
 
         <!-- Meta Information -->
@@ -113,13 +114,13 @@ const {
                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
               ></path>
             </svg>
-            <time datetime={date.toISOString()}
-              >{TEXTS_GENERAL.post.published} {formatPostDate(date)}</time
+            <time datetime={publishedAt.toISOString()}
+              >{TEXTS_GENERAL.post.published} {formatPostDate(publishedAt)}</time
             >
           </div>
 
           {
-            updated && (
+            updatedAt && (
               <div class="flex items-center gap-2">
                 <svg
                   class="w-5 h-5"
@@ -134,8 +135,8 @@ const {
                     d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
                   />
                 </svg>
-                <time datetime={updated.toISOString()}>
-                  {TEXTS_GENERAL.post.updated} {formatPostDate(updated)}
+                <time datetime={updatedAt.toISOString()}>
+                  {TEXTS_GENERAL.post.updated} {formatPostDate(updatedAt)}
                 </time>
               </div>
             )
@@ -154,11 +155,7 @@ const {
                 stroke-width="2"
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <span
-              >{
-                readTime /* TODO: agregar tiempos de lectura o cambiar atributo */
-              }</span
-            >
+            <span>{formatReadTime(readTimeMinutes)}</span>
           </div>
         </div>
 
@@ -244,7 +241,7 @@ const {
     <section class="bg-slate-900 py-12">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <a
-          href="/blog"
+          href={SITE_PAGES.Blog.href}
           class="inline-flex items-center px-6 py-3 bg-linear-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-white font-semibold rounded-lg transition-all duration-300 border border-slate-600 hover:border-blue-500/50"
         >
           <svg
@@ -269,7 +266,7 @@ const {
 </BaseLayout>
 
 <script>
-  import { TEXTS_GENERAL } from "@/scripts/texts";
+  import { TEXTS_GENERAL } from "@/lib/texts.ts";
   function initializeInteractivity() {
     // Copy link functionality
     const copyButton = document.querySelector(

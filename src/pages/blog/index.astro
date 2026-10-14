@@ -1,17 +1,17 @@
 ---
-import { TEXTS_GENERAL } from "@/scripts/texts";
+import { TEXTS_GENERAL } from "@/lib/texts.ts";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import PostCard from "@/components/PostCard.astro";
-import { SITE_PAGES } from "@/scripts/data.js";
-import { getPublishedPostCards, getReadTimeMinutes } from "@/scripts/blog";
+import { SITE_PAGES } from "@/lib/navigation.ts";
+import { getPublishedPostCards } from '@/lib/blog/content.ts';
 
 const processedPosts = await getPublishedPostCards();
 const categories = [...new Set(processedPosts.map((post) => post.category))];
 const totalPosts = processedPosts.length;
 const avgReadTime = totalPosts === 0 ? 0 : Math.round(
-  processedPosts.reduce((sum, post) => sum + getReadTimeMinutes(post.readTime), 0) / totalPosts,
+  processedPosts.reduce((sum, post) => sum + post.readTimeMinutes, 0) / totalPosts,
 );
 ---
 
@@ -230,5 +230,5 @@ const avgReadTime = totalPosts === 0 ? 0 : Math.round(
 </BaseLayout>
 
 <script>
-  import '@/scripts/blog-search';
+  import '@/lib/ui/blog-search.ts';
 </script>

@@ -1,8 +1,8 @@
 ---
-import { TEXTS_GENERAL } from "@/scripts/texts";
+import { TEXTS_GENERAL } from "@/lib/texts.ts";
 import "@/styles/global.css";
 
-import { SITE_DATA } from "@/scripts/data.js";
+import { SITE_DATA, SITE_LOCALE } from '@/lib/site.ts';
 
 import { ClientRouter } from "astro:transitions";
 
@@ -20,11 +20,11 @@ const {
 if (!Astro.site) {
   throw new Error(TEXTS_GENERAL.errors.canonicalSite);
 }
-const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
+const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang={TEXTS_GENERAL.locale.language} class="scroll-smooth">
+<html lang={SITE_LOCALE.html} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

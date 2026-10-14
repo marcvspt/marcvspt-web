@@ -1,8 +1,8 @@
 ---
 title: '(Deprecated) Instalar LibreWolf en ParrotOS y derivados de Debian'
-excerpt: 'Instalar LibreWolf en ParrotOS y derivados de Debian'
-date: '2023-05-03'
-readTime: '7 min'
+description: 'Instalar LibreWolf en ParrotOS y derivados de Debian'
+publishedAt: '2023-05-03'
+readTimeMinutes: 7
 category: 'Instalación'
 tags: [Web, Debian, Linux]
 image: '/img/blog/configs/librewolf/librewolf.webp'
