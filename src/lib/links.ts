@@ -28,6 +28,11 @@ export const HEADER_RESOURCES: LinkItem[] = [
     { id: 'cyber-events', label: TEXTS_GENERAL.header.cyberEvents, href: RESOURCE_URLS.cyberEvents },
 ];
 
+export const SUPPORT_LINKS: LinkItem[] = [
+    { id: 'buy-me-a-coffee', label: TEXTS_GENERAL.header.buyMeACoffee, href: 'https://buymeacoffee.com/marcvspt' },
+    { id: 'github-sponsors', label: TEXTS_GENERAL.header.githubSponsors, href: 'https://github.com/sponsors/marcvspt' },
+];
+
 export const LICENSE_LINK: LinkItem = {
     id: 'license',
     label: TEXTS_GENERAL.footer.licenseName,

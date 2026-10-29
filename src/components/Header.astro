@@ -3,6 +3,7 @@ import { TEXTS_GENERAL } from "@/lib/texts.ts";
 import { SITE_DATA } from '@/lib/site.ts';
 import { MAIN_NAVIGATION, SITE_PAGES } from '@/lib/navigation.ts';
 import { HEADER_RESOURCES } from '@/lib/links.ts';
+import SupportMenu from "@/components/SupportMenu.astro";
 ---
 
 <header
@@ -21,7 +22,7 @@ import { HEADER_RESOURCES } from '@/lib/links.ts';
       </div>
 
       <!-- Navigation -->
-      <nav class="hidden md:flex space-x-8">
+      <nav class="hidden lg:flex items-center gap-6">
         {
           MAIN_NAVIGATION.map((page) => {
             return (
@@ -44,10 +45,11 @@ import { HEADER_RESOURCES } from '@/lib/links.ts';
             {resource.label}
           </a>
         ))}
+        <SupportMenu />
       </nav>
 
       <!-- Mobile menu button -->
-      <div class="md:hidden">
+      <div class="lg:hidden">
         <button
           id="mobileMenuButton"
           type="button"
@@ -73,7 +75,7 @@ import { HEADER_RESOURCES } from '@/lib/links.ts';
     </div>
 
     <!-- Mobile menu -->
-    <div id="mobileMenu" class="hidden md:hidden pb-4">
+    <div id="mobileMenu" class="hidden lg:hidden pb-4">
       <div class="flex flex-col space-y-2">
         {
           MAIN_NAVIGATION.map((page) => {
@@ -87,6 +89,7 @@ import { HEADER_RESOURCES } from '@/lib/links.ts';
             );
           })
         }
+        <SupportMenu mobile />
       </div>
     </div>
   </div>
@@ -103,11 +106,46 @@ import { HEADER_RESOURCES } from '@/lib/links.ts';
     if (!button || !menu) return;
     controller = new AbortController();
     const { signal } = controller;
+    const supportMenus = Array.from(
+      document.querySelectorAll<HTMLDetailsElement>("[data-support-menu]"),
+    );
+    const closeSupportMenus = () => {
+      supportMenus.forEach((supportMenu) => (supportMenu.open = false));
+    };
     const setOpen = (open: boolean) => {
       menu.classList.toggle("hidden", !open);
       button.setAttribute("aria-expanded", String(open));
+      if (!open) closeSupportMenus();
     };
     setOpen(false);
+    supportMenus.forEach((supportMenu) => {
+      supportMenu.addEventListener(
+        "focusout",
+        (event) => {
+          if (
+            !(event.relatedTarget instanceof Node) ||
+            !supportMenu.contains(event.relatedTarget)
+          )
+            supportMenu.open = false;
+        },
+        { signal },
+      );
+      supportMenu.addEventListener(
+        "click",
+        (event) => {
+          if (event.target instanceof Element && event.target.closest("a")) {
+            supportMenu.open = false;
+            supportMenu.querySelector("summary")?.focus();
+          }
+        },
+        { signal },
+      );
+    });
+    window.matchMedia("(min-width: 64rem)").addEventListener(
+      "change",
+      () => setOpen(false),
+      { signal },
+    );
     button.addEventListener(
       "click",
       () => setOpen(button.getAttribute("aria-expanded") !== "true"),
@@ -116,7 +154,15 @@ import { HEADER_RESOURCES } from '@/lib/links.ts';
     document.addEventListener(
       "click",
       (event) => {
+        supportMenus.forEach((supportMenu) => {
+          if (
+            event.target instanceof Node &&
+            !supportMenu.contains(event.target)
+          )
+            supportMenu.open = false;
+        });
         if (
+          button.getAttribute("aria-expanded") === "true" &&
           event.target instanceof Node &&
           !button.contains(event.target) &&
           !menu.contains(event.target)
@@ -128,18 +174,26 @@ import { HEADER_RESOURCES } from '@/lib/links.ts';
     menu.addEventListener(
       "click",
       (event) => {
-        if (event.target instanceof Element && event.target.closest("a"))
+        if (event.target instanceof Element && event.target.closest("a")) {
           setOpen(false);
+          button.focus();
+        }
       },
       { signal },
     );
     document.addEventListener(
       "keydown",
       (event) => {
-        if (
-          event.key === "Escape" &&
-          button.getAttribute("aria-expanded") === "true"
-        ) {
+        if (event.key !== "Escape") return;
+        const openSupportMenu = supportMenus.find(
+          (supportMenu) => supportMenu.open,
+        );
+        if (openSupportMenu) {
+          openSupportMenu.open = false;
+          openSupportMenu.querySelector("summary")?.focus();
+          return;
+        }
+        if (button.getAttribute("aria-expanded") === "true") {
           setOpen(false);
           button.focus();
         }

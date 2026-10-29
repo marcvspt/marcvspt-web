@@ -15,6 +15,7 @@ Estas instrucciones se aplican a todo el repositorio.
 - No eludas esta regla usando npm, yarn, bun, npx, ejecutables directos o scripts equivalentes para realizar las tareas reservadas al propietario. No instales ni actualices herramientas o dependencias por tu cuenta.
 - Puedes explorar archivos, editar código y documentación, y realizar comprobaciones de solo lectura como `git diff --check`.
 - Al entregar cambios, distingue las comprobaciones realizadas de las pendientes. No afirmes que el build o las pruebas pasaron si no se ejecutaron; indica los comandos que debe ejecutar el propietario.
+- Las consultas SQL necesarias para actualizar la base de datos de producción deben entregarse directamente en el chat, en bloques de código SQL listos para copiar. No generes archivos para entregarlas.
 
 ## Contexto del proyecto
 
