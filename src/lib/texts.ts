@@ -121,7 +121,10 @@ export const TEXTS_GENERAL = {
     "header": {
         "menu": "Menú de navegación",
         "cyberThreat": "CyberThreat AI",
-        "cyberEvents": "CyberEvents MX"
+        "cyberEvents": "CyberEvents MX",
+        "support": "Apóyame",
+        "buyMeACoffee": "Buy Me a Coffee",
+        "githubSponsors": "GitHub Sponsors"
     },
     "footer": {
         "licenseIntro": "Este proyecto está licenciado bajo los términos de la",

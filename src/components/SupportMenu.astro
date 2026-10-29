@@ -1,0 +1,47 @@
+---
+import { TEXTS_GENERAL } from "@/lib/texts.ts";
+import { SUPPORT_LINKS } from "@/lib/links.ts";
+
+interface Props {
+  mobile?: boolean;
+}
+
+const { mobile = false } = Astro.props;
+---
+
+<details data-support-menu class="group relative">
+  <summary
+    class="flex w-fit cursor-pointer list-none items-center gap-2 rounded-sm py-2 text-slate-300 hover:text-blue-400 transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400 [&::-webkit-details-marker]:hidden"
+  >
+    {TEXTS_GENERAL.header.support}
+    <svg
+      class="h-4 w-4 transition-transform duration-300 group-open:rotate-180 motion-reduce:transition-none"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      aria-hidden="true"
+    >
+      <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </summary>
+  <ul
+    class:list={[
+      "rounded-xl border border-slate-700 bg-slate-900 p-2 shadow-lg shadow-black/20",
+      mobile ? "mt-2" : "absolute right-0 top-full mt-3 w-56",
+    ]}
+  >
+    {SUPPORT_LINKS.map((link) => (
+      <li>
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block rounded-lg px-3 py-3 text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-blue-400"
+        >
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</details>
