@@ -169,6 +169,8 @@ Usa los alias definidos en `tsconfig.json`: `@/pages/`, `@/components/`, `@/layo
 
 Los estilos globales se definen en `src/styles/global.css` mediante Tailwind CSS 4 (`@import`, `@theme` y `@plugin`). El contenido de los artículos utiliza Tailwind Typography; el recorte de las tarjetas usa `line-clamp-3`.
 
+El logo completo está en `src/assets/marcvspt.svg` y el icono independiente en `src/assets/marcvspt-icon.svg`. `BaseLayout.astro` importa el icono con `?url&no-inline` para usarlo como favicon: el build genera un archivo SVG con una URL que cambia al modificar su contenido, evitando reutilizar un favicon anterior en caché. `public/favicon.svg` conserva una copia para la ruta antigua; el HTML nuevo utiliza el icono importado. Los cambios requieren un nuevo build y despliegue.
+
 El layout incluye `ClientRouter`. El menú y el buscador (`src/lib/ui/blog-search.ts`) se inicializan con `astro:page-load` y limpian sus eventos antes de reemplazar la página. El buscador conserva categoría, búsqueda, orden y vista durante la navegación dentro de la sesión de la página.
 
 ## RSS, sitemap y SEO
