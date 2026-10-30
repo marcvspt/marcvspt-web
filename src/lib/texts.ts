@@ -120,7 +120,7 @@ export const TEXTS_GENERAL = {
     },
     "header": {
         "menu": "Menú de navegación",
-        "cyberThreat": "CyberThreat AI",
+        "adventsec": "AdventSec",
         "cyberEvents": "CyberEvents MX",
         "support": "Apóyame",
         "buyMeACoffee": "Buy Me a Coffee",

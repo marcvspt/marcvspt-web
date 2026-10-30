@@ -10,6 +10,7 @@ export const SOCIAL_DATA: SocialLinkItem[] = [
 ];
 
 const RESOURCE_URLS = {
+    adventsec: 'https://adventsec.com',
     cyberEvents: 'https://cemx.marcvspt.tech/',
     cyberThreat: 'https://ctai.marcvspt.tech/',
     oprp: 'https://oprp.marcvspt.tech/',
@@ -24,7 +25,7 @@ export const EXTERNAL_RESOURCES: LinkItem[] = [
 ];
 
 export const HEADER_RESOURCES: LinkItem[] = [
-    { id: 'cyber-threat', label: TEXTS_GENERAL.header.cyberThreat, href: RESOURCE_URLS.cyberThreat },
+    { id: 'adventsec', label: TEXTS_GENERAL.header.adventsec, href: RESOURCE_URLS.adventsec },
     { id: 'cyber-events', label: TEXTS_GENERAL.header.cyberEvents, href: RESOURCE_URLS.cyberEvents },
 ];
 
