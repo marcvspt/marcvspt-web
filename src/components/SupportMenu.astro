@@ -9,9 +9,20 @@ interface Props {
 const { mobile = false } = Astro.props;
 ---
 
-<details data-support-menu class="group relative">
+<details
+  data-support-menu
+  class:list={[
+    "group relative",
+    mobile && "w-full rounded-xl border border-blue-400/30 bg-blue-950/40 open:border-blue-400/50",
+  ]}
+>
   <summary
-    class="flex w-fit cursor-pointer list-none items-center gap-2 rounded-sm py-2 text-slate-300 hover:text-blue-400 transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400 [&::-webkit-details-marker]:hidden"
+    class:list={[
+      "flex cursor-pointer list-none items-center gap-2 font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-blue-300 [&::-webkit-details-marker]:hidden",
+      mobile
+        ? "min-h-12 w-full justify-between rounded-xl bg-linear-to-r from-blue-600/20 to-indigo-600/20 px-4 py-3 text-blue-100 hover:bg-blue-500/20 hover:text-white group-open:text-white focus-visible:-outline-offset-2"
+        : "w-fit rounded-lg border border-blue-400/50 bg-linear-to-r from-blue-600 to-indigo-600 px-3 py-2 text-sm text-white shadow-md shadow-blue-500/15 hover:from-blue-500 hover:to-indigo-500 group-open:from-blue-500 group-open:to-indigo-500 focus-visible:outline-offset-4",
+    ]}
   >
     {TEXTS_GENERAL.header.support}
     <svg
@@ -27,8 +38,9 @@ const { mobile = false } = Astro.props;
   </summary>
   <ul
     class:list={[
-      "rounded-xl border border-slate-700 bg-slate-900 p-2 shadow-lg shadow-black/20",
-      mobile ? "mt-2" : "absolute right-0 top-full mt-3 w-56",
+      mobile
+        ? "space-y-2 px-3 pb-3"
+        : "absolute right-0 top-full mt-3 w-56 space-y-2 rounded-xl border border-blue-400/25 bg-slate-900 p-2 shadow-lg shadow-black/20",
     ]}
   >
     {SUPPORT_LINKS.map((link) => (
@@ -37,7 +49,15 @@ const { mobile = false } = Astro.props;
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          class="block rounded-lg px-3 py-3 text-slate-300 hover:bg-slate-800 hover:text-blue-400 transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-blue-400"
+          class:list={[
+            "rounded-lg border transition-colors duration-300 focus-visible:outline-2",
+            link.id === "buy-me-a-coffee"
+              ? "border-amber-400/25 bg-amber-500/10 text-amber-100 hover:border-amber-400/60 hover:bg-amber-500/20 focus-visible:outline-amber-300"
+              : "border-pink-400/25 bg-pink-500/10 text-pink-100 hover:border-pink-400/60 hover:bg-pink-500/20 focus-visible:outline-pink-300",
+            mobile
+              ? "flex min-h-14 w-full items-center px-4 py-4"
+              : "block px-3 py-3",
+          ]}
         >
           {link.label}
         </a>

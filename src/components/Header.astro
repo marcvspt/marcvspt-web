@@ -4,6 +4,20 @@ import { SITE_DATA } from '@/lib/site.ts';
 import { MAIN_NAVIGATION, SITE_PAGES } from '@/lib/navigation.ts';
 import { HEADER_RESOURCES } from '@/lib/links.ts';
 import SupportMenu from "@/components/SupportMenu.astro";
+import BrandLogo from "@/assets/marcvspt.svg";
+import AdventSecIcon from "@/assets/adventsec.svg";
+
+const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isActivePage = (href: string) =>
+  pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
+const navigationLinkClass =
+  "rounded-lg border px-3 py-2 text-sm font-medium transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400";
+const navigationStateClass = (href: string) =>
+  isActivePage(href)
+    ? "border-blue-400/30 bg-blue-500/15 text-blue-200"
+    : "border-transparent text-slate-200 hover:border-blue-400/20 hover:bg-blue-500/10 hover:text-blue-300";
+const resourceLinkClass =
+  "inline-flex items-center gap-2 border-cyan-400/20 bg-cyan-500/5 text-cyan-200 hover:border-cyan-400/50 hover:bg-cyan-500/15 hover:text-cyan-100";
 ---
 
 <header
@@ -15,20 +29,22 @@ import SupportMenu from "@/components/SupportMenu.astro";
       <div class="shrink-0">
         <a
           href={SITE_PAGES.Home.href}
-          class="text-2xl font-bold bg-linear-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent hover:from-blue-300 hover:to-blue-500 transition-all duration-300"
+          aria-label={SITE_DATA.name}
+          class="inline-flex rounded-lg transition-opacity duration-300 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-400"
         >
-          {SITE_DATA.name}
+          <BrandLogo class="h-10 w-auto shrink-0" aria-hidden="true" focusable="false" />
         </a>
       </div>
 
       <!-- Navigation -->
-      <nav class="hidden lg:flex items-center gap-6">
+      <nav class="hidden lg:flex items-center gap-2 whitespace-nowrap">
         {
           MAIN_NAVIGATION.map((page) => {
             return (
               <a
                 href={page.href}
-                class="text-slate-300 hover:text-blue-400 transition-colors duration-300"
+                aria-current={pathname === page.href ? "page" : undefined}
+                class:list={[navigationLinkClass, navigationStateClass(page.href)]}
               >
                 {page.label}
               </a>
@@ -38,10 +54,16 @@ import SupportMenu from "@/components/SupportMenu.astro";
         {HEADER_RESOURCES.map((resource) => (
           <a
             href={resource.href}
-            class="text-slate-300 hover:text-blue-400 transition-colors duration-300"
+            class:list={[
+              navigationLinkClass,
+              resourceLinkClass,
+            ]}
             target="_blank"
             rel="noopener noreferrer"
           >
+            {resource.id === "adventsec" && (
+              <AdventSecIcon class="size-5 shrink-0" aria-hidden="true" focusable="false" />
+            )}
             {resource.label}
           </a>
         ))}
@@ -75,20 +97,38 @@ import SupportMenu from "@/components/SupportMenu.astro";
     </div>
 
     <!-- Mobile menu -->
-    <div id="mobileMenu" class="hidden lg:hidden pb-4">
+    <div id="mobileMenu" class="hidden lg:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto pb-4">
       <div class="flex flex-col space-y-2">
         {
           MAIN_NAVIGATION.map((page) => {
             return (
               <a
                 href={page.href}
-                class="text-slate-300 hover:text-blue-400 transition-colors duration-300 py-2"
+                aria-current={pathname === page.href ? "page" : undefined}
+                class:list={[
+                  navigationLinkClass,
+                  navigationStateClass(page.href),
+                  "flex min-h-12 items-center",
+                ]}
               >
                 {page.label}
               </a>
             );
           })
         }
+        {HEADER_RESOURCES.map((resource) => (
+          <a
+            href={resource.href}
+            class:list={[navigationLinkClass, resourceLinkClass, "min-h-12"]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {resource.id === "adventsec" && (
+              <AdventSecIcon class="size-5 shrink-0" aria-hidden="true" focusable="false" />
+            )}
+            {resource.label}
+          </a>
+        ))}
         <SupportMenu mobile />
       </div>
     </div>
@@ -122,6 +162,8 @@ import SupportMenu from "@/components/SupportMenu.astro";
       supportMenu.addEventListener(
         "focusout",
         (event) => {
+          // El panel móvil permanece expandido mientras se usa el menú.
+          if (menu.contains(supportMenu)) return;
           if (
             !(event.relatedTarget instanceof Node) ||
             !supportMenu.contains(event.relatedTarget)
@@ -156,6 +198,7 @@ import SupportMenu from "@/components/SupportMenu.astro";
       (event) => {
         supportMenus.forEach((supportMenu) => {
           if (
+            !menu.contains(supportMenu) &&
             event.target instanceof Node &&
             !supportMenu.contains(event.target)
           )
