@@ -6,6 +6,7 @@ import { HEADER_RESOURCES } from '@/lib/links.ts';
 import SupportMenu from "@/components/SupportMenu.astro";
 import BrandLogo from "@/assets/marcvspt.svg";
 import AdventSecIcon from "@/assets/adventsec.svg";
+import cyberEventsLogoUrl from "@/assets/cyberevents.svg?url&no-inline";
 
 const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const isActivePage = (href: string) =>
@@ -64,7 +65,15 @@ const resourceLinkClass =
             {resource.id === "adventsec" && (
               <AdventSecIcon class="size-5 shrink-0" aria-hidden="true" focusable="false" />
             )}
-            {resource.label}
+            {resource.id === "cyber-events" ? (
+              <img
+                src={cyberEventsLogoUrl}
+                alt={resource.label}
+                width="188"
+                height="36"
+                class="h-6 w-auto shrink-0"
+              />
+            ) : resource.label}
           </a>
         ))}
         <SupportMenu />
@@ -126,7 +135,15 @@ const resourceLinkClass =
             {resource.id === "adventsec" && (
               <AdventSecIcon class="size-5 shrink-0" aria-hidden="true" focusable="false" />
             )}
-            {resource.label}
+            {resource.id === "cyber-events" ? (
+              <img
+                src={cyberEventsLogoUrl}
+                alt={resource.label}
+                width="188"
+                height="36"
+                class="h-6 w-auto shrink-0"
+              />
+            ) : resource.label}
           </a>
         ))}
         <SupportMenu mobile />
