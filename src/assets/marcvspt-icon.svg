@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="marcvspt-icon-background" x1="5" y1="2" x2="39" y2="42" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172554" />
+      <stop offset="1" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="marcvspt-icon-accent" x1="10" y1="8" x2="35" y2="35" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#67e8f9" />
+      <stop offset="1" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+  <path d="M22 2.5 39 12.25v19.5L22 41.5 5 31.75v-19.5L22 2.5Z" fill="url(#marcvspt-icon-background)" stroke="url(#marcvspt-icon-accent)" stroke-width="1.5" />
+  <path d="M13 29V15l9 9 9-9v14" stroke="url(#marcvspt-icon-accent)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
