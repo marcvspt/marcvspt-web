@@ -25,7 +25,7 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang={SITE_LOCALE.html} class="scroll-smooth">
+<html lang={SITE_LOCALE.html} class="scroll-pt-20 motion-safe:scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,10 +33,18 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site).href;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE_DATA.name} href={new URL("rss.xml", Astro.site)} />
     <title>{TEXTS_GENERAL.site.pageTitle(SITE_DATA.name, title)}</title>
     <ClientRouter />
   </head>
   <body class="bg-slate-900 text-slate-100 font-sans antialiased">
+    <a
+      href="#main-content"
+      data-astro-reload
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-4 focus:z-60 focus:rounded-lg focus:bg-slate-900 focus:px-4 focus:py-2 focus:text-white"
+    >
+      {TEXTS_GENERAL.site.skipToContent}
+    </a>
     <slot />
   </body>
 </html>

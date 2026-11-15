@@ -4,7 +4,8 @@ export const TEXTS_GENERAL = {
     "site": {
         "pageTitle": (name: string, title: string) => `${name} | ${title}`,
         "name": "Marcvs Pt",
-        "description": "Blog dedicado a compartir mi conocimiento en tecnología, redes y ciberseguridad a partir de mi experiencia laboral, laboratorios y proyectos personales como especialista en cibergseuridad."
+        "description": "Blog dedicado a compartir mi conocimiento en tecnología, redes y ciberseguridad a partir de mi experiencia laboral, laboratorios y proyectos personales como especialista en ciberseguridad.",
+        "skipToContent": "Saltar al contenido principal"
     },
     "pages": {
         "Home": {
@@ -141,7 +142,9 @@ export const TEXTS_GENERAL = {
         "copyLink": "Copiar enlace",
         "updated": "Actualizado:",
         "published": "Publicado:",
-        "copied": "¡Copiado!",
+        "breadcrumb": "Ruta de navegación",
+        "copied": "Enlace copiado",
+        "copyFailed": "No se pudo copiar el enlace. Puedes copiarlo desde la barra de direcciones.",
         "readMoreLabel": (title: string) => `Leer más: ${title}`,
         "pageTitle": (title: string) => `Blog - ${title}`
     },
@@ -153,7 +156,8 @@ export const TEXTS_GENERAL = {
         },
         "search": {
             "placeholder": "Buscar artículos...",
-            "label": "Buscar artículos"
+            "label": "Buscar artículos",
+            "resultCount": (count: number) => count === 1 ? "1 artículo encontrado" : `${count} artículos encontrados`
         },
         "view": {
             "grid": "Vista en cuadrícula",
@@ -215,7 +219,6 @@ export const TEXTS_GENERAL = {
     },
     "errors": {
         "canonicalSite": "Define site en astro.config.mjs para generar las URL canónicas.",
-        "rssSite": "Define site en astro.config.mjs para generar el RSS.",
-        "clipboard": "Error copying to clipboard:"
+        "rssSite": "Define site en astro.config.mjs para generar el RSS."
     }
 } as const;

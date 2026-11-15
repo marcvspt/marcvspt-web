@@ -30,212 +30,216 @@ const {
 <BaseLayout title={TEXTS_GENERAL.post.pageTitle(title)} description={description}>
   <Header />
 
-  <main class="pt-16">
-    <!-- Hero Section -->
-    <article class="bg-linear-to-br from-slate-900 via-blue-900 to-slate-900">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <!-- Breadcrumb -->
-        <nav class="mb-8 animate-fade-in">
-          <ol class="flex items-center space-x-2 text-sm text-slate-400">
-            <li>
-              <a
-                href={SITE_PAGES.Home.href}
-                class="hover:text-blue-400 transition-colors duration-300"
-                >{SITE_PAGES.Home.label}</a
-              >
-            </li>
-            <li><span class="mx-2">/</span></li>
-            <li>
-              <a
-                href={SITE_PAGES.Blog.href}
-                class="hover:text-blue-400 transition-colors duration-300"
-                >{SITE_PAGES.Blog.label}</a
-              >
-            </li>
-            <li><span class="mx-2">/</span></li>
-            <li class="text-slate-300">{title}</li>
-          </ol>
-        </nav>
+  <main id="main-content" tabindex="-1" class="pt-16">
+    <article>
+      <header class="bg-linear-to-br from-slate-900 via-blue-900 to-slate-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <!-- Breadcrumb -->
+          <nav aria-label={TEXTS_GENERAL.post.breadcrumb} class="mb-8 animate-fade-in">
+            <ol class="flex flex-wrap items-center gap-2 text-sm text-slate-300">
+              <li>
+                <a
+                  href={SITE_PAGES.Home.href}
+                  class="hover:text-blue-300 transition-colors duration-300"
+                  >{SITE_PAGES.Home.label}</a
+                >
+              </li>
+              <li>
+                <span aria-hidden="true" class="mx-2">/</span>
+                <a
+                  href={SITE_PAGES.Blog.href}
+                  class="hover:text-blue-300 transition-colors duration-300"
+                  >{SITE_PAGES.Blog.label}</a
+                >
+              </li>
+              <li aria-current="page"><span aria-hidden="true" class="mx-2">/</span>{title}</li>
+            </ol>
+          </nav>
 
-        <!-- Category and Featured Badge -->
-        <div
-          class="flex items-center gap-3 mb-6 animate-slide-up"
-          style="animation-delay: 0.1s;"
-        >
-          <span
-            class="bg-blue-600/90 text-white px-4 py-2 rounded-full text-sm font-medium"
+          <!-- Category and Featured Badge -->
+          <div
+            class="flex items-center gap-3 mb-6 animate-slide-up"
+            style="animation-delay: 0.1s;"
           >
-            {category}
-          </span>
-          {
-            featured && (
-              <span class="bg-linear-to-r from-yellow-500 to-yellow-600 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                {TEXTS_GENERAL.post.featured}
-              </span>
-            )
-          }
-        </div>
-
-        <!-- Title -->
-        <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight animate-slide-up"
-          style="animation-delay: 0.2s;"
-        >
-          {title}
-        </h1>
-
-        <!-- Excerpt -->
-        <p
-          class="text-xl text-slate-300 mb-8 leading-relaxed animate-slide-up"
-          style="animation-delay: 0.3s;"
-        >
-          {description}
-        </p>
-
-        <!-- Meta Information -->
-        <div
-          class="flex flex-wrap items-center gap-6 text-slate-400 mb-8 animate-slide-up"
-          style="animation-delay: 0.4s;"
-        >
-          <div class="flex items-center gap-2">
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <span
+              class="bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              ></path>
-            </svg>
-            <time datetime={publishedAt.toISOString()}
-              >{TEXTS_GENERAL.post.published} {formatPostDate(publishedAt)}</time
-            >
+              {category}
+            </span>
+            {
+              featured && (
+                <span class="bg-yellow-500 text-yellow-950 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                  {TEXTS_GENERAL.post.featured}
+                </span>
+              )
+            }
           </div>
 
-          {
-            updatedAt && (
-              <div class="flex items-center gap-2">
-                <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                  />
-                </svg>
-                <time datetime={updatedAt.toISOString()}>
-                  {TEXTS_GENERAL.post.updated} {formatPostDate(updatedAt)}
-                </time>
-              </div>
-            )
-          }
+          <!-- Title -->
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight animate-slide-up"
+            style="animation-delay: 0.2s;"
+          >
+            {title}
+          </h1>
 
-          <div class="flex items-center gap-2">
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <span>{formatReadTime(readTimeMinutes)}</span>
-          </div>
-        </div>
+          <!-- Excerpt -->
+          <p
+            class="text-xl text-slate-300 mb-8 leading-relaxed animate-slide-up"
+            style="animation-delay: 0.3s;"
+          >
+            {description}
+          </p>
 
-        <!-- Tags -->
-        <div
-          class="flex flex-wrap gap-2 animate-slide-up"
-          style="animation-delay: 0.5s;"
-        >
-          {
-            /* TODO: agregar enlace para ver articulos con esos tags */
-            tags.map((tag) => (
-              <span class="px-3 py-1 bg-slate-800/60 border border-slate-700 text-slate-300 text-sm rounded-md hover:bg-slate-700/60 hover:border-blue-500/50 transition-all duration-300">
-                #{tag}
-              </span>
-            ))
-          }
-        </div>
-      </div>
-
-      <!-- Hero Image -->
-      <div
-        class="relative overflow-hidden animate-slide-up pb-16"
-        style="animation-delay: 0.6s;"
-      >
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-            <img
-              src={image}
-              alt={title}
-              class="w-full h-64 md:h-80 lg:h-96 object-cover"
-            />
-            <div
-              class="absolute inset-0 bg-linear-to-t from-slate-900/20 to-transparent"
-            >
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- Content -->
-    <section class="bg-slate-900 py-16">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          class="bg-slate-800/30 backdrop-blur-sm rounded-2xl border border-slate-700 p-8 md:p-12"
-        >
-          <!-- Markdown Content -->
-          <div class="prose prose-lg prose-invert max-w-none">
-            <slot />
-          </div>
-
-          <!-- Share Section -->
-          <div class="mt-16 pt-8 border-t border-slate-700">
-            <h3 class="text-xl font-semibold text-white mb-6">
-              {TEXTS_GENERAL.post.share}
-            </h3>
-            <div class="flex flex-wrap gap-4">
-              <button
-                class="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors duration-300"
+          <!-- Meta Information -->
+          <div
+            class="flex flex-wrap items-center gap-6 text-slate-300 mb-8 animate-slide-up"
+            style="animation-delay: 0.4s;"
+          >
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
-                  ></path>
-                </svg>
-                {TEXTS_GENERAL.post.copyLink}
-              </button>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                ></path>
+              </svg>
+              <time datetime={publishedAt.toISOString()}
+                >{TEXTS_GENERAL.post.published} {formatPostDate(publishedAt)}</time
+              >
+            </div>
+
+            {
+              updatedAt && (
+                <div class="flex items-center gap-2">
+                  <svg
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                    />
+                  </svg>
+                  <time datetime={updatedAt.toISOString()}>
+                    {TEXTS_GENERAL.post.updated} {formatPostDate(updatedAt)}
+                  </time>
+                </div>
+              )
+            }
+
+            <div class="flex items-center gap-2">
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>{formatReadTime(readTimeMinutes)}</span>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div
+            class="flex flex-wrap gap-2 animate-slide-up"
+            style="animation-delay: 0.5s;"
+          >
+            {
+              /* TODO: agregar enlace para ver articulos con esos tags */
+              tags.map((tag) => (
+                <span class="px-3 py-1 bg-slate-800/60 border border-slate-700 text-slate-300 text-sm rounded-md hover:bg-slate-700/60 hover:border-blue-500/50 transition-all duration-300">
+                  #{tag}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Hero Image -->
+        <div
+          class="relative overflow-hidden animate-slide-up pb-16"
+          style="animation-delay: 0.6s;"
+        >
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src={image}
+                alt=""
+                class="w-full h-64 md:h-80 lg:h-96 object-cover"
+              />
+              <div
+                class="absolute inset-0 bg-linear-to-t from-slate-900/20 to-transparent"
+              >
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </header>
+
+      <!-- Content -->
+      <section class="bg-slate-900 py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            class="bg-slate-800/30 backdrop-blur-sm rounded-2xl border border-slate-700 p-8 md:p-12"
+          >
+            <!-- Markdown Content -->
+            <div class="prose prose-lg prose-invert max-w-none">
+              <slot />
+            </div>
+
+            <!-- Share Section -->
+            <div class="mt-16 pt-8 border-t border-slate-700">
+              <h2 class="text-xl font-semibold text-white mb-6">
+                {TEXTS_GENERAL.post.share}
+              </h2>
+              <div class="flex flex-wrap items-center gap-4">
+                <button
+                  type="button"
+                  data-copy-link
+                  class="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors duration-300"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+                    ></path>
+                  </svg>
+                  {TEXTS_GENERAL.post.copyLink}
+                </button>
+                <p data-copy-status role="status" class="text-sm text-slate-300"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
 
     <!-- Back to Blog -->
     <section class="bg-slate-900 py-12">
@@ -267,63 +271,35 @@ const {
 
 <script>
   import { TEXTS_GENERAL } from "@/lib/texts.ts";
-  function initializeInteractivity() {
-    // Copy link functionality
-    const copyButton = document.querySelector(
-      'button:has(svg path[d*="M8.684"])',
-    );
+  let controller: AbortController | undefined;
 
-    if (copyButton && !copyButton.hasAttribute("data-listener-added")) {
-      copyButton.setAttribute("data-listener-added", "true");
+  function initializeCopyLink() {
+    controller?.abort();
+    const button = document.querySelector<HTMLButtonElement>("[data-copy-link]");
+    const status = document.querySelector<HTMLElement>("[data-copy-status]");
+    if (!button || !status) return;
 
-      copyButton.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(window.location.href);
+    controller = new AbortController();
+    const { signal } = controller;
+    let copying = false;
 
-          // Visual feedback
-          const originalText = copyButton.innerHTML;
-          copyButton.innerHTML = `
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            ${TEXTS_GENERAL.post.copied}
-          `;
+    button.addEventListener("click", async () => {
+      if (copying) return;
 
-          setTimeout(() => {
-            copyButton.innerHTML = originalText;
-          }, 2000);
-        } catch (err) {
-          console.error(TEXTS_GENERAL.errors.clipboard, err);
-        }
-      });
-    }
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      if (!anchor.hasAttribute("data-listener-added")) {
-        anchor.setAttribute("data-listener-added", "true");
-
-        anchor.addEventListener(
-          "click",
-          function (this: HTMLAnchorElement, e: Event) {
-            e.preventDefault();
-            const href = this.getAttribute("href") || "";
-            const target = document.querySelector(href);
-            if (target) {
-              target.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              });
-            }
-          },
-        );
+      copying = true;
+      status.textContent = "";
+      let message: string = TEXTS_GENERAL.post.copied;
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+      } catch {
+        message = TEXTS_GENERAL.post.copyFailed;
+      } finally {
+        copying = false;
       }
-    });
+      if (!signal.aborted) status.textContent = message;
+    }, { signal });
   }
 
-  // Ejecutar en carga inicial
-  document.addEventListener("DOMContentLoaded", initializeInteractivity);
-
-  // Ejecutar después de cada transición de vista
-  document.addEventListener("astro:page-load", initializeInteractivity);
+  document.addEventListener("astro:page-load", initializeCopyLink);
+  document.addEventListener("astro:before-swap", () => controller?.abort());
 </script>

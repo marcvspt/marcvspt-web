@@ -171,7 +171,7 @@ Los estilos globales se definen en `src/styles/global.css` mediante Tailwind CSS
 
 El logo completo está en `src/assets/marcvspt.svg` y el icono independiente en `src/assets/marcvspt-icon.svg`. `BaseLayout.astro` importa el icono con `?url&no-inline` para usarlo como favicon: el build genera un archivo SVG con una URL que cambia al modificar su contenido, evitando reutilizar un favicon anterior en caché. `public/favicon.svg` conserva una copia para la ruta antigua; el HTML nuevo utiliza el icono importado. Los cambios requieren un nuevo build y despliegue.
 
-El layout incluye `ClientRouter`. El menú y el buscador (`src/lib/ui/blog-search.ts`) se inicializan con `astro:page-load` y limpian sus eventos antes de reemplazar la página. El buscador conserva categoría, búsqueda, orden y vista durante la navegación dentro de la sesión de la página.
+El layout incluye `ClientRouter` y un enlace de teclado al contenido principal de cada página. El menú, el buscador (`src/lib/ui/blog-search.ts`) y el botón para copiar enlaces de artículos se inicializan con `astro:page-load` y limpian sus eventos antes de reemplazar la página. El buscador conserva categoría, búsqueda, orden y vista durante la navegación dentro de la sesión de la página.
 
 ## RSS, sitemap y SEO
 
@@ -183,7 +183,7 @@ El layout incluye `ClientRouter`. El menú y el buscador (`src/lib/ui/blog-searc
 
 El índice referencia archivos como `/sitemap-0.xml`. Las rutas de los artículos se generan con `getStaticPaths()` y excluyen borradores, por lo que estos tampoco se incluyen en el sitemap.
 
-`BaseLayout.astro` añade el enlace al sitemap y genera por defecto una URL canónica para cada página, incluidos los artículos, a partir del dominio y la ruta, sin parámetros de búsqueda. También permite indicar una canónica explícita mediante la prop `canonical`.
+`BaseLayout.astro` anuncia el sitemap y el RSS en el HTML para que los lectores de feeds puedan descubrir `/rss.xml`. Genera por defecto una URL canónica para cada página, incluidos los artículos, a partir del dominio y la ruta, sin parámetros de búsqueda. También permite indicar una canónica explícita mediante la prop `canonical`.
 
 Para modificar estas salidas, cambia los archivos de origen o la configuración y vuelve a generar el sitio. No edites los XML ni `robots.txt` dentro de `dist/`.
 
