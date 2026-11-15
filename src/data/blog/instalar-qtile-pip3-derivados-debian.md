@@ -6,6 +6,7 @@ readTimeMinutes: 5
 category: 'Instalación'
 tags: [Python3, pip3, Debian, Linux]
 image: '/img/blog/configs/qtile/customized.webp'
+thumbnail: '/img/blog/configs/qtile/customized-512.webp'
 featured: false
 ---
 

@@ -11,7 +11,7 @@ export interface Props {
   frontmatter: BlogPostFrontmatter;
 }
 
-const { frontmatter } = Astro.props as Props;
+const { frontmatter } = Astro.props;
 const {
   title,
   description,
@@ -27,7 +27,11 @@ const {
 
 ---
 
-<BaseLayout title={TEXTS_GENERAL.post.pageTitle(title)} description={description}>
+<BaseLayout
+  title={TEXTS_GENERAL.post.pageTitle(title)}
+  description={description}
+  article={{ headline: title, image, publishedAt, updatedAt }}
+>
   <Header />
 
   <main id="main-content" tabindex="-1" class="pt-16">

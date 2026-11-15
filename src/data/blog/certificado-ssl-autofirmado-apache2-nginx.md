@@ -6,6 +6,7 @@ readTimeMinutes: 34
 category: 'Configuración'
 tags: [HTTP, HTTPS, SSL, TLS, Web, Debian, Apache, Nginx, Linux]
 image: '/img/blog/configs/certssl/certssl.webp'
+thumbnail: '/img/blog/configs/certssl/certssl-512.webp'
 featured: true
 ---
 

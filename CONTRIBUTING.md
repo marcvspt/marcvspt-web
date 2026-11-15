@@ -7,18 +7,18 @@ Gracias por contribuir a Marcvspt Web, el sitio personal y blog técnico de Marc
 1. Consulta [README.md](README.md) para configurar el proyecto, [package.json](package.json) para los requisitos de Node.js y scripts disponibles y [AGENTS.md](AGENTS.md) para conocer sus convenciones técnicas.
 2. Si colaboras desde un fork, crea una rama para tu cambio y mantén cada contribución enfocada en un objetivo.
 3. Implementa el cambio siguiendo la estructura, los componentes y los estilos existentes.
-4. Para cambios de código, configuración o contenido publicado, ejecuta `pnpm build`. Si modificas la interfaz o el contenido, revisa también el resultado con `pnpm preview` en móvil y escritorio, incluyendo navegación por teclado. Los cambios únicamente de documentación no requieren una compilación.
+4. Para cambios de código o configuración, ejecuta `pnpm run check` con las dependencias indicadas en el README. Para cambios de código, configuración o contenido publicado, ejecuta `pnpm build`. Si modificas la interfaz o el contenido, revisa también el resultado con `pnpm preview` en móvil y escritorio, incluyendo navegación por teclado. Los cambios únicamente de documentación no requieren una compilación.
 5. Abre un pull request que explique qué cambia, por qué y cómo lo verificaste. Incluye capturas si modificas la interfaz y enlaza el issue relacionado cuando exista.
 
 Usa pnpm y conserva `pnpm-lock.yaml` y `pnpm-workspace.yaml` coherentes con las dependencias. No edites salidas generadas en `dist/`, `.astro/`, `.netlify/` ni dependencias en `node_modules/`. No incluyas archivos `.env`, credenciales ni datos personales en commits, capturas o registros.
 
-Cuando trabajes con un agente, el propietario ejecuta las instalaciones y los comandos del proyecto; el agente prepara los cambios e indica los comandos necesarios, según [AGENTS.md](AGENTS.md). Indica siempre qué comprobaste y qué quedó pendiente. Actualmente no hay scripts de test, lint ni check en `package.json`; la compilación no sustituye esas comprobaciones.
+Cuando trabajes con un agente, el propietario ejecuta las instalaciones y los comandos del proyecto. El agente prepara los cambios e indica los comandos necesarios, según [AGENTS.md](AGENTS.md). Indica siempre qué comprobaste y qué quedó pendiente. El script `check` ejecuta los diagnósticos de Astro y TypeScript.
 
 ## Convenciones del proyecto
 
 - Mantén la generación estática de Astro y la compatibilidad con el adaptador Netlify configurado. El contenido se publica al generar y desplegar de nuevo el sitio.
 - Los artículos viven en `src/data/blog/` y su esquema está en `src/content.config.ts`. Usa nombres descriptivos en minúsculas y separados por guiones; el nombre determina la URL del artículo.
-- Cada artículo requiere `title`, `description`, `publishedAt`, `readTimeMinutes`, `category` e `image`. Usa fechas `YYYY-MM-DD` entre comillas y minutos como entero positivo (`readTimeMinutes: 5`); `updatedAt`, `tags` y `featured` son opcionales.
+- Cada artículo requiere `title`, `description`, `publishedAt`, `readTimeMinutes`, `category` e `image`. Usa fechas `YYYY-MM-DD` entre comillas y minutos como entero positivo (`readTimeMinutes: 5`). `updatedAt`, `tags`, `featured` y `thumbnail` son opcionales.
 - Usa `draft: true` mientras preparas el artículo. Los borradores quedan fuera de portada, catálogo, rutas, RSS y sitemap, y no tienen página de previsualización. Omitir `draft` publica el artículo; los archivos cuyo nombre empieza por `_` no entran en la colección.
 - Guarda las imágenes en `public/img/` y usa rutas públicas desde `/img/` en el frontmatter. Revisa portadas, enlaces y bloques de código al editar contenido técnico.
 - Reutiliza `src/lib/blog/content.ts` para seleccionar publicados y ordenar fechas; `src/lib/blog/presentation.ts` para construir URL y formatear fechas y lectura. Los tipos derivan de la colección en `src/lib/types/blog.ts`. El dominio se define en `site` de `astro.config.mjs`; evita duplicarlo en los datos del sitio.
@@ -30,7 +30,7 @@ Cuando trabajes con un agente, el propietario ejecuta las instalaciones y los co
 - **Artículos:** revisa frontmatter, portada, Markdown, enlaces, fechas y aparición en portada y catálogo. Comprueba la exclusión de borradores y el comportamiento de destacados.
 - **Buscador y catálogo:** combina búsqueda, categorías, orden y vista de lista o cuadrícula; revisa el estado sin resultados y el regreso desde un artículo.
 - **Interfaz:** revisa inicio, página personal, catálogo y artículo en móvil y escritorio. Comprueba menú móvil, cierre con Escape y navegación por teclado.
-- **RSS y SEO:** tras el build, revisa `/rss.xml`, `/robots.txt`, `/sitemap-index.xml`, sus XML referenciados, metadatos y canónicas. Los borradores deben permanecer excluidos.
+- **RSS y SEO:** tras el build, revisa `/rss.xml`, `/robots.txt`, `/sitemap-index.xml`, sus XML referenciados, canónicas, Open Graph y JSON-LD de los artículos. Los borradores deben permanecer excluidos.
 
 Actualiza [README.md](README.md) si cambian la configuración o las instrucciones del blog, y [AGENTS.md](AGENTS.md) si cambian las convenciones, la arquitectura o el flujo de trabajo.
 

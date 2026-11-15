@@ -1,11 +1,12 @@
 import { SITE_LOCALE } from '@/lib/site.ts';
 import { TEXTS_GENERAL } from '@/lib/texts.ts';
-export type SortOrder = 'date-desc' | 'date-asc' | 'title-asc' | 'title-desc' | 'readtime-asc' | 'readtime-desc';
+import { BLOG_SORT_OPTIONS, type BlogSortOption } from '@/lib/blog/sort.ts';
+
 type View = 'grid' | 'list';
 interface SearchState {
     category: string | null;
     search: string;
-    sort: SortOrder;
+    sort: BlogSortOption;
     view: View;
 }
 interface SearchPost {
@@ -17,11 +18,12 @@ interface SearchPost {
     readTime: number;
 }
 
-const sortOrders: readonly SortOrder[] = ['date-desc', 'date-asc', 'title-asc', 'title-desc', 'readtime-asc', 'readtime-desc'];
-function isSortOrder(value: string): value is SortOrder {
-    return sortOrders.some((order) => order === value);
+function normalizeSearch(value: string): string {
+    return value.toLocaleLowerCase(SITE_LOCALE.sort).normalize('NFD')
+        .replace(/n\u0303|\p{M}/gu, (mark) => mark === 'n\u0303' ? 'ñ' : '')
+        .trim();
 }
-const state: SearchState = { category: null, search: '', sort: 'date-desc', view: 'grid' };
+const state: SearchState = { category: null, search: '', sort: BLOG_SORT_OPTIONS[0], view: 'grid' };
 let controller: AbortController | undefined;
 
 function initializeSearch() {
@@ -42,13 +44,15 @@ function initializeSearch() {
         element,
         category: element.dataset.category ?? '',
         title: element.dataset.title ?? '',
-        searchText: `${element.dataset.title ?? ''} ${element.dataset.tags ?? ''}`.toLocaleLowerCase(SITE_LOCALE.sort),
+        searchText: normalizeSearch([
+            element.dataset.title, element.dataset.description, element.dataset.category, element.dataset.tags,
+        ].join(' ')),
         date: Number(element.dataset.date) || 0,
         readTime: Number(element.dataset.readtime) || 0,
     }));
     if (!filters.some((button) => button.getAttribute('data-category') === state.category)) state.category = null;
     input.value = state.search;
-    sort.value = state.sort;
+    sort.value = state.sort.value;
 
     function updateFilters() {
         filters.forEach((button) => {
@@ -60,12 +64,6 @@ function initializeSearch() {
     function updateView() {
         if (!container || !grid || !list) return;
         const isGrid = state.view === 'grid';
-        container.classList.toggle('grid', isGrid);
-        container.classList.toggle('grid-cols-1', isGrid);
-        container.classList.toggle('md:grid-cols-2', isGrid);
-        container.classList.toggle('lg:grid-cols-3', isGrid);
-        container.classList.toggle('gap-8', isGrid);
-        container.classList.toggle('space-y-6', !isGrid);
         container.dataset.view = state.view;
         grid.setAttribute('aria-pressed', String(isGrid));
         list.setAttribute('aria-pressed', String(!isGrid));
@@ -74,29 +72,20 @@ function initializeSearch() {
     function render({ reorder = false, announce = false } = {}) {
         if (!container || !noResults || !status) return;
         if (reorder) {
-            posts.sort((a, b) => {
-                switch (state.sort) {
-                    case 'date-asc': return a.date - b.date;
-                    case 'date-desc': return b.date - a.date;
-                    case 'title-asc': return a.title.localeCompare(b.title, SITE_LOCALE.sort);
-                    case 'title-desc': return b.title.localeCompare(a.title, SITE_LOCALE.sort);
-                    case 'readtime-asc': return a.readTime - b.readTime;
-                    case 'readtime-desc': return b.readTime - a.readTime;
-                }
-            });
+            posts.sort(state.sort.compare);
             const fragment = document.createDocumentFragment();
             posts.forEach((post) => fragment.append(post.element));
             container.append(fragment);
         }
-        const query = state.search.trim().toLocaleLowerCase(SITE_LOCALE.sort);
+        const query = normalizeSearch(state.search);
         let visible = 0;
         posts.forEach((post) => {
             const matches = (state.category === null || state.category === post.category) && post.searchText.includes(query);
             post.element.hidden = !matches;
             if (matches) visible++;
         });
-        noResults.classList.toggle('hidden', visible > 0);
-        container.classList.toggle('hidden', visible === 0);
+        noResults.hidden = visible > 0;
+        container.hidden = visible === 0;
         if (announce) {
             const message = visible === 0 ? TEXTS_GENERAL.blog.empty.title : TEXTS_GENERAL.blog.search.resultCount(visible);
             if (status.textContent !== message) status.textContent = message;
@@ -105,9 +94,9 @@ function initializeSearch() {
 
     input.addEventListener('input', () => { state.search = input.value; render({ announce: true }); }, { signal });
     sort.addEventListener('change', () => {
-        const value = sort.value;
-        if (isSortOrder(value)) {
-            state.sort = value;
+        const option = BLOG_SORT_OPTIONS.find(({ value }) => value === sort.value);
+        if (option) {
+            state.sort = option;
             render({ reorder: true });
         }
     }, { signal });

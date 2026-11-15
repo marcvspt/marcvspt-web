@@ -6,6 +6,7 @@ readTimeMinutes: 7
 category: 'Instalación'
 tags: [Web, Debian, Linux]
 image: '/img/blog/configs/librewolf/librewolf.webp'
+thumbnail: '/img/blog/configs/librewolf/librewolf-512.webp'
 featured: false
 ---
 

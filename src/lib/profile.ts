@@ -16,7 +16,7 @@ export const SKILLS: Skill[] = [
 ];
 
 export const PROFESSIONAL_EXPERIENCE: ProfessionalExperience = {
-    gobierno: { ...TEXTS_GENERAL.experience.gobierno, href: '#' },
+    gobierno: { ...TEXTS_GENERAL.experience.gobierno },
     rooms31: { ...TEXTS_GENERAL.experience.rooms31, href: 'https://31rooms.com/' },
     conexionesTI: { ...TEXTS_GENERAL.experience.conexionesTI, href: 'https://www.conexionesti.com/' },
 };
