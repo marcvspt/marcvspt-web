@@ -41,11 +41,14 @@ El servidor de desarrollo usa normalmente `http://localhost:4321`; consulta la d
 | --- | --- |
 | `pnpm install` | Instalar las dependencias del proyecto |
 | `pnpm run dev` | Iniciar el servidor de desarrollo |
+| `pnpm run check` | Comprobar tipos y diagnósticos de archivos Astro y TypeScript |
 | `pnpm run build` | Generar la salida de producción en `dist/` |
 | `pnpm run preview` | Revisar localmente el último build; requiere generarlo primero |
 | `pnpm run astro --help` | Consultar los comandos de la CLI de Astro |
 
 **Trabajo con agentes:** el propietario ejecuta todos los comandos de pnpm y las instalaciones. Los agentes indican qué ejecutar y para qué, sin usar otras herramientas para eludir esa regla. Las instrucciones completas están en [AGENTS.md](AGENTS.md).
+
+Si la copia todavía no incluye las dependencias de `check`, el propietario las añade desde la raíz con `pnpm add -D -E @astrojs/check@0.9.12 typescript@5.9.2`. Esto actualiza el manifiesto y el lockfile.
 
 ## Estructura del proyecto
 
@@ -80,7 +83,8 @@ El servidor de desarrollo usa normalmente `http://localhost:4321`; consulta la d
 │   │   ├── types/           # Contratos de sitio, perfil y blog
 │   │   ├── blog/
 │   │   │   ├── content.ts   # Artículos publicados y datos de tarjetas
-│   │   │   └── presentation.ts # URL y formato de fechas y lectura
+│   │   │   ├── presentation.ts # URL y formato de fechas y lectura
+│   │   │   └── sort.ts      # Opciones y comparadores del catálogo
 │   │   └── ui/blog-search.ts # Búsqueda, filtros, orden y vista del catálogo
 │   ├── styles/global.css    # Tailwind, Typography y estilos compartidos
 │   └── content.config.ts   # Colección y esquema del blog
@@ -96,9 +100,9 @@ El árbol resume los archivos principales. `dist/`, `.astro/` y `node_modules/` 
 
 ## Textos del sitio
 
-Los textos ajenos al Markdown se centralizan en `src/lib/texts.ts`, dentro de `TEXTS_GENERAL`, agrupados por sección. Incluye textos de interfaz, accesibilidad, metadatos, datos personales y mensajes del navegador. Para cambiarlos o añadirlos, edita ese catálogo e impórtalo mediante `@/lib/texts.ts`. Los textos con parámetros usan funciones, como `TEXTS_GENERAL.post.readMoreLabel(title)` y `TEXTS_GENERAL.post.readTime(minutes)`.
+Los textos ajenos al Markdown se centralizan en `src/lib/texts.ts`, dentro de `TEXTS_GENERAL`, agrupados por sección. Incluye textos de interfaz, accesibilidad, metadatos, datos personales y mensajes del navegador. Para cambiarlos o añadirlos, edita ese catálogo e impórtalo mediante `@/lib/texts.ts`. Los textos con parámetros usan funciones, como `TEXTS_GENERAL.post.readTime(minutes)`.
 
-Las URL e identificadores viven en `src/lib/navigation.ts` y `src/lib/links.ts`; las habilidades y experiencia, en `src/lib/profile.ts`. Los enlaces usan el contrato `id`, `label`, `href`; los metadatos de página usan `title`, `description`. Los iconos sociales se seleccionan mediante un `id` estable, independiente de su etiqueta. Los porcentajes son números (`percentage`), y el símbolo `%` se añade al renderizar. La experiencia usa `occupation` y `href`.
+Las URL e identificadores viven en `src/lib/navigation.ts` y `src/lib/links.ts`; las habilidades y experiencia, en `src/lib/profile.ts`. Los enlaces usan el contrato `id`, `label`, `href`; los metadatos de página usan `title`, `description`. Los iconos sociales se seleccionan mediante un `id` estable, independiente de su etiqueta. Los porcentajes son números (`percentage`), y el símbolo `%` se añade al renderizar. En la experiencia, usa `occupation` y añade `href` si hay un sitio que enlazar.
 
 `SITE_LOCALE` en `src/lib/site.ts` reúne el idioma del HTML y RSS y la configuración regional de fechas y búsqueda. Las fechas editoriales se muestran en UTC para conservar su día. Todavía no hay selección de idioma ni rutas por idioma. El contenido y frontmatter de los artículos siguen en Markdown y quedan fuera del catálogo. Los tipos del blog derivan de la colección, según el patrón de [colecciones de Astro](https://docs.astro.build/en/guides/content-collections/).
 
@@ -117,6 +121,7 @@ readTimeMinutes: 5
 category: 'Linux'
 tags: ['Linux', 'Redes', 'Seguridad']
 image: '/img/blog/linux/configurar-firewall-linux/portada.webp'
+thumbnail: '/img/blog/linux/configurar-firewall-linux/portada-512.webp'
 featured: false
 draft: true
 ---
@@ -139,18 +144,19 @@ El esquema se define en [src/content.config.ts](src/content.config.ts).
 | `readTimeMinutes` | Entero positivo | Sí | Tiempo de lectura manual en minutos, por ejemplo `5` |
 | `category` | Texto | Sí | Categoría usada en tarjetas y filtros |
 | `tags` | Lista de textos | No | Etiquetas; por defecto `[]` |
-| `image` | Texto | Sí | Ruta pública de la imagen de portada |
+| `image` | Texto | Sí | Ruta pública de la portada para el artículo y los metadatos sociales |
+| `thumbnail` | Texto | No | Ruta pública de la miniatura de las tarjetas. Si falta, se usa la portada |
 | `featured` | Booleano | No | Destacar en la portada; por defecto `false` |
 | `draft` | Booleano | No | Excluir de la publicación; por defecto `false` |
 
-Guarda la portada del ejemplo en `public/img/blog/linux/configurar-firewall-linux/portada.webp`. En el frontmatter, la URL empieza en `/img/`, sin el prefijo `public/`.
+Guarda la portada del ejemplo en `public/img/blog/linux/configurar-firewall-linux/portada.webp`. En el frontmatter, la URL empieza en `/img/`, sin el prefijo `public/`. Si la portada pesa más de lo necesario para una tarjeta, exporta una versión WebP de unos 512 px de ancho y enlázala en `thumbnail`.
 
 ### Borradores y publicación
 
 - Usa `draft: true` mientras preparas el artículo. Los borradores no aparecen en la portada, el catálogo, las rutas de artículos, el RSS ni el sitemap; tampoco tienen una página de previsualización en desarrollo.
 - Cambia a `draft: false` cuando esté listo. Si omites el campo, el artículo se considera publicado.
 - Los archivos cuyo nombre empieza por `_` quedan fuera de la colección por el patrón del loader.
-- Usa `featured: true` para incluirlo entre los destacados. La portada muestra hasta tres artículos recientes y hasta tres destacados, ordenados por fecha de publicación.
+- Usa `featured: true` para marcar un artículo como destacado. La portada muestra hasta tres recientes por fecha de publicación y hasta tres destacados adicionales que no aparezcan entre los recientes.
 - Para una actualización, puedes añadir `updatedAt: '2026-10-02'`. El orden del blog y la fecha de publicación del RSS siguen usando `publishedAt`.
 
 Publicar o actualizar contenido requiere generar y desplegar de nuevo el sitio.
@@ -169,9 +175,11 @@ Usa los alias definidos en `tsconfig.json`: `@/pages/`, `@/components/`, `@/layo
 
 Los estilos globales se definen en `src/styles/global.css` mediante Tailwind CSS 4 (`@import`, `@theme` y `@plugin`). El contenido de los artículos utiliza Tailwind Typography; el recorte de las tarjetas usa `line-clamp-3`.
 
+La fuente `font-sans` usa el subconjunto latino de Inter servido desde `public/fonts/`, con respaldo de la tipografía del sistema. La licencia de la fuente se incluye en [OFL-Inter.txt](public/fonts/OFL-Inter.txt).
+
 El logo completo está en `src/assets/marcvspt.svg` y el icono independiente en `src/assets/marcvspt-icon.svg`. `BaseLayout.astro` importa el icono con `?url&no-inline` para usarlo como favicon: el build genera un archivo SVG con una URL que cambia al modificar su contenido, evitando reutilizar un favicon anterior en caché. `public/favicon.svg` conserva una copia para la ruta antigua; el HTML nuevo utiliza el icono importado. Los cambios requieren un nuevo build y despliegue.
 
-El layout incluye `ClientRouter` y un enlace de teclado al contenido principal de cada página. El menú, el buscador (`src/lib/ui/blog-search.ts`) y el botón para copiar enlaces de artículos se inicializan con `astro:page-load` y limpian sus eventos antes de reemplazar la página. El buscador conserva categoría, búsqueda, orden y vista durante la navegación dentro de la sesión de la página.
+El layout incluye `ClientRouter` y un enlace de teclado al contenido principal de cada página. El menú móvil se abre con `details` y `summary`. El cierre con Escape, el buscador y el botón para copiar enlaces de artículos se inicializan con `astro:page-load` y limpian sus eventos antes de reemplazar la página. El buscador consulta título, descripción, categoría y etiquetas sin exigir tildes. Conserva categoría, búsqueda, orden y vista durante la navegación dentro de la sesión de la página. Las opciones de orden se definen en `src/lib/blog/sort.ts`.
 
 ## RSS, sitemap y SEO
 
@@ -184,6 +192,8 @@ El layout incluye `ClientRouter` y un enlace de teclado al contenido principal d
 El índice referencia archivos como `/sitemap-0.xml`. Las rutas de los artículos se generan con `getStaticPaths()` y excluyen borradores, por lo que estos tampoco se incluyen en el sitemap.
 
 `BaseLayout.astro` anuncia el sitemap y el RSS en el HTML para que los lectores de feeds puedan descubrir `/rss.xml`. Genera por defecto una URL canónica para cada página, incluidos los artículos, a partir del dominio y la ruta, sin parámetros de búsqueda. También permite indicar una canónica explícita mediante la prop `canonical`.
+
+El layout publica metadatos Open Graph para compartir enlaces. Los artículos usan su portada y añaden datos estructurados `BlogPosting` con su autor y fechas.
 
 Para modificar estas salidas, cambia los archivos de origen o la configuración y vuelve a generar el sitio. No edites los XML ni `robots.txt` dentro de `dist/`.
 
@@ -211,11 +221,11 @@ El preview sirve para revisar el build local; el despliegue se realiza desde el 
 Después del build, comprueba en el preview:
 
 - Inicio, página personal, catálogo y artículos publicados.
-- Menú móvil al navegar entre páginas, cierre con Escape y estado del botón.
-- Búsqueda combinada con categorías, orden y alternancia entre lista y cuadrícula; regreso al catálogo tras abrir un artículo y estado sin resultados.
+- Menú móvil al navegar entre páginas, apertura con y sin JavaScript, cierre con Escape y devolución del foco al control de apertura.
+- Búsqueda con y sin tildes, filtros combinados, orden, lista y cuadrícula, regreso al catálogo desde un artículo y estado sin resultados.
 - Fechas, etiquetas, destacados y exclusión de borradores.
 - `/rss.xml`, `/robots.txt`, `/sitemap-index.xml` y los XML referenciados por el índice.
-- Metadatos y URL canónicas en el HTML de las páginas y artículos.
+- URL canónicas, etiquetas Open Graph y JSON-LD `BlogPosting` en el HTML correspondiente.
 
 Estas comprobaciones las ejecuta el propietario. Generar el build no sustituye la revisión de las interacciones en el navegador.
 

@@ -6,6 +6,7 @@ readTimeMinutes: 6
 category: 'Errores'
 tags: [Tor, Web, Linux]
 image: '/img/blog/solutions/torbrowser/torbrowser.webp'
+thumbnail: '/img/blog/solutions/torbrowser/torbrowser-512.webp'
 featured: false
 ---
 

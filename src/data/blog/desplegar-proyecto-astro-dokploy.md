@@ -6,6 +6,7 @@ readTimeMinutes: 12
 category: 'Infraestructura'
 tags: [Astro, Dokploy, Cloud, VPS, Infraestructura, Deploy, Railpack, SSR, SSG]
 image: '/img/blog/infraestructura/astro-dokploy/astro-dokploy.webp'
+thumbnail: '/img/blog/infraestructura/astro-dokploy/astro-dokploy-512.webp'
 featured: true
 ---
 

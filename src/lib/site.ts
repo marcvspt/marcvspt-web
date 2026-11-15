@@ -11,5 +11,6 @@ export const SITE_LOCALE = {
     date: 'es-MX',
     sort: 'es-MX',
     rss: 'es-mx',
+    openGraph: 'es_MX',
     timeZone: 'UTC',
 } as const;

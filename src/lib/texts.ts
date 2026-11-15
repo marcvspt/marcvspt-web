@@ -88,10 +88,10 @@ export const TEXTS_GENERAL = {
     },
     "experience": {
         "gobierno": {
-            "occupation": "Lider de Ciberseguridad",
+            "occupation": "Líder de Ciberseguridad",
             "description": "Administración de Firewalls de nueva generación. Configuración de VPN site-to-site y client-to-site. Monitoreo de sistemas EDR, XDR, SIEM, SEG y WAF. Investigación de eventos e incidentes de seguridad. Supervisión de proyectos de ciberseguridad e implementación de controles de seguridad.",
             "time": "Noviembre 2023 - Presente",
-            "company": "Orgazación gubernamental"
+            "company": "Organización gubernamental"
         },
         "rooms31": {
             "occupation": "Practicante de Ciberseguridad",
@@ -107,13 +107,11 @@ export const TEXTS_GENERAL = {
         }
     },
     "home": {
-        "description": "Explorando ideas, compartiendo conocimiento y creando conexiones a través de experiencias e investigaciones.",
-        "explore": "Explorar Posts",
-        "welcome": "Bienvenido a",
-        "title": "Mi Blog",
+        "description": "Tutoriales y notas de campo sobre seguridad web, redes, Linux y análisis forense.",
+        "explore": "Explorar artículos",
+        "title": "Blog de ciberseguridad",
         "posts": {
             "description": "Artículos sobre Ciberseguridad, Linux, Windows, Redes y más",
-            "featuredDescription": "Los artículos más importantes y populares del blog",
             "viewAll": "Ver Todos los Artículos",
             "featured": "Artículos Destacados",
             "recent": "Artículos Recientes"
@@ -136,7 +134,6 @@ export const TEXTS_GENERAL = {
     "post": {
         "readTime": (minutes: number) => `${minutes} min`,
         "featured": "Destacado",
-        "readMore": "Leer más",
         "share": "Compartir este artículo",
         "back": "Volver al Blog",
         "copyLink": "Copiar enlace",
@@ -145,7 +142,6 @@ export const TEXTS_GENERAL = {
         "breadcrumb": "Ruta de navegación",
         "copied": "Enlace copiado",
         "copyFailed": "No se pudo copiar el enlace. Puedes copiarlo desde la barra de direcciones.",
-        "readMoreLabel": (title: string) => `Leer más: ${title}`,
         "pageTitle": (title: string) => `Blog - ${title}`
     },
     "blog": {
@@ -166,7 +162,6 @@ export const TEXTS_GENERAL = {
         },
         "allArticles": "Todos los Artículos",
         "sort": {
-            "accessibleLabel": "Ordenar artículos",
             "shortest": "Lectura rápida",
             "newest": "Más recientes",
             "longest": "Lectura larga",

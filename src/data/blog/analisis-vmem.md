@@ -6,6 +6,7 @@ readTimeMinutes: 7
 category: 'Forense'
 tags: [Memoria, Python, Volatility, VMEM, Linux, Windows]
 image: '/img/blog/forense/vmem/vmem.webp'
+thumbnail: '/img/blog/forense/vmem/vmem-512.webp'
 ---
 
 ## ¿Qué es una VMEM?

@@ -4,6 +4,7 @@ import "@/styles/global.css";
 import faviconUrl from "@/assets/marcvspt-icon.svg?url&no-inline";
 
 import { SITE_DATA, SITE_LOCALE } from '@/lib/site.ts';
+import { SITE_PAGES } from '@/lib/navigation.ts';
 
 import { ClientRouter } from "astro:transitions";
 
@@ -11,17 +12,44 @@ export interface Props {
   title: string;
   description?: string;
   canonical?: string;
+  article?: {
+    headline: string;
+    image: string;
+    publishedAt: Date;
+    updatedAt?: Date;
+  };
 }
 
 const {
   title,
   description = SITE_DATA.description,
   canonical,
-} = Astro.props as Props;
+  article,
+} = Astro.props;
 if (!Astro.site) {
   throw new Error(TEXTS_GENERAL.errors.canonicalSite);
 }
 const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site).href;
+const pageTitle = TEXTS_GENERAL.site.pageTitle(SITE_DATA.name, title);
+const imageURL = new URL(article?.image ?? '/img/logo.webp', Astro.site).href;
+const articleData = article && {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: article.headline,
+  description,
+  image: [imageURL],
+  mainEntityOfPage: canonicalURL,
+  inLanguage: SITE_LOCALE.html,
+  datePublished: article.publishedAt.toISOString(),
+  dateModified: article.updatedAt?.toISOString(),
+  author: {
+    "@type": "Person",
+    name: SITE_DATA.name,
+    url: new URL(SITE_PAGES.About.href, Astro.site).href,
+  },
+};
+// Evita que el texto del frontmatter pueda cerrar el bloque JSON-LD.
+const articleJson = articleData && JSON.stringify(articleData).replace(/</g, "\\u003c");
 ---
 
 <!doctype html>
@@ -34,7 +62,15 @@ const canonicalURL = new URL(canonical ?? Astro.url.pathname, Astro.site).href;
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={SITE_DATA.name} href={new URL("rss.xml", Astro.site)} />
-    <title>{TEXTS_GENERAL.site.pageTitle(SITE_DATA.name, title)}</title>
+    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={article?.headline ?? pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:site_name" content={SITE_DATA.name} />
+    <meta property="og:locale" content={SITE_LOCALE.openGraph} />
+    {articleJson && <script is:inline type="application/ld+json" set:html={articleJson}></script>}
+    <title>{pageTitle}</title>
     <ClientRouter />
   </head>
   <body class="bg-slate-900 text-slate-100 font-sans antialiased">

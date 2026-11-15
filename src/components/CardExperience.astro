@@ -3,7 +3,7 @@ import type { ProfessionalExperienceItem } from '@/lib/types/profile.ts';
 
 type Props = ProfessionalExperienceItem;
 
-const { time, occupation, description, company, href } = Astro.props as Props;
+const { time, occupation, description, company, href } = Astro.props;
 
 import LinkIcon from "@/assets/link.svg";
 ---
@@ -15,11 +15,16 @@ import LinkIcon from "@/assets/link.svg";
     </h4>
     <p class="text-slate-300">{description}</p>
 
-    <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-slate-400 hover:text-blue-400 transition-colors duration-300 inline-flex gap-2 items-center mt-4"
-        ><small>{company} </small><LinkIcon />
-    </a>
+    {href ? (
+        <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-4 inline-flex items-center gap-2 text-sm text-slate-400 transition-colors duration-300 hover:text-blue-400"
+        >
+            {company}<LinkIcon aria-hidden="true" focusable="false" />
+        </a>
+    ) : (
+        <p class="mt-4 text-sm text-slate-400">{company}</p>
+    )}
 </div>

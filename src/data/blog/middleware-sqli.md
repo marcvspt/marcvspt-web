@@ -6,6 +6,7 @@ readTimeMinutes: 14
 category: 'Pentest'
 tags: [SQLi, HTTP, WebSocet, gRPC, Python3, pip3]
 image: '/img/blog/tools/middleware/middleware.webp'
+thumbnail: '/img/blog/tools/middleware/middleware-512.webp'
 featured: true
 ---
 

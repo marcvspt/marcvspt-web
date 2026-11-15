@@ -6,12 +6,13 @@ import Footer from "@/components/Footer.astro";
 import PostCard from "@/components/PostCard.astro";
 import { SITE_PAGES } from "@/lib/navigation.ts";
 import { getPublishedPostCards } from '@/lib/blog/content.ts';
+import { BLOG_SORT_OPTIONS } from '@/lib/blog/sort.ts';
 
 const processedPosts = await getPublishedPostCards();
 const categories = [...new Set(processedPosts.map((post) => post.category))];
 const totalPosts = processedPosts.length;
 const categoryFilterClass = "category-filter rounded-full border border-transparent bg-slate-700 px-4 py-2 text-sm font-medium text-slate-300 transition-colors duration-300 hover:bg-slate-600 hover:text-white aria-pressed:border-blue-300 aria-pressed:bg-blue-700 aria-pressed:font-semibold aria-pressed:text-white aria-pressed:hover:bg-blue-600";
-const viewToggleClass = "rounded border border-transparent px-3 py-1 text-slate-300 transition-colors duration-300 aria-pressed:border-blue-300 aria-pressed:bg-blue-700 aria-pressed:text-white";
+const viewToggleClass = "grid size-10 place-items-center rounded border border-transparent text-slate-300 transition-colors duration-300 aria-pressed:border-blue-300 aria-pressed:bg-blue-700 aria-pressed:text-white";
 const avgReadTime = totalPosts === 0 ? 0 : Math.round(
   processedPosts.reduce((sum, post) => sum + post.readTimeMinutes, 0) / totalPosts,
 );
@@ -128,17 +129,12 @@ const avgReadTime = totalPosts === 0 ? 0 : Math.round(
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-wrap justify-between items-center gap-4">
           <div class="flex items-center gap-4">
-            <span class="text-slate-400 text-sm">{TEXTS_GENERAL.blog.sort.label}</span>
+            <label for="sortSelect" class="text-slate-400 text-sm">{TEXTS_GENERAL.blog.sort.label}</label>
             <select
-              id="sortSelect" aria-label={TEXTS_GENERAL.blog.sort.accessibleLabel}
+              id="sortSelect"
               class="bg-slate-800 border border-slate-500 text-white px-3 py-2 rounded-lg text-sm"
             >
-              <option value="date-desc">{TEXTS_GENERAL.blog.sort.newest}</option>
-              <option value="date-asc">{TEXTS_GENERAL.blog.sort.oldest}</option>
-              <option value="title-asc">{TEXTS_GENERAL.blog.sort.titleAscending}</option>
-              <option value="title-desc">{TEXTS_GENERAL.blog.sort.titleDescending}</option>
-              <option value="readtime-asc">{TEXTS_GENERAL.blog.sort.shortest}</option>
-              <option value="readtime-desc">{TEXTS_GENERAL.blog.sort.longest}</option>
+              {BLOG_SORT_OPTIONS.map(({ value, label }) => <option value={value}>{label}</option>)}
             </select>
           </div>
 
@@ -198,17 +194,19 @@ const avgReadTime = totalPosts === 0 ? 0 : Math.round(
 
         <div
           id="postsContainer"
-          class:list={["grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8", { hidden: totalPosts === 0 }]}
+          data-view="grid"
+          hidden={totalPosts === 0}
+          class="group/posts grid grid-cols-1 gap-8 data-[view=list]:gap-3 md:data-[view=grid]:grid-cols-2 lg:data-[view=grid]:grid-cols-3"
         >
           {
-            processedPosts.map((post, index) => (
-              <PostCard post={post} index={index} variant="catalog" />
+            processedPosts.map((post) => (
+              <PostCard post={post} variant="catalog" />
             ))
           }
         </div>
 
         <!-- No results message -->
-        <div id="noResults" class:list={["text-center py-12", { hidden: totalPosts > 0 }]}>
+        <div id="noResults" hidden={totalPosts > 0} class="text-center py-12">
           <div class="text-slate-400 text-lg mb-4">
             <svg
               aria-hidden="true"

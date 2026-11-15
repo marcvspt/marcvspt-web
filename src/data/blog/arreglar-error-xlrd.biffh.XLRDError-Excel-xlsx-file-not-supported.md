@@ -6,6 +6,7 @@ readTimeMinutes: 5
 category: 'Errores'
 tags: [Python2, pip2, Linux, Windows]
 image: '/img/blog/solutions/windows-exploit-suggester/Windows-Exploit-Suggester.webp'
+thumbnail: '/img/blog/solutions/windows-exploit-suggester/Windows-Exploit-Suggester-512.webp'
 featured: false
 ---
 

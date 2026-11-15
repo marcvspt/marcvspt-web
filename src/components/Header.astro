@@ -79,16 +79,12 @@ const resourceLinkClass =
         <SupportMenu />
       </nav>
 
-      <!-- Mobile menu button -->
-      <div class="lg:hidden">
-        <button
-          id="mobileMenuButton"
-          type="button"
-          aria-label={TEXTS_GENERAL.header.menu}
-          aria-expanded="false"
-          aria-controls="mobileMenu"
-          class="grid size-11 place-items-center rounded-lg text-slate-300 hover:text-blue-400 transition-colors duration-300"
+      <!-- Mobile navigation -->
+      <details id="mobileMenu" class="lg:hidden">
+        <summary
+          class="grid size-11 cursor-pointer list-none place-items-center rounded-lg text-slate-300 transition-colors duration-300 hover:text-blue-400 [&::-webkit-details-marker]:hidden"
         >
+          <span class="sr-only">{TEXTS_GENERAL.header.menu}</span>
           <svg
             aria-hidden="true"
             class="h-6 w-6"
@@ -102,16 +98,14 @@ const resourceLinkClass =
               stroke-width="2"
               d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
-        </button>
-      </div>
-    </div>
+        </summary>
 
-    <!-- Mobile menu -->
-    <nav id="mobileMenu" aria-label={TEXTS_GENERAL.header.menu} class="hidden lg:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto pb-4">
-      <div class="flex flex-col space-y-2">
-        {
-          MAIN_NAVIGATION.map((page) => {
-            return (
+        <nav
+          aria-label={TEXTS_GENERAL.header.menu}
+          class="absolute inset-x-0 top-full max-h-[calc(100dvh_-_4rem_-_1px)] overflow-y-auto border-b border-slate-800 bg-slate-900 px-4 py-4 sm:px-6"
+        >
+          <div class="mx-auto flex max-w-6xl flex-col gap-2 px-1">
+            {MAIN_NAVIGATION.map((page) => (
               <a
                 href={page.href}
                 aria-current={pathname === page.href ? "page" : undefined}
@@ -123,33 +117,33 @@ const resourceLinkClass =
               >
                 {page.label}
               </a>
-            );
-          })
-        }
-        {HEADER_RESOURCES.map((resource) => (
-          <a
-            href={resource.href}
-            class:list={[navigationLinkClass, resourceLinkClass, "min-h-12"]}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {resource.id === "adventsec" && (
-              <AdventSecIcon class="size-5 shrink-0" aria-hidden="true" focusable="false" />
-            )}
-            {resource.id === "cyber-events" ? (
-              <img
-                src={cyberEventsLogoUrl}
-                alt={resource.label}
-                width="188"
-                height="36"
-                class="h-6 w-auto shrink-0"
-              />
-            ) : resource.label}
-          </a>
-        ))}
-        <SupportMenu mobile />
-      </div>
-    </nav>
+            ))}
+            {HEADER_RESOURCES.map((resource) => (
+              <a
+                href={resource.href}
+                class:list={[navigationLinkClass, resourceLinkClass, "min-h-12"]}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {resource.id === "adventsec" && (
+                  <AdventSecIcon class="size-5 shrink-0" aria-hidden="true" focusable="false" />
+                )}
+                {resource.id === "cyber-events" ? (
+                  <img
+                    src={cyberEventsLogoUrl}
+                    alt={resource.label}
+                    width="188"
+                    height="36"
+                    class="h-6 w-auto shrink-0"
+                  />
+                ) : resource.label}
+              </a>
+            ))}
+            <SupportMenu mobile />
+          </div>
+        </nav>
+      </details>
+    </div>
   </div>
 </header>
 
@@ -158,38 +152,27 @@ const resourceLinkClass =
 
   function initializeMenu() {
     controller?.abort();
-    const button =
-      document.querySelector<HTMLButtonElement>("#mobileMenuButton");
-    const menu = document.querySelector<HTMLElement>("#mobileMenu");
-    if (!button || !menu) return;
+    const menu = document.querySelector<HTMLDetailsElement>("#mobileMenu");
+    const summary = menu?.querySelector<HTMLElement>(":scope > summary");
+    if (!menu || !summary) return;
     controller = new AbortController();
     const { signal } = controller;
     const supportMenus = Array.from(
       document.querySelectorAll<HTMLDetailsElement>("[data-support-menu]"),
     );
-    const closeSupportMenus = () => {
-      supportMenus.forEach((supportMenu) => (supportMenu.open = false));
-    };
-    const setOpen = (open: boolean) => {
-      menu.classList.toggle("hidden", !open);
-      button.setAttribute("aria-expanded", String(open));
-      if (!open) closeSupportMenus();
-    };
-    const closeMobileMenuOnFocusExit = (event: FocusEvent) => {
-      const next = event.relatedTarget;
-      if (!(next instanceof Node) || (!button.contains(next) && !menu.contains(next))) {
-        setOpen(false);
-      }
-    };
-    setOpen(false);
-    button.addEventListener("focusout", closeMobileMenuOnFocusExit, { signal });
-    menu.addEventListener("focusout", closeMobileMenuOnFocusExit, { signal });
-    supportMenus.forEach((supportMenu) => {
+    const desktopSupport = supportMenus.filter((supportMenu) => !menu.contains(supportMenu));
+    const mobileSupport = supportMenus.find((supportMenu) => menu.contains(supportMenu));
+
+    menu.addEventListener("toggle", () => {
+      if (!menu.open && mobileSupport) mobileSupport.open = false;
+    }, { signal });
+    menu.addEventListener("focusout", (event) => {
+      if (event.relatedTarget instanceof Node && !menu.contains(event.relatedTarget)) menu.open = false;
+    }, { signal });
+    desktopSupport.forEach((supportMenu) => {
       supportMenu.addEventListener(
         "focusout",
         (event) => {
-          // El panel móvil permanece expandido mientras se usa el menú.
-          if (menu.contains(supportMenu)) return;
           if (
             !(event.relatedTarget instanceof Node) ||
             !supportMenu.contains(event.relatedTarget)
@@ -211,32 +194,21 @@ const resourceLinkClass =
     });
     window.matchMedia("(min-width: 64rem)").addEventListener(
       "change",
-      () => setOpen(false),
-      { signal },
-    );
-    button.addEventListener(
-      "click",
-      () => setOpen(button.getAttribute("aria-expanded") !== "true"),
+      () => {
+        menu.open = false;
+        supportMenus.forEach((supportMenu) => (supportMenu.open = false));
+      },
       { signal },
     );
     document.addEventListener(
       "click",
       (event) => {
-        supportMenus.forEach((supportMenu) => {
-          if (
-            !menu.contains(supportMenu) &&
-            event.target instanceof Node &&
-            !supportMenu.contains(event.target)
-          )
-            supportMenu.open = false;
+        const target = event.target;
+        if (!(target instanceof Node)) return;
+        desktopSupport.forEach((supportMenu) => {
+          if (!supportMenu.contains(target)) supportMenu.open = false;
         });
-        if (
-          button.getAttribute("aria-expanded") === "true" &&
-          event.target instanceof Node &&
-          !button.contains(event.target) &&
-          !menu.contains(event.target)
-        )
-          setOpen(false);
+        if (!menu.contains(target)) menu.open = false;
       },
       { signal },
     );
@@ -244,8 +216,8 @@ const resourceLinkClass =
       "click",
       (event) => {
         if (event.target instanceof Element && event.target.closest("a")) {
-          setOpen(false);
-          button.focus();
+          menu.open = false;
+          summary.focus();
         }
       },
       { signal },
@@ -255,16 +227,18 @@ const resourceLinkClass =
       (event) => {
         if (event.key !== "Escape") return;
         const openSupportMenu = supportMenus.find(
-          (supportMenu) => supportMenu.open,
+          (supportMenu) => supportMenu.open && (!menu.contains(supportMenu) || menu.open),
         );
         if (openSupportMenu) {
+          event.preventDefault();
           openSupportMenu.open = false;
           openSupportMenu.querySelector("summary")?.focus();
           return;
         }
-        if (button.getAttribute("aria-expanded") === "true") {
-          setOpen(false);
-          button.focus();
+        if (menu.open) {
+          event.preventDefault();
+          menu.open = false;
+          summary.focus();
         }
       },
       { signal },

@@ -9,7 +9,7 @@ export interface ProfessionalExperienceItem {
     description: string;
     time: string;
     company: string;
-    href: string;
+    href?: string;
 }
 
 export type ProfessionalExperience = Record<'gobierno' | 'rooms31' | 'conexionesTI', ProfessionalExperienceItem>;
