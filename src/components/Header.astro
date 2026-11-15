@@ -38,7 +38,7 @@ const resourceLinkClass =
       </div>
 
       <!-- Navigation -->
-      <nav class="hidden lg:flex items-center gap-2 whitespace-nowrap">
+      <nav aria-label={TEXTS_GENERAL.header.menu} class="hidden lg:flex items-center gap-2 whitespace-nowrap">
         {
           MAIN_NAVIGATION.map((page) => {
             return (
@@ -87,9 +87,10 @@ const resourceLinkClass =
           aria-label={TEXTS_GENERAL.header.menu}
           aria-expanded="false"
           aria-controls="mobileMenu"
-          class="text-slate-300 hover:text-blue-400 transition-colors duration-300"
+          class="grid size-11 place-items-center rounded-lg text-slate-300 hover:text-blue-400 transition-colors duration-300"
         >
           <svg
+            aria-hidden="true"
             class="h-6 w-6"
             fill="none"
             stroke="currentColor"
@@ -106,7 +107,7 @@ const resourceLinkClass =
     </div>
 
     <!-- Mobile menu -->
-    <div id="mobileMenu" class="hidden lg:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto pb-4">
+    <nav id="mobileMenu" aria-label={TEXTS_GENERAL.header.menu} class="hidden lg:hidden max-h-[calc(100dvh-4rem)] overflow-y-auto pb-4">
       <div class="flex flex-col space-y-2">
         {
           MAIN_NAVIGATION.map((page) => {
@@ -148,7 +149,7 @@ const resourceLinkClass =
         ))}
         <SupportMenu mobile />
       </div>
-    </div>
+    </nav>
   </div>
 </header>
 
@@ -174,7 +175,15 @@ const resourceLinkClass =
       button.setAttribute("aria-expanded", String(open));
       if (!open) closeSupportMenus();
     };
+    const closeMobileMenuOnFocusExit = (event: FocusEvent) => {
+      const next = event.relatedTarget;
+      if (!(next instanceof Node) || (!button.contains(next) && !menu.contains(next))) {
+        setOpen(false);
+      }
+    };
     setOpen(false);
+    button.addEventListener("focusout", closeMobileMenuOnFocusExit, { signal });
+    menu.addEventListener("focusout", closeMobileMenuOnFocusExit, { signal });
     supportMenus.forEach((supportMenu) => {
       supportMenu.addEventListener(
         "focusout",

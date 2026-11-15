@@ -38,13 +38,14 @@ Estas instrucciones se aplican a todo el repositorio.
 - Mantén una UI coherente entre todas las secciones de la aplicación: inicio, página personal, catálogo, artículos y cualquier sección nueva. Respeta la paleta, tipografía, jerarquía de títulos, espaciados, anchos de contenido, bordes, iconografía y animaciones existentes.
 - Reutiliza los layouts, componentes y estilos compartidos para elementos equivalentes, como navegación, tarjetas, botones, enlaces y etiquetas. Si necesitas una variante, intégrala en el patrón existente y evita crear estilos aislados que rompan la coherencia visual.
 - Mantén consistentes los estados de interacción (hover, foco, activo, deshabilitado), los mensajes y el comportamiento en móvil y escritorio. Conserva la accesibilidad y la navegación por teclado al modificar la UI.
+- En páginas que usen `BaseLayout.astro`, conserva `id="main-content"` y `tabindex="-1"` en `<main>` como destino del enlace para saltar al contenido.
 - Al cambiar un componente compartido, considera su efecto en todas las secciones que lo usan y señala al propietario qué vistas debe comprobar visualmente.
 
 ## Blog, RSS y sitemap
 
 - El dominio se define una sola vez en la propiedad `site` de `astro.config.mjs`. Los componentes usan `Astro.site` y los endpoints usan `context.site` (o `site` al desestructurar el contexto); no dupliques el dominio en `SITE_DATA`. Mantén `site` configurado para generar canónicas, RSS y sitemap.
 - El sitemap usa `@astrojs/sitemap`; `src/pages/robots.txt.ts` y `src/layouts/BaseLayout.astro` apuntan a `/sitemap-index.xml`.
-- El RSS se genera en `src/pages/rss.xml.ts` con `@astrojs/rss` y se publica en `/rss.xml`. Mantén su título, descripción, idioma, fechas y enlaces coherentes con los datos del sitio y los artículos publicados.
+- El RSS se genera en `src/pages/rss.xml.ts` con `@astrojs/rss`, se publica en `/rss.xml` y se anuncia con `rel="alternate"` en `BaseLayout.astro`. Mantén su título, descripción, idioma, fechas y enlaces coherentes con los datos del sitio y los artículos publicados.
 - Reutiliza `getPublishedPosts` y `getPublishedPostCards` de `src/lib/blog/content.ts` para publicados y tarjetas; `getPostUrl`, `formatPostDate` y `formatReadTime` de `src/lib/blog/presentation.ts` para URL y presentación. `SITE_LOCALE` configura idioma del HTML, RSS, fechas y búsqueda; las fechas editoriales se muestran en UTC. El navegador usa `src/lib/ui/blog-search.ts`, conservando estado y limpieza de listeners en las transiciones.
 - El frontmatter usa `title`, `description`, `publishedAt`, `readTimeMinutes`, `category` e `image`; `updatedAt` es opcional. Las fechas se escriben como `YYYY-MM-DD` entre comillas y el esquema las convierte en `Date`. `readTimeMinutes` es un entero positivo: no guardar unidades ni textos y no volver a parsear una cadena de lectura. Formatear con `formatReadTime`; promedios y orden usan el número directamente. Mantener `publishedAt` para orden y RSS, y `updatedAt` para actualización visible. Conservar el filtro de `draft` y las URL existentes entre portada, catálogo, artículos, RSS, canónicas y sitemap.
 

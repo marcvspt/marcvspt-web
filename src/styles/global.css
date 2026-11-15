@@ -1,5 +1,13 @@
 @import "tailwindcss";
 @plugin '@tailwindcss/typography';
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-blue-300);
+    outline-offset: 3px;
+  }
+}
+
 /* Configuración de fuentes */
 @theme {
   --font-family-sans: Inter, system-ui, sans-serif;
@@ -31,6 +39,14 @@
   --animate-fade-in: fadeIn 0.8s ease-out both;
   --animate-slide-up: slideUp 0.6s ease-out both;
   --animate-glow: glow 2s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-glow {
+    animation: none;
+  }
 }
 
 /* Variables de tipografía para modo oscuro */
